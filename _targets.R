@@ -23,9 +23,13 @@ options(clustermq.scheduler = "multicore")
 # Run the R scripts in the R/ folder with your custom functions:
 source("src/r/process_experimental_data.R")
 source("src/r/plot_experimental_data.R")
+source("src/r/process_denv_dilutions_infected.R")
+source("src/r/process_disseminated_infection_time_course.R")
+source("src/r/prepare_stan_data_hurdle_denv_only.R")
 
 # Replace the target list below with your own:
 list(
+  ## raw experimental data processing
   tar_target(filename_midgut, "data/raw/Compiled midgut data.xlsx",
              format = "file"),
   tar_target(filename_legs, "data/raw/Compiled leg data.xlsx",
@@ -36,5 +40,21 @@ list(
   tar_target(graph_experimental_data, plot_experimental_data(df_midgut_legs)),
   tar_target(file_graph_experimental_data, {
     ggsave("figures/experimental_titers.pdf", graph_experimental_data, width=10, height=4);
-    "figures/experimental_titers.pdf"}, format="file")
+    "figures/experimental_titers.pdf"}, format="file"),
+  tar_target(filename_denv_dilutions, "data/raw/DENV test of dilutions 8-26-22.xlsx",
+             format="file"),
+  tar_target(df_denv_dilutions_infected,
+             process_denv_dilutions_infected(filename_denv_dilutions)),
+  tar_target(filename_disseminated_time_course, "data/raw/DENV SF DF dissemination time course 8-26-22.xlsx",
+             format="file"),
+  tar_target(df_disseminated_infection_time_course,
+             process_disseminated_infection_time_course(
+               filename_disseminated_time_course)),
+  
+  ## stan data inputs processing
+  tar_target(list_stan_datasets,
+             prepare_stan_data_hurdle_denv_only(
+               df_midgut_legs,
+               df_denv_dilutions_infected,
+               df_disseminated_infection_time_course))
 )
