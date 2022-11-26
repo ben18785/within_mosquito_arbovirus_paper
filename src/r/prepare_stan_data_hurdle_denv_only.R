@@ -2,7 +2,8 @@
 prepare_stan_data_hurdle_denv_only <- function(
     df_midgut_legs,
     df_denv_dilutions_infected,
-    df_disseminated_infection_time_course) {
+    df_disseminated_infection_time_course,
+    df_chp_damage) {
   
   partial_refeed_amount <- 0.56
   both <- df_midgut_legs %>%
@@ -83,13 +84,14 @@ prepare_stan_data_hurdle_denv_only <- function(
   n_dissected_binary <- df_multiple$n_dissected
   ind_binary <- df_multiple$index_new
   difeq_ind_binary <- if_else(df_multiple$tissue=="midgut", 2, 3)
-  g_t <- seq(0.5, max(unique(a$day)) + 10, 0.1)
+  g_t <- seq(0.0, max(unique(a$day)) + 10, 0.1)
   dilutions_sim_fine <- seq(0.1, 50, 0.1)
+  
   data_in <- list(n_unq_t = as.integer(length(unique(a$day))),
                   n_theta = as.integer(12),
                   n_difeq = as.integer(3),
                   n_dilutions = as.integer(length(unique(a$dilutions))),
-                  t0 = as.double(0),
+                  t0 = as.double(-0.000000000001),
                   ts = unique(a$day),
                   d_r_in = as.vector(max(unique(a$day))+10), # simulating without the refeeding
                   dilutions = as.double(unique(a$dilutions)),
@@ -127,7 +129,10 @@ prepare_stan_data_hurdle_denv_only <- function(
                   n_dilutions_sim=5,
                   dilutions_sim=c(1, 5, 12, 20, 25),
                   dilutions_sim_fine=dilutions_sim_fine,
-                  n_dilutions_sim_fine=length(dilutions_sim_fine))
+                  n_dilutions_sim_fine=length(dilutions_sim_fine),
+                  n_chp=nrow(df_chp_damage),
+                  chp=df_chp_damage$chp,
+                  time_chp=df_chp_damage$time)
   
   list(dataset_binary_denv=df_multiple,
        dataset_denv=both,

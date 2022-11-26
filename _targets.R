@@ -28,6 +28,8 @@ source("src/r/process_disseminated_infection_time_course.R")
 source("src/r/prepare_stan_data_hurdle_denv_only.R")
 source("src/r/fit_optimise.R")
 source("src/r/plot_fit_prevalence.R")
+source("src/r/process_damage_data.R")
+source("src/r/plot_chp_damage_fit.R")
 
 
 list(
@@ -54,12 +56,19 @@ list(
              process_disseminated_infection_time_course(
                filename_disseminated_time_course)),
   
+  # process CHP damage data
+  tar_target(filename_chp_damage, "data/raw/midgut damage over time.xlsx",
+             format = "file"),
+  tar_target(df_chp_damage,
+             process_damage_data(filename_chp_damage)),
+  
   # stan data inputs processing
   tar_target(list_stan_datasets,
              prepare_stan_data_hurdle_denv_only(
                df_midgut_legs,
                df_denv_dilutions_infected,
-               df_disseminated_infection_time_course)),
+               df_disseminated_infection_time_course,
+               df_chp_damage)),
   
   # fit stan model via optimisation
   tar_target(stan_model, "src/stan/model_hurdle_binary_richard.stan",
@@ -67,7 +76,9 @@ list(
   tar_target(opt_fit,
              fit_optimise(
                list_stan_datasets$stan_data,
-               stan_model, 5)),
+               stan_model, 2)),
+  
+  # plots based on optimisation
   tar_target(graph_fit_prevalence_midgut_legs,
              plot_fit_prevalence_midgut_legs(
                opt_fit,
@@ -83,5 +94,9 @@ list(
              )),
   tar_target(file_graph_fit_prevalence_midgut_only, {
     ggsave("figures/prevalence_midgut_only.pdf", graph_fit_prevalence_midgut_only, width=10, height=6);
-    "figures/prevalence_midgut_only.pdf"}, format="file")
+    "figures/prevalence_midgut_only.pdf"}, format="file"),
+  tar_target(graph_chp_damage, plot_chp_damage_fit(opt_fit, df_chp_damage)),
+  tar_target(file_graph_chp_damage, {
+    ggsave("figures/chp_damage.pdf", graph_chp_damage, width=10, height=6);
+    "figures/chp_damage.pdf"}, format="file")
 )

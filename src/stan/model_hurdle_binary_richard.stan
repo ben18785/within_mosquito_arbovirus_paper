@@ -44,7 +44,7 @@ functions {
         real [] ts, real [] theta, real [] d_r, int [] d_i, int n_unq_t,
         int n_difeq) {
           real y_hat[n_unq_t, n_difeq];
-          y_hat = integrate_ode_rk45(v_pop_ode, y_init, t0, ts, theta, d_r, d_i);
+          y_hat = integrate_ode_bdf(v_pop_ode, y_init, t0, ts, theta, d_r, d_i);
           return(y_hat);
   }
   
@@ -124,6 +124,11 @@ data {
   int include_binary;
   int include_hurdle;
   
+  // chp damage data
+  int n_chp;
+  real chp[n_chp];
+  real time_chp[n_chp];
+  
   // posterior predictive simulations
   int n_dilutions_sim;
   int dilutions_sim[n_dilutions_sim];
@@ -166,9 +171,13 @@ parameters {
   real<lower=0, upper=1> b2;
   real<lower=0> b3;
   real<lower=0> b4;
-  
-  real<lower=0> eta;
   real<lower=0, upper=x_0> x_star;
+  
+  // CHP data parameters
+  real<lower=0> eta;
+  positive_ordered[2] chp_vals;
+  real<lower=0> chp_sigma;
+  
 }
 
 transformed parameters{
@@ -253,6 +262,11 @@ model {
   eta ~ normal(2, 1);
   x_star ~ normal(0.1, 0.5);
   
+  // priors for chp damage
+  chp_vals[1] ~ normal(300, 200);
+  chp_vals[2] ~ normal(3000, 3000);
+  chp_sigma ~ normal(0, 200);
+  
   // likelihood for semi-non-binary data
   if(include_continuous == 1) {
     if(include_hurdle == 1) {
@@ -299,6 +313,12 @@ model {
       n_infected_binary[i] ~ binomial(n_dissected_binary[i], p);
     }
   }
+  
+  // likelihood for CHP damage data
+  for(i in 1:n_chp) {
+    real mu_tmp = chp_vals[1] + (chp_vals[2] - chp_vals[1]) * exp(-eta * time_chp[i]);
+    chp[i] ~ lognormal(log(mu_tmp), chp_sigma);
+  }
 }
 
 generated quantities{
@@ -317,7 +337,7 @@ generated quantities{
        if(k == 2) {
         inits[1] *= zeta;
        }
-       pred_y_hat[k,j,,,i] = integrate_ode_rk45(v_pop_ode, inits, t0, g_t, theta_temp, {t_refeeds_unique[j]}, d_i);
+       pred_y_hat[k,j,,,i] = integrate_ode_bdf(v_pop_ode, inits, t0, g_t, theta_temp, {t_refeeds_unique[j]}, d_i);
      }
    }
   }
@@ -333,7 +353,7 @@ generated quantities{
       if(k == 2) {
           inits[1] *= zeta;
       }
-      temp = integrate_ode_rk45(v_pop_ode, inits, t0, {5.0}, theta, {100.0}, d_i);
+      temp = integrate_ode_bdf(v_pop_ode, inits, t0, {5.0}, theta, {100.0}, d_i);
       dose_response_midgut[k, i] = temp[1, 2]; // get midgut result only
     }
   }
