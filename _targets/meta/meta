@@ -2,15 +2,29 @@ name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iterat
 df_denv_dilutions_infected|stem|2b448f888e12e5d3|517c66153ca66bd6|80c46dceab3823b5|-1057504582||t19322.7143818465s|801cade07abe9db2|312|rds|local|vector|||0.096||
 df_disseminated_infection_time_course|stem|9d3448bfe5a7dd38|4cc689a7d56dcd81|5bf7925d6c81bd1b|-704817685||t19322.7184323014s|c4c272a184f75d8c|382|rds|local|vector|||0.117||
 df_midgut_legs|stem|176021763aabfe24|88dc55ec0061cd92|b6d8e9fe51501f8d|-1972227969||t19322.7063757356s|0e7ac39955568935|16688|rds|local|vector|||0.069||
+dose_response_curve|function|c8d31f79d9ba6901|||||||||||||||
 file_graph_experimental_data|stem|0efa3128737b8d81|fd94ce284d2b5096|818fb9673f199869|-1064592768|figures/experimental_titers.pdf|t19322.7104630884s|c58a249cb828a6aa|20897|file|local|vector|||1.046|Removed 181 rows containing nonfinite values stat_smooth.. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3828e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3535e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.6166e16. There are other near singularities as well. 25.251. pseudoinverse used at 4.985. neighborhood radius 3.015. reciprocal condition number  0. There are other near singularities as well. 9.0902. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  0. There are other near singularities as well. 9.1506. pseudoinverse used at 4.985. neighborhood radius 3.015. reciprocal condition number  0. There are other near singularities as well. 9.0902. Removed 181 rows containing missing values geom_point.|
+file_graph_fit_prevalence_midgut_legs|stem|552565271ac799a4|d5dd06fe34dedc52|f4ad94680e08d8b0|-727643746|figures/prevalence_midgut_legs.pdf|t19322.8836346078s|eef4ab3d66093fd1|20590|file|local|vector|||0.406||
+file_graph_fit_prevalence_midgut_only|stem|470b591a44ad2502|560748f21f58c7fc|4e257b3930fc1f80|964462409|figures/prevalence_midgut_only.pdf|t19322.8875851487s|6a8fe024f4cd80da|11289|file|local|vector|||0.201|Removed 8 rows containing missing values geom_path.|
 filename_denv_dilutions|stem|920ae6ebd0fa1190|f12bd263c0d36011|ef46db3751d8e999|-1160387037|data/raw/DENV test of dilutions 8-26-22.xlsx|t19235.6529888016s|49eebfdf944f3d24|12547|file|local|vector|||0.814||
 filename_disseminated_time_course|stem|392366874f2bf2db|113dbee789e4d782|ef46db3751d8e999|-898473086|data/raw/DENV SF DF dissemination time course 8-26-22.xlsx|t19235.6673397191s|9513134c9d3d5d10|17704|file|local|vector|||0.815||
 filename_legs|stem|4b3c727d8e585539|8781c7fac32db0d7|ef46db3751d8e999|1973180361|data/raw/Compiled leg data.xlsx|t19139.6443441745s|6a68c821d44db45a|26737|file|local|vector|||0.007||
 filename_midgut|stem|c0507fa5d59f0263|2ee9c1f0837ef737|ef46db3751d8e999|-142451940|data/raw/Compiled midgut data.xlsx|t19139.6432128868s|5b6e8aeca8c66ccf|41749|file|local|vector|||0||
+fit_optimise|function|7bb8879f10c1c2c7|||||||||||||||
 graph_experimental_data|stem|6b122de59cab606b|b8f94891274d7fce|eaf9796ce6982b2f|-1888107996||t19322.7086842679s|a8918ab88139aa15|156616|rds|local|vector|||0.021||
-list_stan_datasets|stem|c95f6b880c944f26|2aeef11b5a8664f0|7c1965e4841a5cea|636512020||t19322.7249378337s|074221dfecb00a61|20966|rds|local|vector|||0.197||
+graph_fit_prevalence_midgut_legs|stem|728d5f6808a64812|6985116a3d8dd7e0|aa83adf3c17ddb5c|-811305942||t19322.8836298448s|2ef61970238ec7ac|588971|rds|local|vector|||0.119||
+graph_fit_prevalence_midgut_only|stem|de9804e8726d994e|657ad5f32200ec06|3e0320ad7dde0f8a|-1460890296||t19322.8875827477s|1fcbdb3259fc914e|373320|rds|local|vector|||0.283||
+list_stan_datasets|stem|b445c5d46c3ebbca|2aeef11b5a8664f0|c60bcdde61d817fa|636512020||t19322.8640096541s|98cc5d85e935651e|22551|rds|local|vector|||0.206||
+logistic_curve|function|7c5e5095b9d9db98|||||||||||||||
+opt_fit|stem|ae3e368f4331de9e|43681d44a164db20|d0410b5149622ea0|-443907170||t19322.8649369333s|e92f0c4ec604421a|195998|rds|local|vector|||80.094|nonzero return code in optimizing. nonzero return code in optimizing. nonzero return code in optimizing. nonzero return code in optimizing. nonzero return code in optimizing|
+optimise_repeat|function|f2b6889fb7eb6a7a|||||||||||||||
 plot_experimental_data|function|72e618fd4825b1a5|||||||||||||||
-prepare_stan_data_hurdle_denv_only|function|597c9b0f8335f1d3|||||||||||||||
+plot_fit_prevalence_midgut_legs|function|dc75e6e9f860e73e|||||||||||||||
+plot_fit_prevalence_midgut_only|function|f26a9c0466ce1d53|||||||||||||||
+prepare_data_prefit|function|8b9b334723c43278|||||||||||||||
+prepare_simulated_data|function|04bab53303a93a53|||||||||||||||
+prepare_stan_data_hurdle_denv_only|function|6ec0b55970f74f7d|||||||||||||||
 process_denv_dilutions_infected|function|0f58ebb23049d777|||||||||||||||
 process_disseminated_infection_time_course|function|8afbf71151da63bf|||||||||||||||
 process_experimental_data|function|0dbc67640970b86e|||||||||||||||
+stan_model|stem|5f2d0d43e20307d3|bd164974735d0954|ef46db3751d8e999|1266485521|src/stan/model_hurdle_binary_richard.stan|t19322.8624820452s|8ce2b7749b4461d4|10758|file|local|vector|||0.468||

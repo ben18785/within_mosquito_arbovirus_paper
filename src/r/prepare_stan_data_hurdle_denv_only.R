@@ -83,6 +83,8 @@ prepare_stan_data_hurdle_denv_only <- function(
   n_dissected_binary <- df_multiple$n_dissected
   ind_binary <- df_multiple$index_new
   difeq_ind_binary <- if_else(df_multiple$tissue=="midgut", 2, 3)
+  g_t <- seq(0.5, max(unique(a$day)) + 10, 0.1)
+  dilutions_sim_fine <- seq(0.1, 50, 0.1)
   data_in <- list(n_unq_t = as.integer(length(unique(a$day))),
                   n_theta = as.integer(12),
                   n_difeq = as.integer(3),
@@ -98,8 +100,8 @@ prepare_stan_data_hurdle_denv_only <- function(
                   dilution_ind = as.integer(a$dilution_ind),
                   x_star = as.double(0.1),
                   eta = as.double(2),
-                  g_t = seq(0.5, max(unique(a$day)) + 10, 0.5),
-                  n_g_t = length(seq(0.5, max(unique(a$day))+10, 0.5)),
+                  g_t = g_t,
+                  n_g_t = length(g_t),
                   x_0=1,
                   x_r=1,
                   titer_lower_bound=titer_lower_bound,
@@ -123,7 +125,9 @@ prepare_stan_data_hurdle_denv_only <- function(
                   t_refeeds_unique=c(3, 100),
                   refeed_amounts_unique=c(1.0, 1.0),
                   n_dilutions_sim=5,
-                  dilutions_sim=c(1, 5, 12, 20, 25))
+                  dilutions_sim=c(1, 5, 12, 20, 25),
+                  dilutions_sim_fine=dilutions_sim_fine,
+                  n_dilutions_sim_fine=length(dilutions_sim_fine))
   
   list(dataset_binary_denv=df_multiple,
        dataset_denv=both,

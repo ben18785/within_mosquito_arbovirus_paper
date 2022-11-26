@@ -9,7 +9,7 @@ library(targets)
 
 # Set target options:
 tar_option_set(
-  packages = c("tidyverse"), # packages that your targets need to run
+  packages = c("tidyverse", "rstan"), # packages that your targets need to run
   format = "rds" # default storage format
   # Set other options as needed.
 )
@@ -26,10 +26,13 @@ source("src/r/plot_experimental_data.R")
 source("src/r/process_denv_dilutions_infected.R")
 source("src/r/process_disseminated_infection_time_course.R")
 source("src/r/prepare_stan_data_hurdle_denv_only.R")
+source("src/r/fit_optimise.R")
+source("src/r/plot_fit_prevalence.R")
 
-# Replace the target list below with your own:
+
 list(
-  ## raw experimental data processing
+  
+  # raw experimental data processing
   tar_target(filename_midgut, "data/raw/Compiled midgut data.xlsx",
              format = "file"),
   tar_target(filename_legs, "data/raw/Compiled leg data.xlsx",
@@ -51,10 +54,34 @@ list(
              process_disseminated_infection_time_course(
                filename_disseminated_time_course)),
   
-  ## stan data inputs processing
+  # stan data inputs processing
   tar_target(list_stan_datasets,
              prepare_stan_data_hurdle_denv_only(
                df_midgut_legs,
                df_denv_dilutions_infected,
-               df_disseminated_infection_time_course))
+               df_disseminated_infection_time_course)),
+  
+  # fit stan model via optimisation
+  tar_target(stan_model, "src/stan/model_hurdle_binary_richard.stan",
+             format="file"),
+  tar_target(opt_fit,
+             fit_optimise(
+               list_stan_datasets$stan_data,
+               stan_model, 5)),
+  tar_target(graph_fit_prevalence_midgut_legs,
+             plot_fit_prevalence_midgut_legs(
+               opt_fit,
+               list_stan_datasets
+             )),
+  tar_target(file_graph_fit_prevalence_midgut_legs, {
+    ggsave("figures/prevalence_midgut_legs.pdf", graph_fit_prevalence_midgut_legs, width=10, height=6);
+    "figures/prevalence_midgut_legs.pdf"}, format="file"),
+  tar_target(graph_fit_prevalence_midgut_only,
+             plot_fit_prevalence_midgut_only(
+               opt_fit,
+               list_stan_datasets
+             )),
+  tar_target(file_graph_fit_prevalence_midgut_only, {
+    ggsave("figures/prevalence_midgut_only.pdf", graph_fit_prevalence_midgut_only, width=10, height=6);
+    "figures/prevalence_midgut_only.pdf"}, format="file")
 )
