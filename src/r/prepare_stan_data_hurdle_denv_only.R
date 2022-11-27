@@ -84,8 +84,13 @@ prepare_stan_data_hurdle_denv_only <- function(
   n_dissected_binary <- df_multiple$n_dissected
   ind_binary <- df_multiple$index_new
   difeq_ind_binary <- if_else(df_multiple$tissue=="midgut", 2, 3)
-  g_t <- seq(0.0, max(unique(a$day)) + 10, 0.1)
+  g_t <- seq(0.0, max(unique(a$day)) + 10, 0.025)
   dilutions_sim_fine <- seq(0.1, 50, 0.1)
+  
+  # data for first noninfectious; second infectious bloodmeal
+  t_feed_2 <- 3
+  g_t_before <- seq(0.0, t_feed_2, 0.025)
+  g_t_after <- seq(0.0, max(unique(a$day)) + 10 - t_feed_2, 0.025)
   
   data_in <- list(n_unq_t = as.integer(length(unique(a$day))),
                   n_theta = as.integer(12),
@@ -132,7 +137,11 @@ prepare_stan_data_hurdle_denv_only <- function(
                   n_dilutions_sim_fine=length(dilutions_sim_fine),
                   n_chp=nrow(df_chp_damage),
                   chp=df_chp_damage$chp,
-                  time_chp=df_chp_damage$time)
+                  time_chp=df_chp_damage$time,
+                  g_t_before=g_t_before,
+                  g_t_after=g_t_after,
+                  n_g_t_before=length(g_t_before),
+                  n_g_t_after=length(g_t_after))
   
   list(dataset_binary_denv=df_multiple,
        dataset_denv=both,

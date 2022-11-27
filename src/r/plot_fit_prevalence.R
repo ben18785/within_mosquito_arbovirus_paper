@@ -181,7 +181,9 @@ prepare_data_prefit <- function(fit, list_stan_datasets) {
 
 plot_fit_prevalence_midgut_legs <- function(fit, list_stan_datasets) {
   
-  all_df <- prepare_data_prefit(fit, list_stan_datasets)
+  all_df <- prepare_data_prefit(fit, list_stan_datasets) %>% 
+    mutate(concentration=1/dilution) %>% 
+    mutate(concentration=format(round(concentration, 2), nsmall = 2)) 
   
   g <- ggplot(all_df,
               aes(x=day, y=middle)) +
@@ -194,12 +196,12 @@ plot_fit_prevalence_midgut_legs <- function(fit, list_stan_datasets) {
     scale_y_continuous(labels = scales::percent) +
     scale_color_brewer(palette = "Dark2") +
     facet_grid(vars(tissue),
-               vars(dilution))
+               vars(concentration))
   g
 }
 
 
-plot_fit_prevalence_midgut_only <- function(fit, list_stan_datasets) {
+plot_fit_prevalence_dose_response <- function(fit, list_stan_datasets) {
   
   data_in <- list_stan_datasets$stan_data
   all_df <- prepare_data_prefit(fit, list_stan_datasets) %>% 
@@ -228,15 +230,52 @@ plot_fit_prevalence_midgut_only <- function(fit, list_stan_datasets) {
     bind_rows(df_probs_d) %>% 
     mutate(concentration=1/dilution)
   
-  g <- ggplot(df_probs,
-              aes(x=concentration, y=middle, group=category,
-                  colour=category)) +
-    geom_line() +
-    geom_pointrange(data=all_df, aes(ymin=lower, ymax=upper)) +
+  g <- ggplot(df_probs %>% filter(category=="dichtonomous"),
+              aes(x=concentration, y=middle, group=category)) +
+    geom_line(colour="grey") +
+    geom_pointrange(data=all_df%>% filter(category=="dichtonomous"),
+                    aes(ymin=lower, ymax=upper),
+                    colour="black") +
     xlab("Concentration") +
     ylab("Positive") +
-    scale_y_continuous(labels = scales::percent) +
-    scale_color_brewer(palette = "Dark2") +
+    scale_y_continuous(labels = scales::percent,
+                       limits=c(0, 1)) +
     scale_x_log10(limits=c(0.02, 2))
+  g
+}
+
+plot_fit_prevalence_midgut_only <- function(fit, list_stan_datasets) {
+  
+  all_df <- prepare_data_prefit(fit, list_stan_datasets) %>% 
+    filter(tissue == "midgut") %>% 
+    mutate(concentration=1/dilution) %>% 
+    mutate(concentration=format(round(concentration, 2), nsmall = 2)) %>% 
+    filter(category == "dichtonomous") %>% 
+    mutate(concentration=fct_rev(concentration))
+  
+  g <- ggplot(all_df,
+              aes(x=day, y=middle, colour=concentration,
+                  group=as.factor(concentration))) +
+    geom_line(data=all_df %>% filter(type=="simulated")) +
+    geom_pointrange(data=all_df %>% filter(type!="simulated"),
+                    aes(ymin=lower, ymax=upper),
+                    position = position_jitterdodge(dodge.width = 0.2, jitter.width = 0.2)) +
+    xlab("DPI") +
+    ylab("Positive") +
+    scale_y_continuous(labels = scales::percent,
+                       limits=c(0, 1)) +
+    scale_color_brewer("Concentration",
+                       palette = "Spectral") +
+    scale_x_continuous(limits=c(0, 13)) +
+    theme(legend.position = c(0.8, 0.4))
+  g
+}
+
+plot_midgut_dose_response_combined <- function(fit, list_stan_datasets) {
+  g1 <- plot_fit_prevalence_midgut_only(fit, list_stan_datasets)
+  g2 <- plot_fit_prevalence_dose_response(fit, list_stan_datasets)
+  g <- plot_grid(g1, g2, nrow = 1,
+                 labels = c("A.", "B."),
+                 label_x = -0.01)
   g
 }

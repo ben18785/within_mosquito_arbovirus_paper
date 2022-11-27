@@ -9,7 +9,7 @@ plot_chp_damage_fit <- function(fit, df_chp_damage) {
     chp_inf + (chp_0 - chp_inf) * exp(- eta * t)
   }
   
-  times <- seq(0, max(df_chp_damage$time), 0.1)
+  times <- seq(0, 12.5, 0.1)
   chp <- map_dbl(times, ~exp_decline(., chp_0, chp_inf, eta))
   df_sim <- tibble(
     time=times,
@@ -17,11 +17,15 @@ plot_chp_damage_fit <- function(fit, df_chp_damage) {
     type="simulated"
   )
   df_chp_damage <- df_chp_damage %>% 
-    mutate(type="real")
+    mutate(type="real") %>% 
+    mutate(assumption=if_else(name=="Unfed", 1, 0))
   
   ggplot(df_chp_damage, aes(x=time, y=chp)) +
-    geom_jitter(width = 0.1) +
-    geom_line(data=df_sim, colour="orange") +
+    geom_jitter(width = 0.2, aes(shape=as.factor(assumption))) +
+    geom_line(data=df_sim, aes(colour=type)) +
     xlab("DPI") +
-    ylab("CHP")
+    ylab("CHP") +
+    scale_x_continuous(limits=c(0, 12.5)) +
+    scale_color_brewer(palette = "Dark2") +
+    theme(legend.position = "none")
 }

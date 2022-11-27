@@ -136,6 +136,10 @@ data {
   real g_t[n_g_t]; // times
   int n_dilutions_sim_fine; // for day 5 dilutions only
   real dilutions_sim_fine[n_dilutions_sim_fine];
+  int n_g_t_before; // number of times before second bloodfeed
+  real g_t_before[n_g_t_before];
+  int n_g_t_after; // number of times after second bloodfeed
+  real g_t_after[n_g_t_after];
 }
 
 transformed data{
@@ -263,9 +267,9 @@ model {
   x_star ~ normal(0.1, 0.5);
   
   // priors for chp damage
-  chp_vals[1] ~ normal(300, 200);
-  chp_vals[2] ~ normal(3000, 3000);
-  chp_sigma ~ normal(0, 200);
+  chp_vals[1] ~ normal(300, 100);
+  chp_vals[2] ~ normal(3000, 500);
+  chp_sigma ~ normal(0, 10);
   
   // likelihood for semi-non-binary data
   if(include_continuous == 1) {
@@ -324,6 +328,7 @@ model {
 generated quantities{
   real pred_y_hat[n_experiment, n_refeed_types, n_g_t, n_difeq, n_dilutions_sim];
   real dose_response_midgut[n_experiment, n_dilutions_sim_fine];
+  real pred_y_hat_other_order[n_g_t_before + n_g_t_after, 3];
   
   for(k in 1:n_experiment) {
    for(i in 1:n_dilutions_sim){
@@ -358,4 +363,30 @@ generated quantities{
     }
   }
   
+  {
+    real pred_y_hat_before[n_g_t_before, 3];
+    real pred_y_hat_after[n_g_t_after, 3];
+    real inits[3];
+    int k = 1;
+    inits[1] = 0; // initially no infectious bloodfeed
+    inits[2] = 0;
+    inits[3] = 0;
+    
+    // integrate up until second feed which is infectious
+    pred_y_hat_before = integrate_ode_bdf(v_pop_ode, inits, t0, g_t_before, theta, {3.0}, d_i);
+    for(i in 1:n_g_t_before) {
+      pred_y_hat_other_order[k, ] = pred_y_hat_before[k, ];
+      k += 1;
+    }
+    
+    // integrate post-discontinuity
+    inits[1] = l0 * 1 / dilutions_sim[2] * zeta; // to match experiments with second feed
+    inits[2] = pred_y_hat_before[n_g_t_before, 2];
+    inits[3] = pred_y_hat_before[n_g_t_before, 3];
+    pred_y_hat_after = integrate_ode_bdf(v_pop_ode, inits, t0, g_t_after, theta, {100.0}, d_i);
+    for(i in 1:n_g_t_after) {
+      pred_y_hat_other_order[k, ] = pred_y_hat_after[i, ];
+      k += 1;
+    }
+  }
 }
