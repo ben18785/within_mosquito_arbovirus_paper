@@ -135,5 +135,20 @@ list(
              }),
   tar_target(file_graph_single_double_chp, {
     ggsave("figures/graph_single_double_chp.pdf", graph_single_double_chp, width=12, height=4);
-    "figures/graph_single_double_chp.pdf"}, format="file")
+    "figures/graph_single_double_chp.pdf"}, format="file"),
+  tar_target(graph_noninfectious_then_infectious_double,
+             plot_noninfectious_then_infectious_double(
+               opt_fit,
+               list_stan_datasets
+             )),
+  tar_target(file_graph_noninfectious_then_infectious_double, {
+    ggsave("figures/double_other_order.pdf", graph_noninfectious_then_infectious_double, width=8, height=4);
+    "figures/double_other_order.pdf"}, format="file"),
+  tar_target(graph_fit_prevalence_legs,
+             plot_fit_prevalence_legs(
+               opt_fit,
+               list_stan_datasets)),
+  tar_target(file_graph_fit_prevalence_legs, {
+    ggsave("figures/prevalence_legs.pdf", graph_fit_prevalence_legs, width=6, height=4);
+    "figures/prevalence_legs.pdf"}, format="file")
 )

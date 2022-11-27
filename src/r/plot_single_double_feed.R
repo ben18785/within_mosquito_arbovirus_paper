@@ -93,4 +93,72 @@ plot_single_double_feed <- function(fit, list_stan_datasets) {
 
 plot_noninfectious_then_infectious_double <- function(fit, list_stan_datasets) {
   
+  data_in <- list_stan_datasets$stan_data
+  preds <- fit$par$pred_y_hat_other_order
+  
+  # get simulations where non-infectious first
+  # remove last term in series since this is repeated in the first term of next
+  g_t_before <- data_in$g_t_before[-length(data_in$g_t_before)]
+  preds <- preds[-length(g_t_before), ]
+  g_t_after <- data_in$g_t_after + max(g_t_before)
+  
+  times <- c(g_t_before, g_t_after)
+  df_double_wrong <- tibble(time=times, midgut=preds[, 2], legs=preds[, 3]) %>% 
+    pivot_longer(-time) %>% 
+    mutate(type="double:\nnoninfectious first")
+  
+  # get double where infectious first
+  preds <- fit$par$pred_y_hat[2, 1, , , 2]
+  df_double <- tibble(time=times, midgut=preds[, 2], legs=preds[, 3]) %>% 
+    pivot_longer(-time) %>% 
+    mutate(type="double:\ninfectious first")
+  
+  # get single feeds
+  preds <- fit$par$pred_y_hat[2, 2, , , 2]
+  df_single <- tibble(time=times, midgut=preds[, 2], legs=preds[, 3]) %>% 
+    pivot_longer(-time) %>% 
+    mutate(type="single")
+  
+  df <- df_double_wrong %>% 
+    bind_rows(df_double,
+              df_single) %>% 
+    mutate(type=as.factor(type)) %>% 
+    mutate(type=fct_relevel(
+      type,
+      "single",
+      "double:\ninfectious first",
+      "double:\nnoninfectious first")) %>% 
+    rename(tissue=name)
+  
+  thresholds <- data_in$titer_lower_bound
+  prob_infect_midgut <- logistic_curve(5 * (1 / fit$par$zeta), fit$par$b1, fit$par$b2, fit$par$b3, fit$par$b4) 
+  prob_escape_midgut <- prob_infect_midgut * fit$par$phi_d
+  sigmas <- fit$par$sigma
+
+  lookup <- tribble(
+    ~tissue,
+    "midgut",
+    "legs"
+  ) %>% 
+    mutate(threshold=thresholds,
+           sigma=sigmas) %>% 
+    mutate(prob_escape=c(prob_infect_midgut, prob_escape_midgut))
+  
+  df_all <- df %>% 
+    left_join(lookup) %>% 
+    mutate(middle=prob_escape * (1-plnorm(threshold, log(value), sigma))) %>% 
+    mutate(tissue=as.factor(tissue)) %>% 
+    mutate(tissue=fct_relevel(tissue, "midgut", "legs"))
+  
+  df_all %>% 
+    ggplot(aes(x=time, y=middle, colour=type)) +
+    geom_vline(xintercept = 3, linetype=2) +
+    geom_line() +
+    facet_wrap(~tissue) +
+    xlab("DPI") +
+    scale_color_brewer("Feed type", palette = "Dark2") +
+    ylab("Positive") +
+    scale_y_continuous(labels = scales::percent,
+                       limits=c(0, 1)) +
+    scale_x_continuous(limits=c(0, 15))
 }

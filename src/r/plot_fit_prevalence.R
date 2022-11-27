@@ -279,3 +279,27 @@ plot_midgut_dose_response_combined <- function(fit, list_stan_datasets) {
                  label_x = -0.01)
   g
 }
+
+plot_fit_prevalence_legs <- function(fit, list_stan_datasets) {
+  
+  all_df <- prepare_data_prefit(fit, list_stan_datasets) %>% 
+    mutate(concentration=1/dilution) %>% 
+    mutate(concentration=format(round(concentration, 2), nsmall = 2)) %>% 
+    filter(tissue=="legs") %>% 
+    mutate(concentration=as.factor(concentration)) %>% 
+    mutate(concentration=fct_rev(concentration))
+  
+  g <- ggplot(all_df,
+              aes(x=day, y=middle, colour=concentration)) +
+    geom_line(data=all_df %>% filter(type=="simulated", category=="continuous")) +
+    geom_pointrange(data=all_df %>% filter(type!="simulated"),
+                    aes(ymin=lower, ymax=upper, shape=category),
+                    position = position_jitterdodge(dodge.width = 0.5, jitter.width = 0.4)) +
+    xlab("DPI") +
+    ylab("Positive") +
+    scale_shape(guide="none") +
+    scale_y_continuous(labels = scales::percent) +
+    scale_color_brewer("Concentration", palette = "Spectral") +
+    scale_x_continuous(limits = c(0, 15))
+  g
+}
