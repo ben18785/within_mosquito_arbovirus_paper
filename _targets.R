@@ -32,6 +32,8 @@ source("src/r/process_damage_data.R")
 source("src/r/plot_chp_damage_fit.R")
 source("src/r/plot_single_double_feed.R")
 source("src/r/plot_bl_permeability.R")
+source("src/r/helper.R")
+source("src/r/fit_sampling.R")
 
 
 list(
@@ -150,5 +152,44 @@ list(
                list_stan_datasets)),
   tar_target(file_graph_fit_prevalence_legs, {
     ggsave("figures/prevalence_legs.pdf", graph_fit_prevalence_legs, width=6, height=4);
-    "figures/prevalence_legs.pdf"}, format="file")
+    "figures/prevalence_legs.pdf"}, format="file"),
+  
+  
+  # fit stan model via sampling
+  tar_target(stan_model_bare, "src/stan/model_hurdle_binary_richard_bare.stan",
+             format="file"),
+  tar_target(sampling_fit,
+             fit_mcmc(opt_fit,
+                      stan_model,
+                      list_stan_datasets$stan_data,
+                      n_iterations=10,
+                      n_chains=4)
+             ),
+  
+  # Plots based on MCMC fitting
+  
+  # Single-double feed
+  tar_target(graph_single_double_mcmc,
+             plot_single_double_feed_mcmc(
+               sampling_fit, list_stan_datasets)),
+  tar_target(graph_chp_damage_mcmc, plot_chp_damage_fit_mcmc(sampling_fit, df_chp_damage)),
+  tar_target(graph_bl_permeability_mcmc,
+             plot_bl_permeability_mcmc(
+               sampling_fit,
+               list_stan_datasets)),
+  tar_target(graph_single_double_chp_mcmc, 
+             {
+               plot_grid(graph_chp_damage_mcmc, graph_bl_permeability_mcmc, graph_single_double_mcmc, nrow = 1,
+                         labels = c("A.", "B.", "C."))
+             }),
+  tar_target(file_graph_single_double_chp_mcmc, {
+    ggsave("figures/graph_single_double_chp_mcmc.pdf", graph_single_double_chp_mcmc, width=12, height=4);
+    "figures/graph_single_double_chp_mcmc.pdf"}, format="file"),
+  
+  ## Concentration plots
+  tar_target(graph_fit_prevalence_midgut_only_mcmc,
+             plot_fit_prevalence_midgut_only_mcmc(
+               sampling_fit,
+               list_stan_datasets
+             ))
 )
