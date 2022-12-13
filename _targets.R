@@ -9,7 +9,7 @@ library(targets)
 
 # Set target options:
 tar_option_set(
-  packages = c("tidyverse", "rstan", "cowplot"), # packages that your targets need to run
+  packages = c("tidyverse", "rstan", "cowplot", "posterior"), # packages that your targets need to run
   format = "rds" # default storage format
   # Set other options as needed.
 )
@@ -34,6 +34,7 @@ source("src/r/plot_single_double_feed.R")
 source("src/r/plot_bl_permeability.R")
 source("src/r/helper.R")
 source("src/r/fit_sampling.R")
+source("src/r/sampling_diagnostics.R")
 
 
 list(
@@ -162,9 +163,13 @@ list(
              fit_mcmc(opt_fit,
                       stan_model,
                       list_stan_datasets$stan_data,
-                      n_iterations=10,
+                      n_iterations=400,
                       n_chains=4)
              ),
+  
+  # MCMC diagnostics
+  tar_target(sampling_fit_diagnostics,
+             create_sampling_diagnostics(sampling_fit)),
   
   # Plots based on MCMC fitting
   
@@ -191,5 +196,22 @@ list(
              plot_fit_prevalence_midgut_only_mcmc(
                sampling_fit,
                list_stan_datasets
-             ))
+             )),
+  tar_target(graph_fit_prevalence_dose_response_mcmc,
+             plot_fit_prevalence_dose_response_mcmc(
+               sampling_fit,
+               list_stan_datasets
+             )),
+  tar_target(graph_midgut_dose_response_combined_mcmc, 
+             {
+               plot_grid(graph_fit_prevalence_midgut_only_mcmc,
+                         graph_fit_prevalence_dose_response_mcmc,
+                         nrow = 1,
+                         labels = c("A.", "B."),
+                         label_x = -0.01)
+             }),
+  tar_target(file_graph_midgut_dose_response_combined_mcmc, {
+    ggsave("figures/prevalence_midgut_dose_response_mcmc.pdf",
+           graph_midgut_dose_response_combined_mcmc, width=10, height=4);
+    "figures/prevalence_midgut_dose_response_mcmc.pdf"}, format="file")
 )

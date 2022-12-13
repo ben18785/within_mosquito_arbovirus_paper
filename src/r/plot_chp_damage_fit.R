@@ -39,16 +39,19 @@ plot_chp_damage_fit_mcmc <- function(fit, df_chp_damage) {
   chp_inf <- chp_vals[, 1]
   chp_0 <- chp_vals[, 2]
   
-  n_iterations <- length(eta)
-  n_rnorm_iterations <- 1000
+  total_iterations <- length(eta)
+  n_iterations <- 100
+  n_rnorm_iterations <- 100
   times <- seq(0, 12.5, 0.1)
   k <- 1
   for(i in 1:n_iterations) {
+    print(i)
+    idx1 <- sample(total_iterations, 1)
     
     for(j in 1:n_rnorm_iterations) {
       
       chp <- map_dbl(times, ~exp_decline(
-        ., chp_0[i], chp_inf[i], eta[i]))
+        ., chp_0[idx1], chp_inf[idx1], eta[idx1]))
       
       idx <- sample(n_iterations, 1)
       chp_sigma_tmp <- chp_sigma[idx]
@@ -66,6 +69,7 @@ plot_chp_damage_fit_mcmc <- function(fit, df_chp_damage) {
       
       k <- k + 1
     }
+    print(nrow(big_df))
 
   }
   

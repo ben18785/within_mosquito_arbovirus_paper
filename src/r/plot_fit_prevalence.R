@@ -557,3 +557,66 @@ plot_fit_prevalence_midgut_only_mcmc <- function(fit, list_stan_datasets) {
     theme(legend.position = c(0.8, 0.4))
   g
 }
+
+plot_fit_prevalence_dose_response_mcmc <- function(fit, list_stan_datasets) {
+  
+  data_in <- list_stan_datasets$stan_data
+  all_df <- prepare_data_prefit_mcmc(fit, list_stan_datasets) %>% 
+    filter(tissue=="midgut") %>% 
+    filter(day == 5) %>% 
+    filter(type != "simulated") %>% 
+    mutate(concentration=1/dilution)
+  
+  # calculate dose response curve
+  sigmas <- apply(rstan::extract(fit, "sigma")[[1]], 2, median)
+  zetas <- rstan::extract(fit, "zeta")[[1]]
+  zeta_middle <- median(zetas)
+  zeta_lower <- quantile(zetas, 0.025)
+  zeta_upper <- quantile(zetas, 0.975)
+  
+  phi_2_middle <- dose_response_curve_mcmc(data_in$dilutions_sim_fine * (1 / zeta_middle), fit)
+  phi_2_lower <- dose_response_curve_mcmc(data_in$dilutions_sim_fine * (1 / zeta_lower), fit)
+  phi_2_upper <- dose_response_curve_mcmc(data_in$dilutions_sim_fine * (1 / zeta_upper), fit)
+  
+  sigma <- sigmas[1]
+  threshold <- data_in$titer_lower_bound[1]
+  
+  dose_response_midgut <- rstan::extract(fit, "dose_response_midgut")[[1]]
+  middles <- apply(dose_response_midgut, c(2, 3), function(x) quantile(x, 0.5))
+  lowers <- apply(dose_response_midgut, c(2, 3), function(x) quantile(x, 0.025))
+  uppers <- apply(dose_response_midgut, c(2, 3), function(x) quantile(x, 0.975))
+  
+  prob_middle <- (1 - plnorm(threshold, log(middles), sigma))
+  prob_lower <- (1 - plnorm(threshold, log(lowers), sigma))
+  prob_upper <- (1 - plnorm(threshold, log(uppers), sigma))
+  
+  # only consider dichtonomous fits to compare with data
+  prob_middle[2, ] = prob_middle[2, ] * phi_2_middle
+  prob_lower[2, ] = prob_lower[2, ] * phi_2_lower
+  prob_upper[2, ] = prob_upper[2, ] * phi_2_upper
+  df_probs_d <- tibble(
+    dilution=data_in$dilutions_sim_fine,
+    middle=prob_middle[2, ],
+    lower=prob_lower[2, ],
+    upper=prob_upper[2, ],
+    category="dichtonomous")
+  df_probs <- df_probs_d %>% 
+    mutate(concentration=1/dilution)
+  
+  g <- ggplot(df_probs,
+              aes(x=concentration, y=middle)) +
+    geom_ribbon(aes(ymin=lower, ymax=upper),
+                fill="blue",
+                alpha=0.3) +
+    geom_line() +
+    geom_pointrange(data=all_df,
+                    aes(ymin=lower, ymax=upper),
+                    colour="black",
+                    position = position_dodge2(width = 0.1)) +
+    xlab("Concentration") +
+    ylab("Positive") +
+    scale_y_continuous(labels = scales::percent,
+                       limits=c(0, 1)) +
+    scale_x_log10(limits=c(0.02, 2))
+  g
+}
