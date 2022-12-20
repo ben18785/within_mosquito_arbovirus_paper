@@ -620,3 +620,63 @@ plot_fit_prevalence_dose_response_mcmc <- function(fit, list_stan_datasets) {
     scale_x_log10(limits=c(0.02, 2))
   g
 }
+
+plot_fit_prevalence_legs_mcmc <- function(fit, list_stan_datasets) {
+  
+  # prepare real data
+  df_continuous <- list_stan_datasets$dataset_denv %>% 
+    mutate(denv_above_zero=if_else(denv_titer > 0,
+                                   "non-censored", "below detection\nthreshold")) %>% 
+    group_by(tissue, dilutions, day) %>% 
+    summarise(n_positive=sum(denv_above_zero=="non-censored", na.rm = TRUE),
+              n_dissected=n()) %>% 
+    mutate(type="single") %>% 
+    rename(dilution=dilutions) %>% 
+    mutate(data_type="DENV") %>% 
+    mutate(category="continuous")
+  
+  df_dichtonomous <- list_stan_datasets$dataset_binary_denv %>% 
+    rename(n_positive=n_infected) %>% 
+    mutate(dilution=dilutions) %>% 
+    select(type, tissue, dilution, day, n_positive, n_dissected, virus) %>% 
+    rename(data_type=virus) %>% 
+    filter(type=="single") %>% 
+    mutate(category="dichtonomous")
+  
+  df_both <- df_dichtonomous %>% 
+    bind_rows(df_continuous) %>% 
+    filter(tissue=="legs") %>% 
+    mutate(
+      middle=qbeta(0.5, 1 + n_positive, 1 + n_dissected - n_positive),
+      lower=qbeta(0.025, 1 + n_positive, 1 + n_dissected - n_positive),
+      upper=qbeta(0.975, 1 + n_positive, 1 + n_dissected - n_positive))
+  
+  all_df <- prepare_data_prefit_mcmc(fit, list_stan_datasets)
+  all_df1 <- all_df %>% 
+    filter(tissue == "legs") %>% 
+    mutate(concentration=1/dilution) %>% 
+    mutate(concentration=format(round(concentration, 2), nsmall = 2)) %>% 
+    mutate(concentration=fct_rev(concentration))
+  
+  g <- ggplot(all_df1,
+              aes(x=day, y=middle)) +
+    geom_line(data=all_df1 %>% filter(type=="simulated", category=="continuous"),
+              aes(colour=concentration)) +
+    geom_ribbon(data=all_df1 %>% filter(type=="simulated", category=="continuous"),
+                aes(ymin=lower, ymax=upper, fill=concentration),
+                alpha=0.4) +
+    geom_pointrange(data=all_df1 %>% filter(type!="simulated"),
+                    aes(ymin=lower, ymax=upper, shape=category, colour=concentration),
+                    position = position_jitterdodge(dodge.width = 0.25, jitter.width = 0.4)) +
+    xlab("DPI") +
+    ylab("Positive") +
+    scale_shape(guide="none") +
+    scale_y_continuous(labels = scales::percent) +
+    scale_color_brewer("Concentration", palette = "Spectral") +
+    scale_fill_brewer("Concentration", palette = "Spectral") +
+    scale_x_continuous(limits = c(0, 15)) +
+    theme(
+      legend.position = c(0.75, 0.25)
+    )
+  g
+}

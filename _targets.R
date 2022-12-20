@@ -11,7 +11,7 @@ library(targets)
 tar_option_set(
   packages = c("tidyverse", "rstan",
                "cowplot", "posterior",
-               "loo", "deSolve"), # packages that your targets need to run
+               "loo", "deSolve", "lmtest"), # packages that your targets need to run
   format = "rds" # default storage format
   # Set other options as needed.
 )
@@ -39,6 +39,7 @@ source("src/r/fit_sampling.R")
 source("src/r/sampling_diagnostics.R")
 source("src/r/model_comparison.R")
 source("src/r/plot_eip.R")
+source("src/r/logistic_regression.R")
 
 
 list(
@@ -51,10 +52,6 @@ list(
   tar_target(df_midgut_legs,
              process_experimental_data(
                filename_midgut, filename_legs)),
-  tar_target(graph_experimental_data, plot_experimental_data(df_midgut_legs)),
-  tar_target(file_graph_experimental_data, {
-    ggsave("figures/experimental_titers.pdf", graph_experimental_data, width=10, height=4);
-    "figures/experimental_titers.pdf"}, format="file"),
   tar_target(filename_denv_dilutions, "data/raw/DENV test of dilutions 8-26-22.xlsx",
              format="file"),
   tar_target(df_denv_dilutions_infected,
@@ -64,6 +61,17 @@ list(
   tar_target(df_disseminated_infection_time_course,
              process_disseminated_infection_time_course(
                filename_disseminated_time_course)),
+  
+  # Plot raw experimental data
+  tar_target(graph_experimental_data, plot_experimental_data(df_midgut_legs)),
+  tar_target(file_graph_experimental_data, {
+    ggsave("figures/experimental_titers.pdf", graph_experimental_data, width=10, height=4);
+    "figures/experimental_titers.pdf"}, format="file"),
+  tar_target(graph_experimental_data_midgut,
+             plot_experimental_data_midgut(df_midgut_legs)),
+  tar_target(file_graph_experimental_data_midgut, {
+    ggsave("figures/experimental_titers_midgut.pdf", graph_experimental_data_midgut, width=6, height=4);
+    "figures/experimental_titers_midgut.pdf"}, format="file"),
   
   # process CHP damage data
   tar_target(filename_chp_damage, "data/raw/midgut damage over time.xlsx",
@@ -80,12 +88,12 @@ list(
                df_chp_damage)),
   
   # fit stan model via optimisation
-  tar_target(stan_model, "src/stan/model_hurdle_binary_richard.stan",
+  tar_target(stan_model, "src/stan/model_full.stan",
              format="file"),
   tar_target(opt_fit,
              fit_optimise(
                list_stan_datasets$stan_data,
-               stan_model, 2)),
+               stan_model, 5)),
   
   # plots based on optimisation
   tar_target(graph_fit_prevalence_midgut_legs,
@@ -225,6 +233,26 @@ list(
   tar_target(graph_eip_dose_response,
              plot_eip_dose_response(df_eip_dose_response)),
   
+  # legs prevalence mcmc
+  tar_target(graph_fit_prevalence_legs_mcmc,
+                        plot_fit_prevalence_legs_mcmc(
+                          sampling_fit,
+                          list_stan_datasets)),
+  
+  # combine eip plot with dissemination plot
+  tar_target(graph_fit_prevalence_legs_eip,
+             {
+               plot_grid(graph_fit_prevalence_legs_mcmc,
+                         graph_eip_dose_response,
+                         nrow = 1,
+                         labels = c("A.", "B."),
+                         label_x = -0.01)
+             }),
+  tar_target(file_graph_fit_prevalence_legs_eip, {
+    ggsave("figures/prevalence_legs_eip_mcmc.pdf",
+           graph_fit_prevalence_legs_eip, width=10, height=4);
+    "figures/prevalence_legs_eip_mcmc.pdf"}, format="file"),
+  
   # fitting for model comparison
   ## fit model without different kappa_m values per dose
   tar_target(stan_model_bare, "src/stan/model_log_likelihood.stan",
@@ -233,7 +261,7 @@ list(
              fit_mcmc(opt_fit,
                       stan_model_bare,
                       list_stan_datasets$stan_data,
-                      n_iterations=10,
+                      n_iterations=400,
                       n_chains=4)),
   ## fit model with different kappa_m values per dose
   tar_target(stan_model_kappa, "src/stan/model_log_likelihood_different_kappa.stan",
@@ -241,14 +269,17 @@ list(
   tar_target(opt_fit_kappa,
              fit_optimise_kappa(
                list_stan_datasets$stan_data,
-               stan_model_kappa, 2)),
+               stan_model_kappa, 5)),
   tar_target(sampling_fit_log_likelihood_kappa,
              fit_mcmc_kappa(opt_fit_kappa,
                       stan_model_kappa,
                       list_stan_datasets$stan_data,
-                      n_iterations=10,
+                      n_iterations=400,
                       n_chains=4)),
   tar_target(model_comparison_kappa,
              model_comparison(sampling_fit_log_likelihood,
-                              sampling_fit_log_likelihood_kappa))
+                              sampling_fit_log_likelihood_kappa)),
+  
+  # fit logistic model to determine if dose effect
+  tar_target(logistic_results, logistic_regression_comparison(list_stan_datasets))
 )

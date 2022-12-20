@@ -110,11 +110,18 @@ plot_eip_dose_response <- function(df_eip_dose_respose) {
               middle=median(eip),
               upper=quantile(eip, 0.75)) %>% 
     ggplot(aes(x=dose, y=middle)) +
+    geom_line(aes(colour=as.factor(q))) +
     geom_ribbon(aes(ymin=lower, ymax=upper,
-                    fill=as.factor(q))) +
+                    fill=as.factor(q)),
+                alpha=0.3) +
+    scale_colour_brewer("EIP quant.",
+                      palette = "Dark2") +
     scale_fill_brewer("EIP quant.",
-                       palette = "Spectral") +
+                       palette = "Dark2") +
     xlab("Concentration") +
-    ylab("EIP, days")
+    ylab("EIP, days") +
+    theme(
+      legend.position = c(0.75, 0.7)
+    )
 }
 
