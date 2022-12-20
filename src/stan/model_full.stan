@@ -184,63 +184,67 @@ parameters {
   
 }
 
-model {
+transformed parameters{
+  
   real theta[n_theta];
   real mu[n_obs];
   real mu_binary[n_obs_binary];
-  real sigma_in[n_obs];
-  real phi;
-  {
-    real y_init[n_difeq, n_dilutions];
-    real y_hat[n_unq_t, n_difeq, n_dilutions];
-    real y_hat_binary[n_unq_t_binary, n_difeq, n_experiment_types_binary];
-    real y_init_binary[3];
-    y_init_binary[2] = 0.0;
-    y_init_binary[3] = 0.0;
-    
-    theta[1] = gamma; // per-capita degradation rate parameter
-    theta[2] = k_lm ; // flow of virus through lumen parameter
-    theta[3] = a; // flow of virus through lumen parameter
-    theta[4] = alpha_m;
-    theta[5] = k_m;
-    theta[6] = k_mh;
-    theta[7] = x_star;
-    theta[8] = eta;
-    theta[9] = x_0;
-    theta[10] = x_r;
-    theta[11] = alpha_h;
-    theta[12] = k_h;
-    
-    // non-binary experiments
-    for(i in 1:n_dilutions){
-          y_init[1, i] = l0 * 1/dilutions[i];
-          y_init[2, i] = 0;
-          y_init[3, i] = 0;
-          y_hat[,,i] = solve_ode_single_dilution(
-              y_init[,i], t0, ts, theta, d_r, d_i, n_unq_t, n_difeq);
-    }
-    
-    for(i in 1:n_obs){
-      mu[i] = y_hat[t_ind[i], difeq_ind[i], dilution_ind[i]] > 0 ? log(y_hat[t_ind[i], difeq_ind[i], dilution_ind[i]]): log(1E-10);
-      sigma_in[i] = sigma[(difeq_ind[i]-1)];
-    }
-    
-    // binary experiments
-    for(i in 1:n_experiment_types_binary){
-      real refeed_amount_temp = refeed_amount_binary[i];
-      real theta_temp[n_theta] = theta;
-      theta_temp[10] = refeed_amount_temp;
-      theta_temp[11] = alpha_h;
-      y_init_binary[1] = zeta * l0 * 1 / dilutions_binary[i];
-      y_hat_binary[, , i] = solve_ode_single_dilution(
-            y_init_binary, t0, ts_binary, theta_temp, {t_refeed_binary[i]}, d_i, n_unq_t_binary, n_difeq);
-    }
-    
-    for(i in 1:n_obs_binary) {
-      real y_temp = y_hat_binary[t_ind_binary[i], difeq_ind_binary[i], ind_binary[i]];
-      mu_binary[i] = y_temp > 0 ? log(y_temp): log(1E-10);
-    }
+  real<lower=0> sigma_in[n_obs];
+  
+  real y_init[n_difeq, n_dilutions];
+  real y_hat[n_unq_t, n_difeq, n_dilutions];
+  real y_hat_binary[n_unq_t_binary, n_difeq, n_experiment_types_binary];
+  real y_init_binary[3];
+  y_init_binary[2] = 0.0;
+  y_init_binary[3] = 0.0;
+  
+  theta[1] = gamma; // per-capita degradation rate parameter
+  theta[2] = k_lm ; // flow of virus through lumen parameter
+  theta[3] = a; // flow of virus through lumen parameter
+  theta[4] = alpha_m;
+  theta[5] = k_m;
+  theta[6] = k_mh;
+  theta[7] = x_star;
+  theta[8] = eta;
+  theta[9] = x_0;
+  theta[10] = x_r;
+  theta[11] = alpha_h;
+  theta[12] = k_h;
+  
+  // non-binary experiments
+  for(i in 1:n_dilutions){
+        y_init[1, i] = l0 * 1/dilutions[i];
+        y_init[2, i] = 0;
+        y_init[3, i] = 0;
+        y_hat[,,i] = solve_ode_single_dilution(
+            y_init[,i], t0, ts, theta, d_r, d_i, n_unq_t, n_difeq);
   }
+  
+  for(i in 1:n_obs){
+    mu[i] = y_hat[t_ind[i], difeq_ind[i], dilution_ind[i]] > 0 ? log(y_hat[t_ind[i], difeq_ind[i], dilution_ind[i]]): log(1E-10);
+    sigma_in[i] = sigma[(difeq_ind[i]-1)];
+  }
+  
+  // binary experiments
+  for(i in 1:n_experiment_types_binary){
+    real refeed_amount_temp = refeed_amount_binary[i];
+    real theta_temp[n_theta] = theta;
+    theta_temp[10] = refeed_amount_temp;
+    theta_temp[11] = alpha_h;
+    y_init_binary[1] = zeta * l0 * 1 / dilutions_binary[i];
+    y_hat_binary[, , i] = solve_ode_single_dilution(
+          y_init_binary, t0, ts_binary, theta_temp, {t_refeed_binary[i]}, d_i, n_unq_t_binary, n_difeq);
+  }
+  
+  for(i in 1:n_obs_binary) {
+    real y_temp = y_hat_binary[t_ind_binary[i], difeq_ind_binary[i], ind_binary[i]];
+    mu_binary[i] = y_temp > 0 ? log(y_temp): log(1E-10);
+  }
+  
+}
+
+model {
+  real phi;
   
   // priors
   l0 ~ normal(0, 1);
@@ -276,7 +280,7 @@ model {
           phi *= phi_d;
         if(y[i] > 0){
           target += log(phi);
-          y[i] ~ lognormal(mu[i], sigma_in[i]) T[titer_lower_bound[difeq_ind[i] - 1],];
+          y[i] ~ lognormal(mu[i], sigma_in[i]); // no need for truncation as per: https://mc-stan.org/docs/2_18/stan-users-guide/censored-data.html
         }else {
           real log_prob[2];
           log_prob[1] = log1m(phi);
@@ -321,3 +325,68 @@ model {
   }
 }
 
+generated quantities{
+  real pred_y_hat[n_experiment, n_refeed_types, n_g_t, n_difeq, n_dilutions_sim];
+  real dose_response_midgut[n_experiment, n_dilutions_sim_fine];
+  real pred_y_hat_other_order[n_g_t_before + n_g_t_after, 3];
+  
+  for(k in 1:n_experiment) {
+   for(i in 1:n_dilutions_sim){
+     for(j in 1:n_refeed_types) {
+       real inits[3];
+       real theta_temp[n_theta] = theta;
+       inits[1] = l0 * 1 / dilutions_sim[i];
+       inits[2] = 0;
+       inits[3] = 0;
+       theta_temp[10] = refeed_amounts_unique[j];
+       if(k == 2) {
+        inits[1] *= zeta;
+       }
+       pred_y_hat[k,j,,,i] = integrate_ode_bdf(v_pop_ode, inits, t0, g_t, theta_temp, {t_refeeds_unique[j]}, d_i);
+     }
+   }
+  }
+  
+  // dose response curve at day 5
+  for(k in 1:n_experiment) {
+    for(i in 1:n_dilutions_sim_fine) {
+      real temp[1, 3];
+      real inits[3];
+      inits[1] = l0 * 1 / dilutions_sim_fine[i];
+      inits[2] = 0;
+      inits[3] = 0;
+      if(k == 2) {
+          inits[1] *= zeta;
+      }
+      temp = integrate_ode_bdf(v_pop_ode, inits, t0, {5.0}, theta, {100.0}, d_i);
+      dose_response_midgut[k, i] = temp[1, 2]; // get midgut result only
+    }
+  }
+  
+  {
+    real pred_y_hat_before[n_g_t_before, 3];
+    real pred_y_hat_after[n_g_t_after, 3];
+    real inits[3];
+    int k = 1;
+    inits[1] = 0; // initially no infectious bloodfeed
+    inits[2] = 0;
+    inits[3] = 0;
+    
+    // integrate up until second feed which is infectious
+    pred_y_hat_before = integrate_ode_bdf(v_pop_ode, inits, t0, g_t_before, theta, {3.0}, d_i);
+    for(i in 1:n_g_t_before) {
+      pred_y_hat_other_order[k, ] = pred_y_hat_before[k, ];
+      k += 1;
+    }
+    
+    // integrate post-discontinuity
+    inits[1] = l0 * 1 / dilutions_sim[2] * zeta; // to match experiments with second feed
+    inits[2] = pred_y_hat_before[n_g_t_before, 2];
+    inits[3] = pred_y_hat_before[n_g_t_before, 3];
+    pred_y_hat_after = integrate_ode_bdf(v_pop_ode, inits, t0, g_t_after, theta, {100.0}, d_i);
+    for(i in 1:n_g_t_after) {
+      pred_y_hat_other_order[k, ] = pred_y_hat_after[i, ];
+      k += 1;
+    }
+  }
+}

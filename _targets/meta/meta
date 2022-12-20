@@ -4,9 +4,13 @@ create_sampling_diagnostics|function|14788035ea7f1697|||||||||||||||
 df_chp_damage|stem|281b5643d0d3c58e|3e30a4b9c15980b5|3e508490191c298a|-2804493||t19322.9576667258s|734eed8d6fa94b1a|434|rds|local|vector|||0.083||
 df_denv_dilutions_infected|stem|2b448f888e12e5d3|517c66153ca66bd6|80c46dceab3823b5|-1057504582||t19322.7143818465s|801cade07abe9db2|312|rds|local|vector|||0.096||
 df_disseminated_infection_time_course|stem|9d3448bfe5a7dd38|4cc689a7d56dcd81|5bf7925d6c81bd1b|-704817685||t19322.7184323014s|c4c272a184f75d8c|382|rds|local|vector|||0.117||
+df_eip_dose_response|stem|7363c9d4efc366fd|0f0b7df518c33ddf|167db325ff47dc37|575991084||t19346.5693998103s||84877|rds|local|vector|||79.974||ignoring SIGPIPE signal
 df_midgut_legs|stem|176021763aabfe24|88dc55ec0061cd92|b6d8e9fe51501f8d|-1972227969||t19322.7063757356s|0e7ac39955568935|16688|rds|local|vector|||0.069||
 dose_response_curve|function|c8d31f79d9ba6901|||||||||||||||
 dose_response_curve_mcmc|function|2d0d410ab09caa66|||||||||||||||
+eip_dose_response|function|0a8bcc07c17d4b74|||||||||||||||
+eip_quantile_calculator|function|1450245d7d727435|||||||||||||||
+eip_quantile_samples|function|a57a1c561bdfcf48|||||||||||||||
 exp_decline|function|8b9aefc5425e2cea|||||||||||||||
 file_graph_chp_damage|stem|6474178f610dd77c|051b7db0cbad14ab|b17fbe78be63d0ca|-1602690068|figures/chp_damage.pdf|t19339.5384164375s|42bc8c2a77bca050|7511|file|local|vector|||0.149|Removed 3 rows containing missing values geom_point.|
 file_graph_experimental_data|stem|0efa3128737b8d81|fd94ce284d2b5096|818fb9673f199869|-1064592768|figures/experimental_titers.pdf|t19322.7104630884s|c58a249cb828a6aa|20897|file|local|vector|||1.046|Removed 181 rows containing nonfinite values stat_smooth.. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3828e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3535e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.6166e16. There are other near singularities as well. 25.251. pseudoinverse used at 4.985. neighborhood radius 3.015. reciprocal condition number  0. There are other near singularities as well. 9.0902. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  0. There are other near singularities as well. 9.1506. pseudoinverse used at 4.985. neighborhood radius 3.015. reciprocal condition number  0. There are other near singularities as well. 9.0902. Removed 181 rows containing missing values geom_point.|
@@ -28,11 +32,15 @@ filename_disseminated_time_course|stem|392366874f2bf2db|113dbee789e4d782|ef46db3
 filename_legs|stem|4b3c727d8e585539|8781c7fac32db0d7|ef46db3751d8e999|1973180361|data/raw/Compiled leg data.xlsx|t19139.6443441745s|6a68c821d44db45a|26737|file|local|vector|||0.007||
 filename_midgut|stem|c0507fa5d59f0263|2ee9c1f0837ef737|ef46db3751d8e999|-142451940|data/raw/Compiled midgut data.xlsx|t19139.6432128868s|5b6e8aeca8c66ccf|41749|file|local|vector|||0||
 fit_mcmc|function|c3fbf8500b3c4c88|||||||||||||||
+fit_mcmc_kappa|function|f8a5d67709a89214|||||||||||||||
 fit_optimise|function|7bb8879f10c1c2c7|||||||||||||||
+fit_optimise_kappa|function|437f70d34491a5ba|||||||||||||||
+get_full_log_likelihood|function|15fd4aebe9f3ba9c|||||||||||||||
 graph_bl_permeability|stem|f09bb0d471943278|aa9d5f6eb93a6d43|4bcec349728c6083|-973413816||t19339.5358803246s|090c72f89c5bde59|816266|rds|local|vector|||0.065||
 graph_bl_permeability_mcmc|stem|854a1f8a24479453|457b19260ed6179b|736d3270bc3cd82f|-1166845372||t19339.5286934356s|1b2ec87aefca5d44|505835499|rds|local|vector|||0.131||
 graph_chp_damage|stem|236e4d13ac84707d|d14b4bf8768f1f22|6964b25f9b3adff1|-2065656816||t19339.535881892s|2ae5777ca47e89c9|816661|rds|local|vector|||0.037||
 graph_chp_damage_mcmc|stem|b2c8f0871cbf1e87|502f9469a9cae1fe|4044d99e22532360|2027128779||t19339.5242154894s|94e250e4689eccf9|515466171|rds|local|vector|||36.448||
+graph_eip_dose_response|stem|ca8dc831a60ae08e|0c7eb9516c059bf4|24a2259d7be5fc59|1663849473||t19346.5694012008s|40e8369f8f9f78bb|140075|rds|local|vector|||0.092||
 graph_experimental_data|stem|6b122de59cab606b|b8f94891274d7fce|eaf9796ce6982b2f|-1888107996||t19322.7086842679s|a8918ab88139aa15|156616|rds|local|vector|||0.021||
 graph_fit_prevalence_dose_response|stem|829f6b57d551ac3f|e27ade246e9ad9c2|96e64216b8fa0f90|-1584553380||t19323.9108508062s|f89217f9fce1bfe2|898419|rds|local|vector|||0.129||
 graph_fit_prevalence_dose_response_mcmc|stem|f41762a58fd519ee|66d8b91702396e4e|9473332f35cc0e21|773784154||t19339.5310334589s|acdf2f5c342f48b4|511981884|rds|local|vector|||16.468||
@@ -49,13 +57,16 @@ graph_single_double_chp_mcmc|stem|80645a5a732547c5|33e732405a90e9d2|b63a62a971eb
 graph_single_double_mcmc|stem|b1c66e02603e466e|fde2c5712565a9e4|489bac74c5f32cf1|-1665383287||t19339.5245235879s|671f572f9c420f8c|626206280|rds|local|vector|||8.139||
 list_stan_datasets|stem|37c9772e982b378d|a3ebe132ade7c3dd|d2e7657f4ed3cc92|636512020||t19323.7779286409s|d49c2dfa7212c00b|24664|rds|local|vector|||0.337||
 logistic_curve|function|7c5e5095b9d9db98|||||||||||||||
+model_comparison|function|2f97c176abcc2471|||||||||||||||
 opt_fit|stem|9a7df9493f343944|9b85856e36cd8577|98212c7ae0b7cba6|-443907170||t19323.9108257754s|93df8b8ce86d19ed|729360|rds|local|vector|||121.686|nonzero return code in optimizing. nonzero return code in optimizing|
+opt_fit_kappa|stem|7f3461e426d050d4|38c14255024eac42|f60be64d9233998e|121592079||t19346.4846384858s|265061f89caa40ee|5126|rds|local|vector|||97.057|nonzero return code in optimizing. nonzero return code in optimizing|
 optimise_repeat|function|f2b6889fb7eb6a7a|||||||||||||||
 plot_bl_permeability|function|2e7b981a3131bb8d|||||||||||||||
 plot_bl_permeability_mcmc|function|bfcde3f5af928955|||||||||||||||
 plot_chp_damage_fit|function|ae04e59d2709ad74|||||||||||||||
 plot_chp_damage_fit_mcmc|function|ba1bbdd0d37aed91|||||||||||||||
 plot_chp_damage_mcmc|function|d3e9d3b76ddae8fb|||||||||||||||
+plot_eip_dose_response|function|6ca3f0670d66a89d|||||||||||||||
 plot_experimental_data|function|72e618fd4825b1a5|||||||||||||||
 plot_fit_prevalence_dose_response|function|6cef4948edac26b7|||||||||||||||
 plot_fit_prevalence_dose_response_mcmc|function|9bd35be0b613a0ee|||||||||||||||
@@ -76,7 +87,10 @@ process_damage_data|function|cc344f349e863642|||||||||||||||
 process_denv_dilutions_infected|function|0f58ebb23049d777|||||||||||||||
 process_disseminated_infection_time_course|function|8afbf71151da63bf|||||||||||||||
 process_experimental_data|function|0dbc67640970b86e|||||||||||||||
+rhs|function|652ae45982f872dd|||||||||||||||
 sampling_fit|stem|9ceb5c79118e430c|4e8cdeaed80cf88e|ef85e2ed1d324fce|1084379112||t19339.0539130841s|698da3be4534d00f|505755055|rds|local|vector|||5180.951|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
 sampling_fit_diagnostics|stem|7d16bd33e85b1eb3|0499abbd08bd48ad|f9c687b4ca00c6f0|321453760||t19339.5720189173s|2247cb837b5b96db|124|rds|local|vector|||0.116||
-stan_model|stem|002c8303ddd636ba|bd164974735d0954|ef46db3751d8e999|1266485521|src/stan/model_hurdle_binary_richard.stan|t19323.7836959215s|c52e6f310fd255a5|12429|file|local|vector|||0.466||
-stan_model_bare|stem|5bbcf9a31c37bfe5|695ace0ec15c2fbf|ef46db3751d8e999|-2045659691|src/stan/model_hurdle_binary_richard_bare.stan|t19338.6434724594s|3c81cb1e5af9336a|10383|file|local|vector|||0.454||
+sampling_fit_log_likelihood_kappa|stem|65f94866618eb9fb|ea621b3a9b00ba9e|d373043d6fd145e9|1310855773||t19346.4861295529s|fda01435032fc2f0|2312001|rds|local|vector|||128.394|There were 16 divergent transitions after warmup. Seehttpsmcstan.orgmiscwarnings.htmldivergenttransitionsafterwarmupto find out why this is a problem and how to eliminate them.. Examine the pairs plot to diagnose sampling problems. The largest Rhat is Inf, indicating chains have not mixed.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlrhat|
+stan_model|stem|002c8303ddd636ba|bd164974735d0954|ef46db3751d8e999|1266485521|src/stan/model_hurdle_binary_richard.stan|t19346.4540468928s|c52e6f310fd255a5|12429|file|local|vector|||0.466||
+stan_model_bare|stem|7014d2478ffe0d4f|695ace0ec15c2fbf|ef46db3751d8e999|-2045659691|src/stan/model_hurdle_binary_richard_bare.stan|t19346.4380190552s|45d7ad538027d3b1|11058|file|local|vector|||0.881||
+stan_model_kappa|stem|00e17ba01b7d845c|4520f72ea86b42f1|ef46db3751d8e999|328983018|src/stan/model_log_likelihood_different_kappa.stan|t19346.4818329132s|6dbeacc496622393|11360|file|local|vector|||0.517||

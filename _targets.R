@@ -9,7 +9,9 @@ library(targets)
 
 # Set target options:
 tar_option_set(
-  packages = c("tidyverse", "rstan", "cowplot", "posterior"), # packages that your targets need to run
+  packages = c("tidyverse", "rstan",
+               "cowplot", "posterior",
+               "loo", "deSolve"), # packages that your targets need to run
   format = "rds" # default storage format
   # Set other options as needed.
 )
@@ -35,6 +37,8 @@ source("src/r/plot_bl_permeability.R")
 source("src/r/helper.R")
 source("src/r/fit_sampling.R")
 source("src/r/sampling_diagnostics.R")
+source("src/r/model_comparison.R")
+source("src/r/plot_eip.R")
 
 
 list(
@@ -157,8 +161,6 @@ list(
   
   
   # fit stan model via sampling
-  tar_target(stan_model_bare, "src/stan/model_hurdle_binary_richard_bare.stan",
-             format="file"),
   tar_target(sampling_fit,
              fit_mcmc(opt_fit,
                       stan_model,
@@ -213,5 +215,40 @@ list(
   tar_target(file_graph_midgut_dose_response_combined_mcmc, {
     ggsave("figures/prevalence_midgut_dose_response_mcmc.pdf",
            graph_midgut_dose_response_combined_mcmc, width=10, height=4);
-    "figures/prevalence_midgut_dose_response_mcmc.pdf"}, format="file")
+    "figures/prevalence_midgut_dose_response_mcmc.pdf"}, format="file"),
+  
+  # eip dose-response
+  tar_target(df_eip_dose_response,
+             eip_dose_response(
+               sampling_fit, list_stan_datasets$stan_data,
+               500)),
+  tar_target(graph_eip_dose_response,
+             plot_eip_dose_response(df_eip_dose_response)),
+  
+  # fitting for model comparison
+  ## fit model without different kappa_m values per dose
+  tar_target(stan_model_bare, "src/stan/model_log_likelihood.stan",
+             format="file"),
+  tar_target(sampling_fit_log_likelihood,
+             fit_mcmc(opt_fit,
+                      stan_model_bare,
+                      list_stan_datasets$stan_data,
+                      n_iterations=10,
+                      n_chains=4)),
+  ## fit model with different kappa_m values per dose
+  tar_target(stan_model_kappa, "src/stan/model_log_likelihood_different_kappa.stan",
+             format="file"),
+  tar_target(opt_fit_kappa,
+             fit_optimise_kappa(
+               list_stan_datasets$stan_data,
+               stan_model_kappa, 2)),
+  tar_target(sampling_fit_log_likelihood_kappa,
+             fit_mcmc_kappa(opt_fit_kappa,
+                      stan_model_kappa,
+                      list_stan_datasets$stan_data,
+                      n_iterations=10,
+                      n_chains=4)),
+  tar_target(model_comparison_kappa,
+             model_comparison(sampling_fit_log_likelihood,
+                              sampling_fit_log_likelihood_kappa))
 )
