@@ -121,6 +121,8 @@ plot_eip_dose_response <- function(df_eip_dose_respose) {
     xlab("Concentration") +
     ylab("Time for dissemination, DPI") +
     theme_bw() +
+    geom_vline(xintercept = 0.08, linetype = 2) +
+    geom_vline(xintercept = 1, linetype = 2) +
     theme(
       legend.position = c(0.75, 0.7)
     )

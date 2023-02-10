@@ -115,5 +115,6 @@ plot_continuous_data <- function(sampling_fit, list_stan_datasets) {
     ylab("DENV titer") +
     xlab("DPI") +
     scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + 
-    scale_y_sqrt(labels = function(x) format(x, scientific = TRUE))
+    scale_y_sqrt(labels = function(x) format(x, scientific = TRUE)) +
+    theme_bw()
 }

@@ -25,6 +25,6 @@ plot_experimental_data_midgut <- function(df_midgut_legs) {
     geom_smooth(se=FALSE) +
     ylab("DENV titer") +
     xlab("DPI") +
-    scale_color_brewer(palette = "Spectral") +
+    scale_color_viridis_d("Concentration") +
     theme_bw()
 }

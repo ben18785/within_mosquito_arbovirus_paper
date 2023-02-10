@@ -549,10 +549,8 @@ plot_fit_prevalence_midgut_only_mcmc <- function(fit, list_stan_datasets) {
     ylab("Positive") +
     scale_y_continuous(labels = scales::percent,
                        limits=c(0, 1)) +
-    scale_color_brewer("Concentration",
-                       palette = "Spectral") +
-    scale_fill_brewer("Concentration",
-                       palette = "Spectral") +
+    scale_colour_viridis_d("Concentration") +
+    scale_fill_viridis_d("Concentration") +
     scale_x_continuous(limits=c(0, 13)) +
     theme_bw() +
     theme(legend.position = c(0.8, 0.4))
@@ -674,8 +672,8 @@ plot_fit_prevalence_legs_mcmc <- function(fit, list_stan_datasets) {
     ylab("Positive") +
     scale_shape(guide="none") +
     scale_y_continuous(labels = scales::percent) +
-    scale_color_brewer("Concentration", palette = "Spectral") +
-    scale_fill_brewer("Concentration", palette = "Spectral") +
+    scale_color_viridis_d("Concentration") +
+    scale_fill_viridis_d("Concentration") +
     scale_x_continuous(limits = c(0, 15)) +
     theme_bw() +
     theme(

@@ -1,5 +1,6 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 bl_permeability|function|39a86775eecda18d|||||||||||||||
+calculate_sensitivity|function|bf954effdb443609|||||||||||||||
 create_sampling_diagnostics|function|14788035ea7f1697|||||||||||||||
 df_chp_damage|stem|281b5643d0d3c58e|3e30a4b9c15980b5|3e508490191c298a|-2804493||t19322.9576667258s|734eed8d6fa94b1a|434|rds|local|vector|||0.083||
 df_denv_dilutions_infected|stem|2b448f888e12e5d3|517c66153ca66bd6|80c46dceab3823b5|-1057504582||t19322.7143818465s|801cade07abe9db2|312|rds|local|vector|||0.096||
@@ -13,18 +14,19 @@ eip_quantile_calculator|function|1450245d7d727435|||||||||||||||
 eip_quantile_samples|function|a57a1c561bdfcf48|||||||||||||||
 exp_decline|function|8b9aefc5425e2cea|||||||||||||||
 file_graph_chp_damage|stem|6474178f610dd77c|051b7db0cbad14ab|b17fbe78be63d0ca|-1602690068|figures/chp_damage.pdf|t19339.5384164375s|42bc8c2a77bca050|7511|file|local|vector|||0.149|Removed 3 rows containing missing values geom_point.|
-file_graph_continuous|stem|75894dab2f11a6e9|e12b6a8887484729|fe76443e0dd36567|-983018382|figures/fit_vs_continuous.pdf|t19398.626871618s|bc035afe2514d406|39644|file|local|vector|||0.501||
+file_graph_continuous|stem|bf2be3b99e80bb52|faad2a9b927f9e3e|601db19480bdc739|-983018382|figures/fit_vs_continuous.pdf|t19398.6450752746s|6bd07c5e321a6a8b|40321|file|local|vector|||0.533||
 file_graph_experimental_data|stem|0efa3128737b8d81|fd94ce284d2b5096|818fb9673f199869|-1064592768|figures/experimental_titers.pdf|t19322.7104630884s|c58a249cb828a6aa|20897|file|local|vector|||1.046|Removed 181 rows containing nonfinite values stat_smooth.. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3828e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3535e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.6166e16. There are other near singularities as well. 25.251. pseudoinverse used at 4.985. neighborhood radius 3.015. reciprocal condition number  0. There are other near singularities as well. 9.0902. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  0. There are other near singularities as well. 9.1506. pseudoinverse used at 4.985. neighborhood radius 3.015. reciprocal condition number  0. There are other near singularities as well. 9.0902. Removed 181 rows containing missing values geom_point.|
-file_graph_experimental_data_midgut|stem|072d2bc8430bf7a3|0ce4d98f0bdeb3ea|c6f5841ba1d83e5a|62142703|figures/experimental_titers_midgut.pdf|t19397.507106736s|297ebdd8c3e61a74|14810|file|local|vector|||1.924|Removed 110 rows containing nonfinite values stat_smooth.. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3828e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3535e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.6166e16. There are other near singularities as well. 25.251. Removed 110 rows containing missing values geom_point.|
+file_graph_experimental_data_midgut|stem|c34e5c00cde006c2|0ce4d98f0bdeb3ea|ee2683dbd18fb48f|62142703|figures/experimental_titers_midgut.pdf|t19398.636991719s|8c452f7c8bd52335|14814|file|local|vector|||0.981|Removed 110 rows containing nonfinite values stat_smooth.. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3828e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3535e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.6166e16. There are other near singularities as well. 25.251. Removed 110 rows containing missing values geom_point.|
 file_graph_fit_prevalence_dose_response|stem|8d11cc4baf90553c|dc00414e50a4d54f|d7471e6e53c218f7|-1485284617|figures/prevalence_dose_response.pdf|t19323.9108623945s|2751155b0392ecaa|8109|file|local|vector|||0.049|Removed 4 rows containing missing values geom_path.|
 file_graph_fit_prevalence_legs|stem|32543decdabf00c0|c51be97981a91859|416bbbe822da5fc4|365284467|figures/prevalence_legs.pdf|t19346.9834851482s|797857cb5537f0c9|15087|file|local|vector|||0.212|Removed 360 rows containing missing values geom_path.|
-file_graph_fit_prevalence_legs_eip|stem|8c813ac1e39ee82a|b7380058be1bf69c|75d7debb75bbfadd|1503857889|figures/prevalence_legs_eip_mcmc.pdf|t19397.5157107854s|7923576f223cba49|35421|file|local|vector|||0.149||
+file_graph_fit_prevalence_legs_eip|stem|799ba8cc906878c9|b7380058be1bf69c|1f2dd528e50ac4eb|1503857889|figures/prevalence_legs_eip_mcmc.pdf|t19398.6555649697s|eeaca311c672330f|35458|file|local|vector|||0.277||
 file_graph_fit_prevalence_midgut_legs|stem|e81bae1f2fba6aa8|d5dd06fe34dedc52|1c5cdcf77dbb6349|-727643746|figures/prevalence_midgut_legs.pdf|t19323.9108581456s|89207f2170990509|48327|file|local|vector|||0.306||
 file_graph_fit_prevalence_midgut_only|stem|6b5f038cd74c50dd|0afab7dd05b77dfa|d07e67836f81f992|964462409|figures/prevalence_midgut_only.pdf|t19323.9108599138s|8aa258ac93c7cc68|15606|file|local|vector|||0.103|Removed 1000 rows containing missing values geom_path.|
 file_graph_fit_prevalence_midgut_only_png|stem|63eaf94e91b89525|d47b02ebb471475a|d07e67836f81f992|-1928915247|figures/prevalence_midgut_only.png|t19323.9108617907s|21fb355d2c4e6064|68795|file|local|vector|||0.159|Removed 1000 rows containing missing values geom_path.|
 file_graph_midgut_dose_response_combined|stem|dad80f53e2bc59ab|bde5de5003856be7|dffb7ca30bec4fec|725685376|figures/prevalence_midgut_dose_response.pdf|t19346.9831773956s|732ba01f8d78bae1|19124|file|local|vector|||0.252||
-file_graph_midgut_dose_response_combined_mcmc|stem|6f9371ec55079d31|25685f59a2533582|a153e5b29e0ed7a4|-1435188334|figures/prevalence_midgut_dose_response_mcmc.pdf|t19397.5119147968s|00347da42a206ec7|41196|file|local|vector|||0.167||
+file_graph_midgut_dose_response_combined_mcmc|stem|986c59c3d421486e|25685f59a2533582|b4b5e0798d73002e|-1435188334|figures/prevalence_midgut_dose_response_mcmc.pdf|t19398.6361116223s|5d4625e7b9f2578a|41201|file|local|vector|||0.163||
 file_graph_midgut_dose_response_combined_png|stem|bde362e6d13581ff|cbf16aab1f425e1b|6a26ada4649de3a3|1865176596|figures/prevalence_midgut_dose_response.png|t19323.6822214396s|0772dd7f924005bb|134205|file|local|vector|||0.432||
+file_graph_midgut_invasion_sensitivities|stem|d37bcfef3023f4be|ac01efb8e45542eb|4239f849c0325ffe|464941294|figures/sensitivities_midgut_invasion.pdf|t19398.741406273s|79d6ffe31f592bc1|151990|file|local|vector|||0.547||
 file_graph_noninfectious_then_infectious_double|stem|7524f33d82d5f164|553cfce31f35bd3b|c727dcc12c355989|155998749|figures/double_other_order.pdf|t19398.5226222331s|dc3855803e129f27|16418|file|local|vector|||0.27|Removed 357 rows containing missing values geom_path.|
 file_graph_single_double|stem|edcea82deae4eed2|b5ebdac4e1fe517f|a918f9d21b687115|-650493317|figures/single_double.png|t19370.9281727857s|6ebdade8e18c87f4|70580|file|local|vector|||0.258|Removed 440 rows containing missing values geom_path.|
 file_graph_single_double_chp|stem|9af519438a906ec5|3d99bd324319d599|892e92ebd46c9204|830819145|figures/graph_single_double_chp.pdf|t19346.9877742203s|e60d2f95b4ca201c|15754|file|local|vector|||0.218||
@@ -39,24 +41,26 @@ fit_mcmc_kappa|function|f8a5d67709a89214|||||||||||||||
 fit_optimise|function|7bb8879f10c1c2c7|||||||||||||||
 fit_optimise_kappa|function|437f70d34491a5ba|||||||||||||||
 get_full_log_likelihood|function|15fd4aebe9f3ba9c|||||||||||||||
+get_summary_parameters|function|0ea8a3b8e7811fa1|||||||||||||||
 graph_bl_permeability|stem|8bb6e6aaa7afdf82|aa9d5f6eb93a6d43|4864ea746486c627|-973413816||t19346.9838095102s|6e526e40156b08c4|828646|rds|local|vector|||0.028||
 graph_bl_permeability_mcmc|stem|ae87eabc00d61be0|457b19260ed6179b|c6277c224e3dfb4d|-1166845372||t19398.5142972125s|7434e79b1e1499d5|757721695|rds|local|vector|||0.083||
 graph_chp_damage|stem|4f338b47807444c4|d14b4bf8768f1f22|481a7e2941d2cfb2|-2065656816||t19346.9838050827s|6b043e76a3e8612a|823495|rds|local|vector|||0.055||
 graph_chp_damage_mcmc|stem|a349ea3c989756aa|502f9469a9cae1fe|525b4651d77f3e17|2027128779||t19398.5150341091s|637e2835725e63ab|767382661|rds|local|vector|||40.973||
-graph_continuous|stem|1646885ab3aa9576|d2e26f0a3270eccb|b334b85ff4bdbbc6|1605326323||t19398.6268598135s|7eca506ef5692101|856612274|rds|local|vector|||6.56||
-graph_eip_dose_response|stem|b9c3091345176261|0c7eb9516c059bf4|1e0562cb26008c37|1663849473||t19397.5136132973s|334c15c32f68572f|269752|rds|local|vector|||0.162||
+graph_continuous|stem|68cd9ef917969112|d2e26f0a3270eccb|b491814bbee8d56a|1605326323||t19398.6319412552s|a9abfaea098c8a89|856613846|rds|local|vector|||5.963||
+graph_eip_dose_response|stem|6e78ea1bb9f343e6|0c7eb9516c059bf4|66db569f8b31a2f8|1663849473||t19398.6554836083s|ac6bc3977cc8b842|272649|rds|local|vector|||0.15||
 graph_experimental_data|stem|6b122de59cab606b|b8f94891274d7fce|eaf9796ce6982b2f|-1888107996||t19322.7086842679s|a8918ab88139aa15|156616|rds|local|vector|||0.021||
-graph_experimental_data_midgut|stem|d0740d430d170a92|cb1f2e35a380c5f9|11f2842283845f03|-1462709422||t19397.5070844044s|6aa8032a8f4c1d1c|131101|rds|local|vector|||0.066||
+graph_experimental_data_midgut|stem|d386efcf2d0d1ac4|cb1f2e35a380c5f9|d55e2a0f98af790d|-1462709422||t19398.6368996825s|3628f7798dacd4d9|130444|rds|local|vector|||0.06||
 graph_fit_prevalence_dose_response|stem|829f6b57d551ac3f|e27ade246e9ad9c2|96e64216b8fa0f90|-1584553380||t19323.9108508062s|f89217f9fce1bfe2|898419|rds|local|vector|||0.129||
 graph_fit_prevalence_dose_response_mcmc|stem|8d76b6ff3b10c716|66d8b91702396e4e|f55f07ce61499321|773784154||t19397.502344183s|e4ce1ed7f33f84e6|766911060|rds|local|vector|||18.262||
 graph_fit_prevalence_legs|stem|dde0ff81356d9e95|c682957791bb9240|da4ca35c946ebecb|1848306733||t19346.9834826348s|4757dd5db005ae12|1230918|rds|local|vector|||0.327||
-graph_fit_prevalence_legs_eip|stem|ba0297c619736e11|22c4a57b696c14ef|c993ca05fd8baba0|1596777757||t19397.5157090106s|8594cb55f70f644a|443422|rds|local|vector|||0.323|Removed 360 rows containing missing values geom_path.|
-graph_fit_prevalence_legs_mcmc|stem|ac188b376f0272ec|8903393bca68c7b9|7c8c4194d22930c9|1579347732||t19397.5157003065s|921d3380e3dff753|758664379|rds|local|vector|||17.74||
+graph_fit_prevalence_legs_eip|stem|50dc50266782027e|22c4a57b696c14ef|90455a600f2b8398|1596777757||t19398.6555617167s|8a0aa6b985295bca|444207|rds|local|vector|||0.347|Removed 360 rows containing missing values geom_path.|
+graph_fit_prevalence_legs_mcmc|stem|f945a1052563f9af|8903393bca68c7b9|888009c300af6780|1579347732||t19398.6390494571s|d954d12dedcb1127|758662878|rds|local|vector|||19.159||
 graph_fit_prevalence_midgut_legs|stem|85173bda95c89d2b|6985116a3d8dd7e0|29813c1fb509b9cb|-811305942||t19323.9108417029s|37e569690998600f|1906517|rds|local|vector|||0.155||
 graph_fit_prevalence_midgut_only|stem|d0859a83742729ee|657ad5f32200ec06|0ed1d72b54a4729d|-1460890296||t19323.9108481253s|98b2a89993362702|1148957|rds|local|vector|||0.25||
-graph_fit_prevalence_midgut_only_mcmc|stem|14414c4cc12489c4|844c266335adc607|126da9b44ac27451|1359956710||t19397.5112449093s|a7900a669a19e70e|758175966|rds|local|vector|||18.936||
+graph_fit_prevalence_midgut_only_mcmc|stem|c56a3df6b8c27796|844c266335adc607|b9d42314370e779b|1359956710||t19398.6357310005s|b41faf3b7ee73fe7|758174813|rds|local|vector|||18.993||
 graph_midgut_dose_response_combined|stem|c3fd14bf694a316e|e21610411719ad00|f1db9e59c25f0e54|1796995008||t19346.9831744265s|a4923b0b233e96b4|264686|rds|local|vector|||0.7|Removed 1000 rows containing missing values geom_path.. Removed 4 rows containing missing values geom_path.|
-graph_midgut_dose_response_combined_mcmc|stem|474e9d35e862f26d|597c83ea59f82ff7|a4036f4675a31a21|710496145||t19397.5119127891s|b72e1ccb639614f2|438338|rds|local|vector|||0.652|Removed 1000 rows containing missing values geom_path.. Removed 4 rows containing missing values geom_path.|
+graph_midgut_dose_response_combined_mcmc|stem|0b934805170e8e14|597c83ea59f82ff7|1938879c66377aec|710496145||t19398.636109654s|a99fd2f59f454248|438354|rds|local|vector|||0.717|Removed 1000 rows containing missing values geom_path.. Removed 4 rows containing missing values geom_path.|
+graph_midgut_invasion_sensitivities|stem|78a542784ff8cac0|ee1520f185a914bd|556bf03a05cfb2e8|1005224169||t19398.741394783s|51571521d7e26bf6|759516034|rds|local|vector|||1.411||
 graph_noninfectious_then_infectious_double|stem|e2c7f0b448499bc1|3ba123e6510640ca|741c6bafab4b790b|1373307119||t19398.5226190417s|6549a75c3747b35b|1049133|rds|local|vector|||0.143||
 graph_single_double|stem|cedca25acfcc4643|533debf3773c5e7d|c33d1abba43999c1|513076901||t19370.9281697195s|2db1f153775b530c|1204328|rds|local|vector|||0.168||
 graph_single_double_chp|stem|283135961cde675b|e9bef8fd8dc12e5d|21cdfdc91f97154f|-335058568||t19346.9838136888s|e8f6f67159fecb91|237568|rds|local|vector|||0.251|Removed 1 rows containing missing values geom_point.. Removed 440 rows containing missing values geom_path.|
@@ -76,19 +80,20 @@ plot_bl_permeability_mcmc|function|8b6c733625af25b0|||||||||||||||
 plot_chp_damage_fit|function|ae04e59d2709ad74|||||||||||||||
 plot_chp_damage_fit_mcmc|function|b1fc36dcaa0a372d|||||||||||||||
 plot_chp_damage_mcmc|function|d3e9d3b76ddae8fb|||||||||||||||
-plot_continuous_data|function|6e159879baeb2620|||||||||||||||
-plot_eip_dose_response|function|8f01b1c898846cd0|||||||||||||||
+plot_continuous_data|function|f9a3353893f99d9f|||||||||||||||
+plot_eip_dose_response|function|f5fd70f634874f25|||||||||||||||
 plot_experimental_data|function|72e618fd4825b1a5|||||||||||||||
-plot_experimental_data_midgut|function|fec6da1d0317b81c|||||||||||||||
+plot_experimental_data_midgut|function|ae251214808c7410|||||||||||||||
 plot_fit_prevalence_dose_response|function|6cef4948edac26b7|||||||||||||||
 plot_fit_prevalence_dose_response_mcmc|function|aa03d8f969ae0bb1|||||||||||||||
 plot_fit_prevalence_legs|function|29dca7456c266014|||||||||||||||
-plot_fit_prevalence_legs_mcmc|function|5201d402612d2fce|||||||||||||||
+plot_fit_prevalence_legs_mcmc|function|bb04abd7bad01851|||||||||||||||
 plot_fit_prevalence_midgut_legs|function|8787ef315b8fad4a|||||||||||||||
 plot_fit_prevalence_midgut_only|function|adbd051d669b96c8|||||||||||||||
-plot_fit_prevalence_midgut_only_mcmc|function|35ac8500165b278d|||||||||||||||
+plot_fit_prevalence_midgut_only_mcmc|function|d741d2985913a136|||||||||||||||
 plot_midgut_dose_response_combined|function|8ea3fcd88d997ac9|||||||||||||||
 plot_noninfectious_then_infectious_double|function|1ec46baba8a42ddb|||||||||||||||
+plot_sensitivities_midgut_invasion|function|7fc51909a36442dd|||||||||||||||
 plot_single_double_feed|function|8842316e20944f4b|||||||||||||||
 plot_single_double_feed_mcmc|function|ac73ee94f659519d|||||||||||||||
 prepare_data_prefit|function|8b9b334723c43278|||||||||||||||
@@ -101,9 +106,11 @@ process_denv_dilutions_infected|function|0f58ebb23049d777|||||||||||||||
 process_disseminated_infection_time_course|function|8afbf71151da63bf|||||||||||||||
 process_experimental_data|function|0dbc67640970b86e|||||||||||||||
 rhs|function|652ae45982f872dd|||||||||||||||
+rhs_complex|function|e19a70f55f5fc656|||||||||||||||
 sampling_fit|stem|e6520ad2924707cd|73634d74bd90a7b0|9781962428a32864|1084379112||t19371.0068388527s|014ae391f3a47b76|757639057|rds|local|vector|||6757.787|The largest Rhat is NA, indicating chains have not mixed.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlrhat. Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
 sampling_fit_diagnostics|stem|366b05ad0f31434c|0499abbd08bd48ad|4594b201f0c0aefa|321453760||t19398.5321916438s|24d52ebf1535bba2|123|rds|local|vector|||0.156||
 sampling_fit_log_likelihood_kappa|stem|65f94866618eb9fb|ea621b3a9b00ba9e|d373043d6fd145e9|1310855773||t19346.4861295529s|fda01435032fc2f0|2312001|rds|local|vector|||128.394|There were 16 divergent transitions after warmup. Seehttpsmcstan.orgmiscwarnings.htmldivergenttransitionsafterwarmupto find out why this is a problem and how to eliminate them.. Examine the pairs plot to diagnose sampling problems. The largest Rhat is Inf, indicating chains have not mixed.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlrhat|
+simulate_model|function|c855077d142739da|||||||||||||||
 stan_model|stem|002c8303ddd636ba|2815e1a04913b64b|ef46db3751d8e999|1266485521|src/stan/model_full.stan|t19370.8973154709s|c52e6f310fd255a5|12429|file|local|vector|||0.634||
 stan_model_bare|stem|c45ed89081d3d63b|88524f2a77d350d3|ef46db3751d8e999|-2045659691|src/stan/model_log_likelihood.stan|t19346.4532763909s|766f9eea4f425034|11112|file|local|vector|||0.553||
 stan_model_kappa|stem|00e17ba01b7d845c|4520f72ea86b42f1|ef46db3751d8e999|328983018|src/stan/model_log_likelihood_different_kappa.stan|t19346.4818329132s|6dbeacc496622393|11360|file|local|vector|||0.517||

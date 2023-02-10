@@ -42,6 +42,7 @@ source("src/r/model_comparison.R")
 source("src/r/plot_eip.R")
 source("src/r/logistic_regression.R")
 source("src/r/plot_continuous_data.R")
+source("src/r/plot_sensitivity.R")
 
 list(
   
@@ -288,6 +289,13 @@ list(
   # plot continuous data and fit
   tar_target(graph_continuous, plot_continuous_data(sampling_fit, list_stan_datasets)),
   tar_target(file_graph_continuous, {
-    ggsave("figures/fit_vs_continuous.pdf", graph_continuous, width=8, height=4);
-    "figures/fit_vs_continuous.pdf"}, format="file")
+    ggsave("figures/fit_vs_continuous.pdf", graph_continuous, width=8, height=5);
+    "figures/fit_vs_continuous.pdf"}, format="file"),
+  
+  # sensitivity plots
+  tar_target(graph_midgut_invasion_sensitivities,
+             plot_sensitivities_midgut_invasion(sampling_fit, list_stan_datasets)),
+  tar_target(file_graph_midgut_invasion_sensitivities, {
+    ggsave("figures/sensitivities_midgut_invasion.pdf", graph_midgut_invasion_sensitivities, width=8, height=4);
+    "figures/sensitivities_midgut_invasion.pdf"}, format="file")
 )
