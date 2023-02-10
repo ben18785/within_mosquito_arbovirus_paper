@@ -119,7 +119,8 @@ plot_eip_dose_response <- function(df_eip_dose_respose) {
     scale_fill_brewer("EIP quant.",
                        palette = "Dark2") +
     xlab("Concentration") +
-    ylab("EIP, days") +
+    ylab("Time for dissemination, DPI") +
+    theme_bw() +
     theme(
       legend.position = c(0.75, 0.7)
     )

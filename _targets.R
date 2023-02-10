@@ -11,7 +11,8 @@ library(targets)
 tar_option_set(
   packages = c("tidyverse", "rstan",
                "cowplot", "posterior",
-               "loo", "deSolve", "lmtest"), # packages that your targets need to run
+               "loo", "deSolve", "lmtest",
+               "stargazer"), # packages that your targets need to run
   format = "rds" # default storage format
   # Set other options as needed.
 )
@@ -40,7 +41,7 @@ source("src/r/sampling_diagnostics.R")
 source("src/r/model_comparison.R")
 source("src/r/plot_eip.R")
 source("src/r/logistic_regression.R")
-
+source("src/r/plot_continuous_data.R")
 
 list(
   
@@ -173,7 +174,7 @@ list(
              fit_mcmc(opt_fit,
                       stan_model,
                       list_stan_datasets$stan_data,
-                      n_iterations=400,
+                      n_iterations=600,
                       n_chains=4)
              ),
   
@@ -281,5 +282,12 @@ list(
                               sampling_fit_log_likelihood_kappa)),
   
   # fit logistic model to determine if dose effect
-  tar_target(logistic_results, logistic_regression_comparison(list_stan_datasets))
+  tar_target(logistic_results, logistic_regression_comparison(list_stan_datasets)),
+  tar_target(logistic_results_tex, {stargazer::stargazer(logistic_results$model_1, logistic_results$model_0, out="figures/logistic_regression.tex")}),
+  
+  # plot continuous data and fit
+  tar_target(graph_continuous, plot_continuous_data(sampling_fit, list_stan_datasets)),
+  tar_target(file_graph_continuous, {
+    ggsave("figures/fit_vs_continuous.pdf", graph_continuous, width=8, height=4);
+    "figures/fit_vs_continuous.pdf"}, format="file")
 )

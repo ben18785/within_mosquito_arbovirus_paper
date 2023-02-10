@@ -98,5 +98,6 @@ plot_chp_damage_fit_mcmc <- function(fit, df_chp_damage) {
     scale_y_log10() +
     scale_color_brewer(palette = "Dark2") +
     scale_fill_brewer(palette = "Dark2") +
+    theme_bw() + 
     theme(legend.position = "none")
 }

@@ -554,6 +554,7 @@ plot_fit_prevalence_midgut_only_mcmc <- function(fit, list_stan_datasets) {
     scale_fill_brewer("Concentration",
                        palette = "Spectral") +
     scale_x_continuous(limits=c(0, 13)) +
+    theme_bw() +
     theme(legend.position = c(0.8, 0.4))
   g
 }
@@ -617,7 +618,8 @@ plot_fit_prevalence_dose_response_mcmc <- function(fit, list_stan_datasets) {
     ylab("Positive") +
     scale_y_continuous(labels = scales::percent,
                        limits=c(0, 1)) +
-    scale_x_log10(limits=c(0.02, 2))
+    scale_x_log10(limits=c(0.02, 2)) +
+    theme_bw()
   g
 }
 
@@ -664,7 +666,7 @@ plot_fit_prevalence_legs_mcmc <- function(fit, list_stan_datasets) {
               aes(colour=concentration)) +
     geom_ribbon(data=all_df1 %>% filter(type=="simulated", category=="continuous"),
                 aes(ymin=lower, ymax=upper, fill=concentration),
-                alpha=0.4) +
+                alpha=0.8) +
     geom_pointrange(data=all_df1 %>% filter(type!="simulated"),
                     aes(ymin=lower, ymax=upper, shape=category, colour=concentration),
                     position = position_jitterdodge(dodge.width = 0.25, jitter.width = 0.4)) +
@@ -675,6 +677,7 @@ plot_fit_prevalence_legs_mcmc <- function(fit, list_stan_datasets) {
     scale_color_brewer("Concentration", palette = "Spectral") +
     scale_fill_brewer("Concentration", palette = "Spectral") +
     scale_x_continuous(limits = c(0, 15)) +
+    theme_bw() +
     theme(
       legend.position = c(0.75, 0.25)
     )

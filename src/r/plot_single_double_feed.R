@@ -160,6 +160,7 @@ plot_noninfectious_then_infectious_double <- function(fit, list_stan_datasets) {
     ylab("Positive") +
     scale_y_continuous(labels = scales::percent,
                        limits=c(0, 1)) +
+    theme_bw() +
     scale_x_continuous(limits=c(0, 15))
 }
 
@@ -285,6 +286,7 @@ plot_single_double_feed_mcmc <- function(
     xlab("DPI") +
     ylab("Positive") +
     scale_y_continuous(labels = scales::percent) +
+    theme_bw() +
     theme(legend.position = c(0.8, 0.4)) +
     scale_x_continuous(limits=c(0, 12.5))
 }

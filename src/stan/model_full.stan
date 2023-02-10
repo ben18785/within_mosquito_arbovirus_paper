@@ -280,7 +280,7 @@ model {
           phi *= phi_d;
         if(y[i] > 0){
           target += log(phi);
-          y[i] ~ lognormal(mu[i], sigma_in[i]); // no need for truncation as per: https://mc-stan.org/docs/2_18/stan-users-guide/censored-data.html
+          y[i] ~ lognormal(mu[i], sigma_in[i]) T[titer_lower_bound[difeq_ind[i] - 1],];
         }else {
           real log_prob[2];
           log_prob[1] = log1m(phi);
