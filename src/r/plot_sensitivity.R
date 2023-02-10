@@ -58,12 +58,12 @@ get_summary_parameters <- function(fit, x0, t_refeed, summary_func=mean) {
   parameters
 }
 
-calculate_sensitivity <- function(parameter_name, multipliers, fit, stan_data) {
+calculate_sensitivity <- function(parameter_name, multipliers, fit, stan_data,
+                                  times) {
   
   base_parameters <- get_summary_parameters(fit, stan_data$x_0, 100)
   inits <- c(l=as.numeric(base_parameters["l0"]), m=0, h=0)
   parameter_values <- base_parameters[parameter_name] * multipliers
-  times <- seq(0.01, 10, 0.01)
   base_sol <- simulate_model(base_parameters, inits, times=times) %>% 
     mutate(multiplier=1)
   
@@ -87,27 +87,37 @@ calculate_sensitivity <- function(parameter_name, multipliers, fit, stan_data) {
 plot_sensitivities_midgut_invasion <- function(fit, list_stan_datasets) {
   
   stan_data <- list_stan_datasets$stan_data
-  multipliers <- seq(0.1, 11, 1)
-  df_gamma <- calculate_sensitivity("gamma", multipliers, fit, stan_data)
-  df_klm <- calculate_sensitivity("k_lm", multipliers, fit, stan_data) %>% 
+  lower <- log10(0.1)
+  upper <- log10(11)
+  multipliers <- 10^seq(lower, upper, length.out=10)
+  times <- seq(0.01, 15, 0.01)
+  df_gamma <- calculate_sensitivity("gamma", multipliers, fit, stan_data, times=times)
+  df_klm <- calculate_sensitivity("k_lm", multipliers, fit, stan_data, times=times) %>% 
     mutate(parameter="kappa[lm]")
-  df_a <- calculate_sensitivity("a", multipliers, fit, stan_data)
+  df_a <- calculate_sensitivity("a", multipliers, fit, stan_data, times=times)
   
   df_all <- df_gamma %>% 
     bind_rows(
       df_klm,
       df_a
     ) %>% 
-    dplyr::select(time, m, multiplier, parameter)
+    dplyr::select(time, m, h, multiplier, parameter) %>% 
+    pivot_longer(c(m, h)) %>% 
+    rename(tissue=name) %>% 
+    mutate(
+      tissue=if_else(tissue=="m", "midgut", "legs")
+    )
   
-  titer_multiplier <- list_stan_datasets$dataset_denv_sum %>% 
-    filter(tissue=="midgut") %>% 
-    pull(overall_denv_titer)
+  titer_multipliers <- list_stan_datasets$dataset_denv_sum
+  
   df_all <- df_all %>% 
-    mutate(m = m * titer_multiplier)
+    left_join(titer_multipliers) %>% 
+    mutate(value = value * overall_denv_titer) %>% 
+    mutate(tissue=as.factor(tissue)) %>% 
+    mutate(tissue=fct_relevel(tissue, "midgut", "legs"))
   
   df_all %>% 
-    ggplot(aes(x=time, y=m, colour=multiplier, group=multiplier)) +
+    ggplot(aes(x=time, y=value, colour=multiplier, group=multiplier)) +
     geom_line() +
     geom_line(data=df_all %>% filter(multiplier==1),
               colour="black", linetype=2) +
@@ -120,8 +130,9 @@ plot_sensitivities_midgut_invasion <- function(fit, list_stan_datasets) {
     scale_color_viridis_c("Multiplier",
                           trans = "log",
                           breaks=c(0.1, 1, 10)) +
-    scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) +
-    facet_wrap(~parameter, labeller = label_parsed)
+    scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10, 12, 14)) +
+    facet_grid(vars(tissue), vars(parameter), labeller = label_parsed,
+               scales = "free")
 }
 
 

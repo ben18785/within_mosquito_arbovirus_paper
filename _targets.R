@@ -296,6 +296,14 @@ list(
   tar_target(graph_midgut_invasion_sensitivities,
              plot_sensitivities_midgut_invasion(sampling_fit, list_stan_datasets)),
   tar_target(file_graph_midgut_invasion_sensitivities, {
-    ggsave("figures/sensitivities_midgut_invasion.pdf", graph_midgut_invasion_sensitivities, width=8, height=4);
-    "figures/sensitivities_midgut_invasion.pdf"}, format="file")
+    ggsave("figures/sensitivities_midgut_invasion.pdf", graph_midgut_invasion_sensitivities, width=8, height=5);
+    "figures/sensitivities_midgut_invasion.pdf"}, format="file"),
+  
+  # outputted parameter values for Alex
+  tar_target(mean_parameter_values, get_summary_parameters(sampling_fit, list_stan_datasets$stan_data$x_0, 100)),
+  tar_target(file_mean_parameter_values, {
+    write.csv(mean_parameter_values, "data/processed/mean_parameter_values.csv");
+    "data/processed/mean_parameter_values.csv"
+  }
+  )
 )
