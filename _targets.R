@@ -12,7 +12,7 @@ tar_option_set(
   packages = c("tidyverse", "rstan",
                "cowplot", "posterior",
                "loo", "deSolve", "lmtest",
-               "stargazer"), # packages that your targets need to run
+               "stargazer", "latex2exp"), # packages that your targets need to run
   format = "rds" # default storage format
   # Set other options as needed.
 )
@@ -298,6 +298,16 @@ list(
   tar_target(file_graph_midgut_invasion_sensitivities, {
     ggsave("figures/sensitivities_midgut_invasion.pdf", graph_midgut_invasion_sensitivities, width=8, height=5);
     "figures/sensitivities_midgut_invasion.pdf"}, format="file"),
+  tar_target(graph_sensitivities_single_double_feed,
+             plot_sensitivities_single_double_feed(sampling_fit, list_stan_datasets)),
+  tar_target(file_graph_sensitivities_single_double_feed, {
+    ggsave("figures/sensitivities_single_double_feed.pdf", graph_sensitivities_single_double_feed, width=8, height=5);
+    "figures/sensitivities_single_double_feed.pdf"}, format="file"),
+  tar_target(sd_sensitivity_2d_alpha_kappa, single_double_sensitivity_2d(c("alpha_m", "k_mh"),
+                                                                         seq(0.1, 5, length.out=25),
+                                                                         seq(0.1, 10, length.out=25),
+                                                                         sampling_fit, list_stan_datasets)),
+  tar_target(plot_sd_sensitivity_2d_alpha_kappa, plot_single_double_sensitivity_2d(sd_sensitivity_2d_alpha_kappa, c("alpha_m", "kappa_{mh}"))),
   
   # outputted parameter values for Alex
   tar_target(mean_parameter_values, get_summary_parameters(sampling_fit, list_stan_datasets$stan_data$x_0, 100)),

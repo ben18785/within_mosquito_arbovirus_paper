@@ -59,9 +59,9 @@ get_summary_parameters <- function(fit, x0, t_refeed, summary_func=mean) {
 }
 
 calculate_sensitivity <- function(parameter_name, multipliers, fit, stan_data,
-                                  times) {
+                                  times, t_refeed=100) {
   
-  base_parameters <- get_summary_parameters(fit, stan_data$x_0, 100)
+  base_parameters <- get_summary_parameters(fit, stan_data$x_0, t_refeed)
   inits <- c(l=as.numeric(base_parameters["l0"]), m=0, h=0)
   parameter_values <- base_parameters[parameter_name] * multipliers
   base_sol <- simulate_model(base_parameters, inits, times=times) %>% 
@@ -125,7 +125,7 @@ plot_sensitivities_midgut_invasion <- function(fit, list_stan_datasets) {
       legend.position = "none"
     ) +
     xlab("DPI") +
-    ylab("Midgut DENV titer") +
+    ylab("DENV titer") +
     theme_bw() +
     scale_color_viridis_c("Multiplier",
                           trans = "log",
@@ -135,4 +135,167 @@ plot_sensitivities_midgut_invasion <- function(fit, list_stan_datasets) {
                scales = "free")
 }
 
+plot_sensitivities_single_double_feed <- function(fit, list_stan_datasets) {
+  stan_data <- list_stan_datasets$stan_data
+  multipliers <- c(0.1, 1, 10)
+  times <- seq(0.01, 15, 0.01)
+  df_single_eta <- calculate_sensitivity("eta", multipliers, fit, stan_data, times=times, t_refeed=100) %>% 
+    mutate(type="single")
+  df_double_eta <- calculate_sensitivity("eta", multipliers, fit, stan_data, times=times, t_refeed=3) %>% 
+    mutate(type="double")
+  df_single_alpha <- calculate_sensitivity("alpha_m", multipliers, fit, stan_data, times=times, t_refeed=100) %>% 
+    mutate(type="single") %>% 
+    mutate(parameter="alpha[m]")
+  df_double_alpha <- calculate_sensitivity("alpha_m", multipliers, fit, stan_data, times=times, t_refeed=3) %>% 
+    mutate(type="double") %>% 
+    mutate(parameter="alpha[m]")
+  df_single_kappa <- calculate_sensitivity("k_mh", multipliers, fit, stan_data, times=times, t_refeed=100) %>% 
+    mutate(type="single") %>% 
+    mutate(parameter="kappa[mh]")
+  df_double_kappa <- calculate_sensitivity("k_mh", multipliers, fit, stan_data, times=times, t_refeed=3) %>% 
+    mutate(type="double") %>% 
+    mutate(parameter="kappa[mh]")
+  df_both <- df_single_eta %>% 
+    bind_rows(
+      df_single_alpha,
+      df_single_kappa,
+      df_double_eta,
+      df_double_alpha,
+      df_double_kappa
+      )
+  
+  df_all <- df_both %>% 
+    dplyr::select(time, m, h, multiplier, parameter, type) %>% 
+    pivot_longer(c(m, h)) %>% 
+    rename(tissue=name) %>% 
+    mutate(
+      tissue=if_else(tissue=="m", "midgut", "legs")
+    )
+  titer_multipliers <- list_stan_datasets$dataset_denv_sum
+  
+  df_all <- df_all %>% 
+    left_join(titer_multipliers) %>% 
+    mutate(value = value * overall_denv_titer) %>% 
+    mutate(tissue=as.factor(tissue)) %>% 
+    mutate(tissue=fct_relevel(tissue, "midgut", "legs"))
+  
+  df_all %>% 
+    filter(tissue == "legs") %>% 
+    mutate(type=as.factor(type)) %>% 
+    mutate(type=fct_relevel(type, "single", "double")) %>% 
+    ggplot(aes(x=time, y=value, colour=type, group=type)) +
+    geom_line() +
+    theme(
+      legend.position = "none"
+    ) +
+    xlab("DPI") +
+    ylab("DENV titer") +
+    theme_bw() +
+    scale_color_brewer(palette = "Dark2") +
+    scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10, 12, 14)) +
+    facet_grid(vars(parameter), vars(multiplier), labeller = label_parsed,
+               scales = "free")
+}
 
+calculate_sensitivity_2d <- function(
+    parameter_names, multipliers1, multipliers2, fit, stan_data,
+    times, t_refeed=100) {
+  
+  base_parameters <- get_summary_parameters(fit, stan_data$x_0, t_refeed)
+  inits <- c(l=as.numeric(base_parameters["l0"]), m=0, h=0)
+  
+  parameter1_values <- base_parameters[parameter_names[1]] * multipliers1
+  parameter2_values <- base_parameters[parameter_names[2]] * multipliers2
+  base_sol <- simulate_model(base_parameters, inits, times=times) %>% 
+    mutate(multiplier=1)
+  k <- 1
+  for(i in seq_along(parameter1_values)) {
+    for(j in seq_along(parameter2_values)) {
+      parameters <- base_parameters
+      parameters[parameter_names[1]] <- parameter1_values[i]
+      parameters[parameter_names[2]] <- parameter1_values[j]
+      sol <- simulate_model(parameters, inits, times=times) %>% 
+        mutate(
+          multiplier1=multipliers1[i],
+          multiplier2=multipliers2[j],
+          )
+      if(k == 1)
+        big_df <- sol
+      else
+        big_df <- big_df %>% bind_rows(sol)
+      
+      k <- k + 1
+    }
+  }
+  big_df %>% 
+    mutate(
+      parameter1=parameter_names[1],
+      parameter2=parameter_names[2])
+}
+
+single_double_sensitivity_2d <- function(parameter_names, multipliers1, multipliers2, fit, list_stan_datasets) {
+  
+  stan_data <- list_stan_datasets$stan_data
+  times <- seq(0.01, 15, 0.01)
+  df_single <- calculate_sensitivity_2d(
+    parameter_names, multipliers1, multipliers2, fit, stan_data,
+    times, t_refeed=100) %>% 
+    mutate(type="single") %>% 
+    select(-c(l, m))
+  df_double <- calculate_sensitivity_2d(
+    parameter_names, multipliers1, multipliers2, fit, stan_data,
+    times, t_refeed=3) %>% 
+    mutate(type="double") %>% 
+    select(-c(l, m))
+  df_both <- df_single %>% 
+    bind_rows(df_double)
+  
+  m_double_feed_effect <- matrix(
+    nrow = length(multipliers1),
+    ncol = length(multipliers2),
+    )
+
+  for(i in seq_along(multipliers1)) {
+    for(j in seq_along(multipliers2)) {
+      df_tmp_s <- df_single %>% 
+        filter(
+          multiplier1==multipliers1[i],
+          multiplier2==multipliers2[j],
+          )
+      h_max <- last(df_tmp_s$h)
+      f <- approxfun(df_tmp_s$h, df_tmp_s$time)
+      s_time <- f(h_max / 2)
+      df_tmp_d <- df_double %>% 
+        filter(
+          multiplier1==multipliers1[i],
+          multiplier2==multipliers2[j],
+        )
+      h_max <- last(df_tmp_d$h)
+      f <- approxfun(df_tmp_d$h, df_tmp_d$time)
+      d_time <- f(h_max / 2)
+      m_double_feed_effect[i, j] <- s_time - d_time
+    }
+  }
+  colnames(m_double_feed_effect) <- multipliers2
+  m_double_feed_effect <- m_double_feed_effect %>% 
+    as.data.frame() %>% 
+    mutate(multiplier1=multipliers1)
+  df_long <- m_double_feed_effect %>% 
+    pivot_longer(as.character(multipliers2)) %>% 
+    rename(multiplier2=name) %>% 
+    mutate(multiplier2=as.numeric(multiplier2))
+  
+  colnames(df_long)[1:2] <- parameter_names
+  
+  df_long
+}
+
+plot_single_double_sensitivity_2d <- function(df_2d_sensitivity, parameter_names) {
+  colnames(df_2d_sensitivity)[1:2] <- c("V1", "V2")
+  ggplot(df_2d_sensitivity, aes(x=V1, y=V2)) +
+    geom_contour_filled(aes(z=value), bins=5) +
+    xlab(TeX(paste0("$", "\\", parameter_names[1], "$"))) +
+    ylab(TeX(paste0("$", "\\", parameter_names[2], "$"))) +
+    geom_point(data=tibble(V1=1, V2=1), colour="red") +
+    guides(fill=guide_legend(title="Double vs\nsingle feeding\neffect"))
+}
