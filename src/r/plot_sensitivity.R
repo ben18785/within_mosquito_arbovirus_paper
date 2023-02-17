@@ -93,7 +93,7 @@ plot_sensitivities_midgut_invasion <- function(fit, list_stan_datasets) {
   times <- seq(0.01, 15, 0.01)
   df_gamma <- calculate_sensitivity("gamma", multipliers, fit, stan_data, times=times)
   df_klm <- calculate_sensitivity("k_lm", multipliers, fit, stan_data, times=times) %>% 
-    mutate(parameter="kappa[lm]")
+    mutate(parameter="k[lm]")
   df_a <- calculate_sensitivity("a", multipliers, fit, stan_data, times=times)
   
   df_all <- df_gamma %>% 
@@ -114,7 +114,9 @@ plot_sensitivities_midgut_invasion <- function(fit, list_stan_datasets) {
     left_join(titer_multipliers) %>% 
     mutate(value = value * overall_denv_titer) %>% 
     mutate(tissue=as.factor(tissue)) %>% 
-    mutate(tissue=fct_relevel(tissue, "midgut", "legs"))
+    mutate(tissue=fct_relevel(tissue, "midgut", "legs")) %>% 
+    mutate(parameter=as.factor(parameter)) %>% 
+    mutate(parameter=fct_relevel(parameter, "gamma", "a", "k[lm]"))
   
   df_all %>% 
     ggplot(aes(x=time, y=value, colour=multiplier, group=multiplier)) +
@@ -151,10 +153,10 @@ plot_sensitivities_single_double_feed <- function(fit, list_stan_datasets) {
     mutate(parameter="alpha[m]")
   df_single_kappa <- calculate_sensitivity("k_mh", multipliers, fit, stan_data, times=times, t_refeed=100) %>% 
     mutate(type="single") %>% 
-    mutate(parameter="kappa[mh]")
+    mutate(parameter="k[mh]")
   df_double_kappa <- calculate_sensitivity("k_mh", multipliers, fit, stan_data, times=times, t_refeed=3) %>% 
     mutate(type="double") %>% 
-    mutate(parameter="kappa[mh]")
+    mutate(parameter="k[mh]")
   df_both <- df_single_eta %>% 
     bind_rows(
       df_single_alpha,
@@ -292,10 +294,20 @@ single_double_sensitivity_2d <- function(parameter_names, multipliers1, multipli
 
 plot_single_double_sensitivity_2d <- function(df_2d_sensitivity, parameter_names) {
   colnames(df_2d_sensitivity)[1:2] <- c("V1", "V2")
+  max_val <- max(df_2d_sensitivity$value)
+  df_2d_sensitivity <- df_2d_sensitivity %>% 
+    mutate(value=if_else(value < 0, 0, value))
+  
+  breaks_lower <- seq(0, ceiling(max_val) - 1, length.out=10)
+  breaks_upper <- seq(1, ceiling(max_val), length.out=10)
+  breaks_mid <- 0.5 * (breaks_lower + breaks_upper)
+  
   ggplot(df_2d_sensitivity, aes(x=V1, y=V2)) +
-    geom_contour_filled(aes(z=value), bins=5) +
+    geom_contour_filled(aes(z=value)) +
     xlab(TeX(paste0("$", "\\", parameter_names[1], "$"))) +
     ylab(TeX(paste0("$", "\\", parameter_names[2], "$"))) +
-    geom_point(data=tibble(V1=1, V2=1), colour="red") +
-    guides(fill=guide_legend(title="Double vs\nsingle feeding\neffect"))
+    geom_point(data=tibble(V1=1, V2=1), colour="red", size=3) +
+    theme_bw() +
+    scale_fill_viridis_d("Double vs\nsingle feeding\neffect, days",
+                         guide = guide_bins(title.position = "right", reverse=TRUE))
 }

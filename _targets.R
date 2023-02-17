@@ -307,7 +307,10 @@ list(
                                                                          seq(0.1, 5, length.out=25),
                                                                          seq(0.1, 10, length.out=25),
                                                                          sampling_fit, list_stan_datasets)),
-  tar_target(plot_sd_sensitivity_2d_alpha_kappa, plot_single_double_sensitivity_2d(sd_sensitivity_2d_alpha_kappa, c("alpha_m", "kappa_{mh}"))),
+  tar_target(plot_sd_sensitivity_2d_alpha_kappa, plot_single_double_sensitivity_2d(sd_sensitivity_2d_alpha_kappa, c("alpha_m", "k_{mh}"))),
+  tar_target(file_plot_sd_sensitivity_2d_alpha_kappa, {
+    ggsave("figures/sensitivity_2d_single_double_feed.pdf", plot_sd_sensitivity_2d_alpha_kappa, width=8, height=5);
+    "figures/sensitivity_2d_single_double_feed.pdf"}, format="file"),
   
   # outputted parameter values for Alex
   tar_target(mean_parameter_values, get_summary_parameters(sampling_fit, list_stan_datasets$stan_data$x_0, 100)),
