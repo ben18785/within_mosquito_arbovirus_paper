@@ -12,7 +12,8 @@ tar_option_set(
   packages = c("tidyverse", "rstan",
                "cowplot", "posterior",
                "loo", "deSolve", "lmtest",
-               "stargazer", "latex2exp"), # packages that your targets need to run
+               "stargazer", "latex2exp",
+               "adjustr", "bayesplot"), # packages that your targets need to run
   format = "rds" # default storage format
   # Set other options as needed.
 )
@@ -43,6 +44,8 @@ source("src/r/plot_eip.R")
 source("src/r/logistic_regression.R")
 source("src/r/plot_continuous_data.R")
 source("src/r/plot_sensitivity.R")
+source("src/r/prior_sensitivity_analysis.R")
+source("src/r/posterior_summary_statistics.R")
 
 list(
   
@@ -311,6 +314,32 @@ list(
   tar_target(file_plot_sd_sensitivity_2d_alpha_kappa, {
     ggsave("figures/sensitivity_2d_single_double_feed.pdf", plot_sd_sensitivity_2d_alpha_kappa, width=8, height=5);
     "figures/sensitivity_2d_single_double_feed.pdf"}, format="file"),
+  
+  # prior sensitivity analysis for fit
+  tar_target(prior_sensitivities, prior_sensitivity(sampling_fit)),
+  tar_target(files_prior_sensitivities, {
+    write.csv(prior_sensitivities$mean, "data/processed/prior_sensitivities_mean.csv",
+              row.names = FALSE)
+    write.csv(prior_sensitivities$wasserstein, "data/processed/prior_sensitivities_wasserstein.csv",
+              row.names = FALSE)
+    "data/processed/prior_sensitivities_mean.csv"
+  }),
+  tar_target(graph_wasserstein_heatmap, wasserstein_heatmap(prior_sensitivities$wasserstein)),
+  tar_target(file_graph_wasserstein_heatmap, {
+    ggsave("figures/wasserstein_heatmap.pdf", graph_wasserstein_heatmap, width = 5, height = 3);
+  }),
+  
+  tar_target(posteriors_summary, posterior_summary(sampling_fit)),
+  tar_target(file_posteriors_summary, {
+    write.csv(posteriors_summary, "data/processed/posterior_summary.csv",
+              row.names = FALSE)
+  }),
+  tar_target(graph_posterior_correlations, posteriors_correlation(sampling_fit)),
+  tar_target(file_graph_posterior_correlations, {
+    ggsave("figures/posterior_correlations.pdf", graph_posterior_correlations,
+           width = 8, height = 4);
+    "figures/posterior_correlations.pdf"
+  }),
   
   # outputted parameter values for Alex
   tar_target(mean_parameter_values, get_summary_parameters(sampling_fit, list_stan_datasets$stan_data$x_0, 100)),
