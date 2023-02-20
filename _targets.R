@@ -328,6 +328,15 @@ list(
   tar_target(file_graph_wasserstein_heatmap, {
     ggsave("figures/wasserstein_heatmap.pdf", graph_wasserstein_heatmap, width = 5, height = 3);
   }),
+  tar_target(graph_estimates_heatmap, estimates_heatmap(prior_sensitivities$mean)),
+  tar_target(graph_wasserstein_estimates, {
+    plot_grid(graph_wasserstein_heatmap, graph_estimates_heatmap, nrow = 2,
+              labels = c("A.", "B."))
+  }),
+  tar_target(file_graph_wasserstein_estimate, {
+    ggsave("figures/wasserstein_estimates_heatmaps.pdf", graph_wasserstein_estimates)
+    "figures/wasserstein_estimates_heatmaps.pdf"
+  }),
   
   tar_target(posteriors_summary, posterior_summary(sampling_fit)),
   tar_target(file_posteriors_summary, {

@@ -133,4 +133,76 @@ wasserstein_heatmap <- function(wasserstein_estimates) {
     scale_fill_viridis_c("Wasserstein\ndist.")
 }
 
+estimates_heatmap <- function(mean_estimates) {
+  
+  var_order <- rev(mean_estimates$variable[-1])
+  greek_labels <- c(
+    'l0'=expression(l[0]),
+    'gamma'=expression(gamma),
+    'k_h'=expression(kappa[h]),
+    'k_lm'=expression(k[lm]),
+    'k_mh'=expression(k[mh]),
+    'k_m'=expression(kappa[m]),
+    'x_star'='x*',
+    'eta'=expression(eta),
+    'zeta'=expression(zeta),
+    'alpha_h'=expression(alpha[h]),
+    'alpha_m'=expression(alpha[m]),
+    'b1'='c',
+    'b2'='k',
+    'b3'='b',
+    'b4'='q',
+    'chp_sigma'=expression(sigma[c])
+  )
 
+  df <- mean_estimates %>% 
+    filter(variable != "original") %>% 
+    select(-.pareto_k) %>% 
+    pivot_longer(-variable)
+  
+  original <- mean_estimates %>% 
+    filter(variable == "original") %>% 
+    select(-.pareto_k) %>% 
+    pivot_longer(-variable) %>% 
+    select(-variable) %>% 
+    rename(original=value)
+  
+  df1 <- df %>% 
+    left_join(original) %>% 
+    mutate(
+      name=as.factor(name),
+      variable=as.factor(variable)
+    ) %>% 
+    mutate(
+      name=fct_rev(fct_relevel(name, var_order)),
+      variable=fct_relevel(variable, var_order)
+    ) %>% 
+    rename(
+      prior_variable=variable,
+      posterior_variable=name
+      ) %>% 
+    mutate(ratio=value/original) %>% 
+    mutate(is_pattern = ifelse(ratio < 1.1, ifelse(ratio > 0.9, "yes", "no"), "no"))
+  
+  library(ggpattern)
+  ggplot(df1, aes(x=posterior_variable, y=prior_variable,
+                  pattern=is_pattern,
+                  fill=log(ratio))) +
+    scale_x_discrete(
+      labels=greek_labels
+    ) +
+    geom_tile_pattern(pattern_color = NA,
+                      pattern_fill = "black",
+                      pattern_angle = 45,
+                      pattern_density = 0.5,
+                      pattern_spacing = 0.025,
+                      pattern_key_scale_factor = 1) +
+    scale_pattern_manual("Within 10%?", values = c(yes = "circle", no = "none")) +
+    scale_y_discrete(
+      labels=greek_labels
+    ) +
+    xlab("") +
+    ylab("") +
+    scale_fill_viridis_c("Log ratio") +
+    guides(pattern = guide_legend(override.aes = list(fill = "white")))
+}
