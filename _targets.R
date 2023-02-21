@@ -46,6 +46,7 @@ source("src/r/plot_continuous_data.R")
 source("src/r/plot_sensitivity.R")
 source("src/r/prior_sensitivity_analysis.R")
 source("src/r/posterior_summary_statistics.R")
+source("src/r/prior_predictive.R")
 
 list(
   
@@ -294,6 +295,33 @@ list(
   tar_target(file_graph_continuous, {
     ggsave("figures/fit_vs_continuous.pdf", graph_continuous, width=8, height=5);
     "figures/fit_vs_continuous.pdf"}, format="file"),
+  
+  # prior predictive
+  tar_target(graph_prior_phi, prior_predictive_phi(sampling_fit)),
+  tar_target(graph_prior_logistic_growth_midgut,
+             prior_predictive_logistic_growth(
+               alpha_est=mean(rstan::extract(sampling_fit, "alpha_m")[[1]]),
+               kappa_est=mean(rstan::extract(sampling_fit, "k_m")[[1]]),
+               mu_alpha=3, sigma_alpha=10,
+               mu_kappa=1, sigma_kappa=10
+             )),
+  tar_target(graph_prior_logistic_growth_legs,
+             prior_predictive_logistic_growth(
+               alpha_est=mean(rstan::extract(sampling_fit, "alpha_h")[[1]]),
+               kappa_est=mean(rstan::extract(sampling_fit, "k_h")[[1]]),
+               mu_alpha=1.5, sigma_alpha=10,
+               mu_kappa=1, sigma_kappa=10
+             )),
+  tar_target(graph_prior_predictives, {
+    plot_grid(graph_prior_phi, graph_prior_logistic_growth_midgut, graph_prior_logistic_growth_legs,
+              labels=c("A.", "B.", "C."),
+              nrow = 1,
+              label_x = -0.01)
+  }),
+  tar_target(file_graph_prior_predictives, {
+    ggsave("figures/prior_predictive.pdf", graph_prior_predictives, width = 10, height = 4);
+    "figures/prior_predictive.pdf"
+  }),
   
   # sensitivity plots
   tar_target(graph_midgut_invasion_sensitivities,
