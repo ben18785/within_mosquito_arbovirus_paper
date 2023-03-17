@@ -13,7 +13,8 @@ tar_option_set(
                "cowplot", "posterior",
                "loo", "deSolve", "lmtest",
                "stargazer", "latex2exp",
-               "adjustr", "bayesplot"), # packages that your targets need to run
+               "adjustr", "bayesplot",
+               "sensobol"), # packages that your targets need to run
   format = "rds" # default storage format
   # Set other options as needed.
 )
@@ -47,6 +48,7 @@ source("src/r/plot_sensitivity.R")
 source("src/r/prior_sensitivity_analysis.R")
 source("src/r/posterior_summary_statistics.R")
 source("src/r/prior_predictive.R")
+source("src/r/sensitivity_sobol.R")
 
 list(
   
@@ -376,6 +378,15 @@ list(
     ggsave("figures/posterior_correlations.pdf", graph_posterior_correlations,
            width = 8, height = 4);
     "figures/posterior_correlations.pdf"
+  }),
+  
+  # global sensitivity analysis
+  tar_target(sobol_indices, sensitivity_sobol(sampling_fit)),
+  tar_target(graph_sobol_indices, plot_sensitivity_sobol(sobol_indices)),
+  tar_target(file_graph_sobol_indices, {
+    ggsave("figures/sobol_indices.pdf", graph_sobol_indices,
+           width = 8, height = 4);
+    "figures/sobol_indices.pdf"
   }),
   
   # outputted parameter values for Alex
