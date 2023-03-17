@@ -39,6 +39,7 @@ file_graph_sensitivities_single_double_feed|stem|0ecc83f86b1b9e7f|5b9f61e9ca04f6
 file_graph_single_double|stem|edcea82deae4eed2|b5ebdac4e1fe517f|a918f9d21b687115|-650493317|figures/single_double.png|t19370.9281727857s|6ebdade8e18c87f4|70580|file|local|vector|||0.258|Removed 440 rows containing missing values geom_path.|
 file_graph_single_double_chp|stem|9af519438a906ec5|3d99bd324319d599|892e92ebd46c9204|830819145|figures/graph_single_double_chp.pdf|t19346.9877742203s|e60d2f95b4ca201c|15754|file|local|vector|||0.218||
 file_graph_single_double_chp_mcmc|stem|b9378bc78403748c|48a5e8158d4d8afe|8f2ddf975ff53d7d|1262893080|figures/graph_single_double_chp_mcmc.pdf|t19398.5212048s|1d5a662de4dd4abc|26663|file|local|vector|||0.224||
+file_graph_sobol_indices|stem|aecb5c36f88432d4|20dd710fb371b16f|761bc2680efef9eb|-2132494405||t19433.7158475233s|c852eab37a726e04|78|rds|local|vector|||0.746||
 file_graph_wasserstein_estimate|stem|18ca8c0d94bbd7ac|534b7327b4669f62|d06dc6b05c821d91|-1942002461||t19408.6669182245s|dfd0d40dc0c5171b|95|rds|local|vector|||8.473||
 file_graph_wasserstein_heatmap|stem|15cebd10d538ea23|1b660e721b0a6ffc|54c4c50833de86d0|1396103599||t19408.4072219349s|3e4acf685da8f273|84|rds|local|vector|||0.162||
 file_graph_wassterstein_estimate|stem||175ab620a135cdda|bcd9de9bf01a2cc9|516390540||t19408.64819818s||0|rds|local|vector|||0.039||device must be NULL, a string or a function.
@@ -89,6 +90,7 @@ graph_single_double|stem|cedca25acfcc4643|533debf3773c5e7d|c33d1abba43999c1|5130
 graph_single_double_chp|stem|283135961cde675b|e9bef8fd8dc12e5d|21cdfdc91f97154f|-335058568||t19346.9838136888s|e8f6f67159fecb91|237568|rds|local|vector|||0.251|Removed 1 rows containing missing values geom_point.. Removed 440 rows containing missing values geom_path.|
 graph_single_double_chp_mcmc|stem|5d2a8c1dddec42dc|33e732405a90e9d2|1cddaad774dd43f8|204999174||t19398.5212020851s|45a593527003282e|362359|rds|local|vector|||0.526|Removed 1 rows containing missing values geom_point.. Removed 440 rows containing missing values geom_path.|
 graph_single_double_mcmc|stem|5941e4f6052f66fe|fde2c5712565a9e4|f2d6349643bc8c06|-1665383287||t19398.5210600788s|b3e5a6d3f900e762|938387922|rds|local|vector|||10.034||
+graph_sobol_indices|stem|959e94ad9d264deb|3205d37f0a70ccfa|a228b3dc94a4c694|191557491||t19433.7158388308s|51cf5d33c40c80c2|201761|rds|local|vector|||0.06||
 graph_wasserstein_estimate|stem|1fde89c930ba9d32|8e65110b8cc33607|3c6daab9ab9151cd|2095671430||t19408.6491485256s|cb95c7bb8e7cef09|175401|rds|local|vector|||0.179||
 graph_wasserstein_estimates|stem|a30f6ebb63607624|186541595e5eeaf3|48e6f0e790a1262d|-1977932724||t19408.6668200979s|f0757660f56e504e|505883|rds|local|vector|||0.557||
 graph_wasserstein_heatmap|stem|90be7bdfb1f668d5|ad48e4545b79fc90|f5fc2d8f74d1bac3|-1702899999||t19408.6657518322s|b4d377b7b0b22384|88304|rds|local|vector|||0.06||
@@ -125,6 +127,7 @@ plot_noninfectious_then_infectious_double|function|1ec46baba8a42ddb|||||||||||||
 plot_sd_sensitivity_2d_alpha_kappa|stem|f077f227d92b86f5|ea06058e9e8c0382|13bf53a1d0aa2fec|-1871131855||t19405.6523495695s|34151b337831f1a1|58771|rds|local|vector|||0.069||
 plot_sensitivities_midgut_invasion|function|4cc5c8632ec66ba7|||||||||||||||
 plot_sensitivities_single_double_feed|function|e1083b7c619796af|||||||||||||||
+plot_sensitivity_sobol|function|104e9ab5a055bb31|||||||||||||||
 plot_single_double_feed|function|8842316e20944f4b|||||||||||||||
 plot_single_double_feed_mcmc|function|ac73ee94f659519d|||||||||||||||
 plot_single_double_sensitivity_2d|function|500462133328f746|||||||||||||||
@@ -154,8 +157,10 @@ sampling_fit|stem|e6520ad2924707cd|73634d74bd90a7b0|9781962428a32864|1084379112|
 sampling_fit_diagnostics|stem|366b05ad0f31434c|0499abbd08bd48ad|4594b201f0c0aefa|321453760||t19398.5321916438s|24d52ebf1535bba2|123|rds|local|vector|||0.156||
 sampling_fit_log_likelihood_kappa|stem|65f94866618eb9fb|ea621b3a9b00ba9e|d373043d6fd145e9|1310855773||t19346.4861295529s|fda01435032fc2f0|2312001|rds|local|vector|||128.394|There were 16 divergent transitions after warmup. Seehttpsmcstan.orgmiscwarnings.htmldivergenttransitionsafterwarmupto find out why this is a problem and how to eliminate them.. Examine the pairs plot to diagnose sampling problems. The largest Rhat is Inf, indicating chains have not mixed.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlrhat|
 sd_sensitivity_2d_alpha_kappa|stem|6bb53ee73656d285|00b61f1fc01f7b96|062a05b7d23c7bd1|234665059||t19404.7603973171s|eae3a5461cae2ba8|5127|rds|local|vector|||71.238|collapsing to unique x values|
+sensitivity_sobol|function|d0d9bf206094d02e|||||||||||||||
 simulate_model|function|c855077d142739da|||||||||||||||
 single_double_sensitivity_2d|function|aaf8f5fb0af281e7|||||||||||||||
+sobol_indices|stem|2bb1d348881ca318|21827abd355f1d10|e4add117ccff4edd|-2111202095||t19433.7158375884s|dac33ee9a982cd19|37124|rds|local|vector|||94.682||
 stan_model|stem|002c8303ddd636ba|2815e1a04913b64b|ef46db3751d8e999|1266485521|src/stan/model_full.stan|t19370.8973154709s|c52e6f310fd255a5|12429|file|local|vector|||0.634||
 stan_model_bare|stem|c45ed89081d3d63b|88524f2a77d350d3|ef46db3751d8e999|-2045659691|src/stan/model_log_likelihood.stan|t19346.4532763909s|766f9eea4f425034|11112|file|local|vector|||0.553||
 stan_model_kappa|stem|00e17ba01b7d845c|4520f72ea86b42f1|ef46db3751d8e999|328983018|src/stan/model_log_likelihood_different_kappa.stan|t19346.4818329132s|6dbeacc496622393|11360|file|local|vector|||0.517||

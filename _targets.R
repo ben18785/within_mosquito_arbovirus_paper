@@ -385,7 +385,7 @@ list(
   tar_target(graph_sobol_indices, plot_sensitivity_sobol(sobol_indices)),
   tar_target(file_graph_sobol_indices, {
     ggsave("figures/sobol_indices.pdf", graph_sobol_indices,
-           width = 8, height = 4);
+           width = 6, height = 6);
     "figures/sobol_indices.pdf"
   }),
   

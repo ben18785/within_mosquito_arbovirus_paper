@@ -1,7 +1,7 @@
 
 sensitivity_sobol <- function(fit) {
   
-  N <- 2 ^ 8 # number of points at which ODE is solved
+  N <- 2 ^ 10 # number of points at which ODE is solved
   params <- c(
     "gamma",
     "k_lm",
