@@ -127,7 +127,7 @@ plot_sensitivities_midgut_invasion <- function(fit, list_stan_datasets) {
       legend.position = "none"
     ) +
     xlab("DPI") +
-    ylab("DENV titer") +
+    ylab("DENV titer, GE/uL") +
     theme_bw() +
     scale_color_viridis_c("Multiplier",
                           trans = "log",
@@ -191,7 +191,7 @@ plot_sensitivities_single_double_feed <- function(fit, list_stan_datasets) {
       legend.position = "none"
     ) +
     xlab("DPI") +
-    ylab("DENV titer") +
+    ylab("DENV titer, GE/uL") +
     theme_bw() +
     scale_color_brewer(palette = "Dark2") +
     scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10, 12, 14)) +

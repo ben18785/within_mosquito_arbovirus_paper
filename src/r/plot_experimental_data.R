@@ -23,8 +23,8 @@ plot_experimental_data_midgut <- function(df_midgut_legs) {
     geom_jitter(width=0.2) +
     scale_y_log10() +
     geom_smooth(se=FALSE) +
-    ylab("DENV titer") +
-    xlab("DPI") +
-    scale_color_viridis_d("Concentration") +
+    ylab("DENV titer, GE/uL") +
+    xlab("Days post infection") +
+    scale_color_viridis_d("Relative concentration") +
     theme_bw()
 }

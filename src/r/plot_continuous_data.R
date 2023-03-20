@@ -112,8 +112,8 @@ plot_continuous_data <- function(sampling_fit, list_stan_datasets) {
     geom_pointrange(data=df_sum, aes(ymin=lower, ymax=upper)) +
     facet_grid(vars(tissue), vars(concentration),
                scales="free") +
-    ylab("DENV titer") +
-    xlab("DPI") +
+    ylab("DENV titer, GE/uL") +
+    xlab("Days post infection") +
     scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + 
     scale_y_sqrt(labels = function(x) format(x, scientific = TRUE)) +
     theme_bw()
