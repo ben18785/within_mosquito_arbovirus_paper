@@ -27,9 +27,10 @@ file_graph_fit_prevalence_legs|stem|32543decdabf00c0|c51be97981a91859|416bbbe822
 file_graph_fit_prevalence_legs_eip|stem|799ba8cc906878c9|b7380058be1bf69c|1f2dd528e50ac4eb|1503857889|figures/prevalence_legs_eip_mcmc.pdf|t19398.6555649697s|eeaca311c672330f|35458|file|local|vector|||0.277||
 file_graph_fit_prevalence_midgut_legs|stem|e81bae1f2fba6aa8|d5dd06fe34dedc52|1c5cdcf77dbb6349|-727643746|figures/prevalence_midgut_legs.pdf|t19323.9108581456s|89207f2170990509|48327|file|local|vector|||0.306||
 file_graph_fit_prevalence_midgut_only|stem|6b5f038cd74c50dd|0afab7dd05b77dfa|d07e67836f81f992|964462409|figures/prevalence_midgut_only.pdf|t19323.9108599138s|8aa258ac93c7cc68|15606|file|local|vector|||0.103|Removed 1000 rows containing missing values geom_path.|
+file_graph_fit_prevalence_midgut_only_mcmc_both_types|stem|70a91a5f7e7fc47b|8c7e2b149929d0c2|5b2b957dc8e1bd98|389933133||t19458.7206516662s|17e1813002340629|93|rds|local|vector|||0.589|1m22mRemoved 1000 rows containing missing values geom_line.|
 file_graph_fit_prevalence_midgut_only_png|stem|63eaf94e91b89525|d47b02ebb471475a|d07e67836f81f992|-1928915247|figures/prevalence_midgut_only.png|t19323.9108617907s|21fb355d2c4e6064|68795|file|local|vector|||0.159|Removed 1000 rows containing missing values geom_path.|
 file_graph_midgut_dose_response_combined|stem|1c230c5a0d9e7e89|bde5de5003856be7|84523a6d4e927324|725685376|figures/prevalence_midgut_dose_response.pdf|t19436.5655365996s|4b82787e50e2db6f|19261|file|local|vector|||0.143||
-file_graph_midgut_dose_response_combined_mcmc|stem|44dff1e106065875|25685f59a2533582|57bdc6c9c386530a|-1435188334|figures/prevalence_midgut_dose_response_mcmc.pdf|t19436.5699673601s|00933010efc469fb|41230|file|local|vector|||0.351||
+file_graph_midgut_dose_response_combined_mcmc|stem|f497db76b5003a64|25685f59a2533582|3c10ce848749aaff|-1435188334|figures/prevalence_midgut_dose_response_mcmc.pdf|t19461.8983055372s|5a7663d307bf8c3d|40960|file|local|vector|||1.201||
 file_graph_midgut_dose_response_combined_png|stem|bde362e6d13581ff|cbf16aab1f425e1b|6a26ada4649de3a3|1865176596|figures/prevalence_midgut_dose_response.png|t19323.6822214396s|0772dd7f924005bb|134205|file|local|vector|||0.432||
 file_graph_midgut_invasion_sensitivities|stem|a224854898c192e2|438c4015e76eadcc|a8080ee4b8b10945|464941294|figures/sensitivities_midgut_invasion.pdf|t19405.5531656304s|a9c35f2061c4044f|357089|file|local|vector|||0.836||
 file_graph_noninfectious_then_infectious_double|stem|7524f33d82d5f164|553cfce31f35bd3b|c727dcc12c355989|155998749|figures/double_other_order.pdf|t19398.5226222331s|dc3855803e129f27|16418|file|local|vector|||0.27|Removed 357 rows containing missing values geom_path.|
@@ -69,15 +70,16 @@ graph_estimates_heatmap|stem|69eb976364a72982|f08baea1a0ca28a2|f235f2640611d603|
 graph_experimental_data|stem|6b122de59cab606b|b8f94891274d7fce|eaf9796ce6982b2f|-1888107996||t19322.7086842679s|a8918ab88139aa15|156616|rds|local|vector|||0.021||
 graph_experimental_data_midgut|stem|d386efcf2d0d1ac4|cb1f2e35a380c5f9|d55e2a0f98af790d|-1462709422||t19398.6368996825s|3628f7798dacd4d9|130444|rds|local|vector|||0.06||
 graph_fit_prevalence_dose_response|stem|829f6b57d551ac3f|e27ade246e9ad9c2|96e64216b8fa0f90|-1584553380||t19323.9108508062s|f89217f9fce1bfe2|898419|rds|local|vector|||0.129||
-graph_fit_prevalence_dose_response_mcmc|stem|ca5b0bbfa2d55863|66d8b91702396e4e|a666e4b6e79bc8bf|773784154||t19436.5676860093s|b34ddd5fdf8c1805|766911564|rds|local|vector|||20.191||
+graph_fit_prevalence_dose_response_mcmc|stem|9b151ab2fd1fcb0b|66d8b91702396e4e|abe7da05279d7faa|773784154||t19461.8965776253s|cf2044a05479971a|766911470|rds|local|vector|||18.021||
 graph_fit_prevalence_legs|stem|dde0ff81356d9e95|c682957791bb9240|da4ca35c946ebecb|1848306733||t19346.9834826348s|4757dd5db005ae12|1230918|rds|local|vector|||0.327||
 graph_fit_prevalence_legs_eip|stem|50dc50266782027e|22c4a57b696c14ef|90455a600f2b8398|1596777757||t19398.6555617167s|8a0aa6b985295bca|444207|rds|local|vector|||0.347|Removed 360 rows containing missing values geom_path.|
 graph_fit_prevalence_legs_mcmc|stem|f945a1052563f9af|8903393bca68c7b9|888009c300af6780|1579347732||t19398.6390494571s|d954d12dedcb1127|758662878|rds|local|vector|||19.159||
 graph_fit_prevalence_midgut_legs|stem|85173bda95c89d2b|6985116a3d8dd7e0|29813c1fb509b9cb|-811305942||t19323.9108417029s|37e569690998600f|1906517|rds|local|vector|||0.155||
 graph_fit_prevalence_midgut_only|stem|d0859a83742729ee|657ad5f32200ec06|0ed1d72b54a4729d|-1460890296||t19323.9108481253s|98b2a89993362702|1148957|rds|local|vector|||0.25||
 graph_fit_prevalence_midgut_only_mcmc|stem|4583cf21974a92ce|844c266335adc607|6165e289ff2e4d46|1359956710||t19436.569355673s|6bb5ca873c6b7b63|758176495|rds|local|vector|||17.717||
+graph_fit_prevalence_midgut_only_mcmc_both_types|stem|7ad32bd409e80e3a|89f64acfeddad301|d98fb7149daf5386|1980714437||t19458.7206402352s|702f41cc73249688|758545138|rds|local|vector|||19.14||
 graph_midgut_dose_response_combined|stem|3ee11788389fda25|e21610411719ad00|616496bfb56fe756|1796995008||t19436.5655348544s|011a0b4be7472df3|2283486|rds|local|vector|||0.748|1m22mRemoved 1000 rows containing missing values geom_line.. 1m22mRemoved 4 rows containing missing values geom_line.|
-graph_midgut_dose_response_combined_mcmc|stem|6900f06d66ab52a2|597c83ea59f82ff7|14726ecb8224aa11|710496145||t19436.5699515542s|0a1e95a9f3cc0490|1525617626|rds|local|vector|||1.011|1m22mRemoved 1000 rows containing missing values geom_line.. 1m22mRemoved 4 rows containing missing values geom_line.|
+graph_midgut_dose_response_combined_mcmc|stem|d16d821c8400420e|597c83ea59f82ff7|c1a77c9c0d3c40c9|710496145||t19461.8982802221s|06fbbee2fb2c2a7b|1525668388|rds|local|vector|||0.618|1m22mRemoved 1000 rows containing missing values geom_line.. 1m22mRemoved 4 rows containing missing values geom_line.|
 graph_midgut_invasion_sensitivities|stem|2f6833cfbb498525|ee1520f185a914bd|45e55fba389acd5a|1005224169||t19405.5531519794s|b19a74a53839098d|761292261|rds|local|vector|||1.801||
 graph_noninfectious_then_infectious_double|stem|e2c7f0b448499bc1|3ba123e6510640ca|741c6bafab4b790b|1373307119||t19398.5226190417s|6549a75c3747b35b|1049133|rds|local|vector|||0.143||
 graph_posterior_correlations|stem|f61e68247b4da9a3|457769c478d7ae6c|a914cc19748f0eca|1611126002||t19408.6248829477s|f18fa5013ba4e956|376057|rds|local|vector|||0.133||
@@ -111,22 +113,23 @@ plot_bl_permeability_mcmc|function|8b6c733625af25b0|||||||||||||||
 plot_chp_damage_fit|function|ae04e59d2709ad74|||||||||||||||
 plot_chp_damage_fit_mcmc|function|b1fc36dcaa0a372d|||||||||||||||
 plot_chp_damage_mcmc|function|d3e9d3b76ddae8fb|||||||||||||||
-plot_continuous_data|function|f9a3353893f99d9f|||||||||||||||
+plot_continuous_data|function|9f7c35c812452d6a|||||||||||||||
 plot_eip_dose_response|function|f5fd70f634874f25|||||||||||||||
 plot_experimental_data|function|72e618fd4825b1a5|||||||||||||||
-plot_experimental_data_midgut|function|ae251214808c7410|||||||||||||||
+plot_experimental_data_midgut|function|6aec1d5ebc4d4bc7|||||||||||||||
 plot_fit_prevalence_dose_response|function|6cef4948edac26b7|||||||||||||||
-plot_fit_prevalence_dose_response_mcmc|function|32e0f573211e626f|||||||||||||||
+plot_fit_prevalence_dose_response_mcmc|function|97875ed1c053d615|||||||||||||||
 plot_fit_prevalence_legs|function|29dca7456c266014|||||||||||||||
-plot_fit_prevalence_legs_mcmc|function|bb04abd7bad01851|||||||||||||||
+plot_fit_prevalence_legs_mcmc|function|04b197d06ae49b4f|||||||||||||||
 plot_fit_prevalence_midgut_legs|function|8787ef315b8fad4a|||||||||||||||
 plot_fit_prevalence_midgut_only|function|359e3981f9c82a93|||||||||||||||
 plot_fit_prevalence_midgut_only_mcmc|function|a89ba5b6980af4d3|||||||||||||||
+plot_fit_prevalence_midgut_only_mcmc_both_types|function|a343fb0f707a6ff4|||||||||||||||
 plot_midgut_dose_response_combined|function|5152a0fdcee65773|||||||||||||||
 plot_noninfectious_then_infectious_double|function|1ec46baba8a42ddb|||||||||||||||
 plot_sd_sensitivity_2d_alpha_kappa|stem|f077f227d92b86f5|ea06058e9e8c0382|13bf53a1d0aa2fec|-1871131855||t19405.6523495695s|34151b337831f1a1|58771|rds|local|vector|||0.069||
-plot_sensitivities_midgut_invasion|function|4cc5c8632ec66ba7|||||||||||||||
-plot_sensitivities_single_double_feed|function|e1083b7c619796af|||||||||||||||
+plot_sensitivities_midgut_invasion|function|b81cf834483256e6|||||||||||||||
+plot_sensitivities_single_double_feed|function|65e0d6ec44e513b8|||||||||||||||
 plot_sensitivity_sobol|function|104e9ab5a055bb31|||||||||||||||
 plot_single_double_feed|function|8842316e20944f4b|||||||||||||||
 plot_single_double_feed_mcmc|function|ac73ee94f659519d|||||||||||||||

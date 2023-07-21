@@ -232,6 +232,16 @@ list(
     ggsave("figures/prevalence_midgut_dose_response_mcmc.pdf",
            graph_midgut_dose_response_combined_mcmc, width=10, height=4);
     "figures/prevalence_midgut_dose_response_mcmc.pdf"}, format="file"),
+  tar_target(graph_fit_prevalence_midgut_only_mcmc_both_types,
+             plot_fit_prevalence_midgut_only_mcmc_both_types(
+               sampling_fit,
+               list_stan_datasets
+             )),
+  tar_target(file_graph_fit_prevalence_midgut_only_mcmc_both_types, {
+    ggsave("figures/prevalence_midgut_both_types.pdf",
+           graph_fit_prevalence_midgut_only_mcmc_both_types,
+           width=10, height=4)
+  }),
   
   # eip dose-response
   tar_target(df_eip_dose_response,

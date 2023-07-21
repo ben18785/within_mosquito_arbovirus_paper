@@ -557,6 +557,40 @@ plot_fit_prevalence_midgut_only_mcmc <- function(fit, list_stan_datasets) {
   g
 }
 
+plot_fit_prevalence_midgut_only_mcmc_both_types <- function(fit, list_stan_datasets) {
+  
+  all_df <- prepare_data_prefit_mcmc(fit, list_stan_datasets) %>% 
+    filter(tissue == "midgut") %>% 
+    mutate(concentration=1/dilution) %>% 
+    mutate(concentration=format(round(concentration, 2), nsmall = 2)) %>% 
+    mutate(concentration=fct_rev(concentration)) %>% 
+    mutate(category=as.factor(category)) %>% 
+    mutate(category=fct_relevel(category, "dichtonomous", "continuous"))
+  
+  g <- ggplot(all_df,
+              aes(x=day, y=middle,
+                  group=as.factor(concentration))) +
+    geom_ribbon(data=all_df %>% filter(type=="simulated"),
+                aes(ymin=lower, ymax=upper, fill=concentration),
+                alpha=0.3) +
+    geom_line(data=all_df %>% filter(type=="simulated"),
+              aes(colour=concentration)) +
+    geom_pointrange(data=all_df %>% filter(type!="simulated"),
+                    aes(ymin=lower, ymax=upper, colour=concentration),
+                    position = position_jitterdodge(dodge.width = 0.2, jitter.width = 0.2)) +
+    xlab("Days post infection") +
+    ylab("% infected midguts") +
+    scale_y_continuous(labels = scales::percent,
+                       limits=c(0, 1)) +
+    scale_colour_viridis_d("Concentration") +
+    scale_fill_viridis_d("Concentration") +
+    scale_x_continuous(limits=c(0, 13)) +
+    theme_bw() +
+    theme(legend.position = c(0.9, 0.4)) +
+    facet_wrap(~category)
+  g
+}
+
 plot_fit_prevalence_dose_response_mcmc <- function(fit, list_stan_datasets) {
   
   data_in <- list_stan_datasets$stan_data
@@ -564,7 +598,8 @@ plot_fit_prevalence_dose_response_mcmc <- function(fit, list_stan_datasets) {
     filter(tissue=="midgut") %>% 
     filter(day == 5) %>% 
     filter(type != "simulated") %>% 
-    mutate(concentration=1/dilution)
+    mutate(concentration=1/dilution) %>% 
+    filter(category == "dichtonomous")
   
   # calculate dose response curve
   sigmas <- apply(rstan::extract(fit, "sigma")[[1]], 2, median)
