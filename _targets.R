@@ -181,7 +181,7 @@ list(
              fit_mcmc(opt_fit,
                       stan_model,
                       list_stan_datasets$stan_data,
-                      n_iterations=600,
+                      n_iterations=3000,
                       n_chains=4)
              ),
   
