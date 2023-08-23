@@ -354,6 +354,17 @@ list(
   tar_target(file_plot_sd_sensitivity_2d_alpha_kappa, {
     ggsave("figures/sensitivity_2d_single_double_feed.pdf", plot_sd_sensitivity_2d_alpha_kappa, width=8, height=5);
     "figures/sensitivity_2d_single_double_feed.pdf"}, format="file"),
+  tar_target(sd_sensitivity_2d_alpha_l0, single_double_sensitivity_2d(c("alpha_m", "l0"),
+                                                                         seq(0.1, 5, length.out=25),
+                                                                         seq(0.1, 6, length.out=25),
+                                                                         sampling_fit,
+                                                                         list_stan_datasets,
+                                                                         non_l0_2nd=FALSE)),
+  tar_target(plot_sd_sensitivity_2d_alpha_l0, plot_single_double_sensitivity_2d(sd_sensitivity_2d_alpha_l0, c("alpha_m", "l_{0}"))),
+  tar_target(file_plot_sd_sensitivity_2d_alpha_l0, {
+    filename <- "figures/sensitivity_2d_single_double_feed_l0.pdf"
+    ggsave(filename, plot_sd_sensitivity_2d_alpha_l0, width=8, height=5);
+    filename}, format="file"),
   
   # prior sensitivity analysis for fit
   tar_target(prior_sensitivities, prior_sensitivity(sampling_fit)),

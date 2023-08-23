@@ -1,7 +1,7 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 bl_permeability|function|39a86775eecda18d|||||||||||||||
 calculate_sensitivity|function|e2664e996018ade8|||||||||||||||
-calculate_sensitivity_2d|function|1cd34013019fb8f3|||||||||||||||
+calculate_sensitivity_2d|function|e9bb0f3b18de5733|||||||||||||||
 create_sampling_diagnostics|function|14788035ea7f1697|||||||||||||||
 df_chp_damage|stem|281b5643d0d3c58e|3e30a4b9c15980b5|3e508490191c298a|-2804493||t19322.9576667258s|734eed8d6fa94b1a|434|rds|local|vector|||0.083||
 df_denv_dilutions_infected|stem|2b448f888e12e5d3|517c66153ca66bd6|80c46dceab3823b5|-1057504582||t19322.7143818465s|801cade07abe9db2|312|rds|local|vector|||0.096||
@@ -46,6 +46,7 @@ file_graph_wasserstein_heatmap|stem|15cebd10d538ea23|1b660e721b0a6ffc|54c4c50833
 file_graph_wassterstein_estimate|stem||175ab620a135cdda|bcd9de9bf01a2cc9|516390540||t19408.64819818s||0|rds|local|vector|||0.039||device must be NULL, a string or a function.
 file_mean_parameter_values|stem|43e0f2438ed8b11e|9b0f6ed459286ec6|cf8f70d5a4db2850|1036627987||t19398.7696277557s|17e1813002340629|93|rds|local|vector|||0.002||
 file_plot_sd_sensitivity_2d_alpha_kappa|stem|f4e781db1c3714e1|560002e95eaf24db|ebc03aa8c5b8eccc|-504567032|figures/sensitivity_2d_single_double_feed.pdf|t19405.6523528532s|fb64b5e088a94384|9155|file|local|vector|||0.279||
+file_plot_sd_sensitivity_2d_alpha_l0|stem|01f94bf5f63e6a02|9a18c41586323589|0dd5ab7c37dfba90|1981480047|figures/sensitivity_2d_single_double_feed_l0.pdf|t19592.4737126669s|1a854452df218c9e|7226|file|local|vector|||0.261||
 file_posteriors_summary|stem|4ac1eb883db90b0f|a603c140e4c6c7d5|02001e63c0392975|1840660366||t19408.4630007148s|a1c456b03adbfbf8|44|rds|local|vector|||0.006||
 filename_chp_damage|stem|cecdc4b7f90623a4|c3b095f807a1b99e|ef46db3751d8e999|-233709604|data/raw/midgut damage over time.xlsx|t19318.001638517s|7cd3fa5b5875b28a|9987|file|local|vector|||0||
 filename_denv_dilutions|stem|920ae6ebd0fa1190|f12bd263c0d36011|ef46db3751d8e999|-1160387037|data/raw/DENV test of dilutions 8-26-22.xlsx|t19235.6529888016s|49eebfdf944f3d24|12547|file|local|vector|||0.814||
@@ -80,7 +81,7 @@ graph_fit_prevalence_midgut_only_mcmc|stem|4583cf21974a92ce|844c266335adc607|616
 graph_fit_prevalence_midgut_only_mcmc_both_types|stem|7ad32bd409e80e3a|89f64acfeddad301|d98fb7149daf5386|1980714437||t19458.7206402352s|702f41cc73249688|758545138|rds|local|vector|||19.14||
 graph_midgut_dose_response_combined|stem|3ee11788389fda25|e21610411719ad00|616496bfb56fe756|1796995008||t19436.5655348544s|011a0b4be7472df3|2283486|rds|local|vector|||0.748|1m22mRemoved 1000 rows containing missing values geom_line.. 1m22mRemoved 4 rows containing missing values geom_line.|
 graph_midgut_dose_response_combined_mcmc|stem|d16d821c8400420e|597c83ea59f82ff7|c1a77c9c0d3c40c9|710496145||t19461.8982802221s|06fbbee2fb2c2a7b|1525668388|rds|local|vector|||0.618|1m22mRemoved 1000 rows containing missing values geom_line.. 1m22mRemoved 4 rows containing missing values geom_line.|
-graph_midgut_invasion_sensitivities|stem|2f6833cfbb498525|ee1520f185a914bd|45e55fba389acd5a|1005224169||t19405.5531519794s|b19a74a53839098d|761292261|rds|local|vector|||1.801||
+graph_midgut_invasion_sensitivities|stem|1aef54bdeeb154cc|ee1520f185a914bd|89b89d6222304ed3|1005224169||t19592.4379901963s|49e3befc7d5a4446|4296919786|rds|local|vector|||4.714||
 graph_noninfectious_then_infectious_double|stem|e2c7f0b448499bc1|3ba123e6510640ca|741c6bafab4b790b|1373307119||t19398.5226190417s|6549a75c3747b35b|1049133|rds|local|vector|||0.143||
 graph_posterior_correlations|stem|f61e68247b4da9a3|457769c478d7ae6c|a914cc19748f0eca|1611126002||t19408.6248829477s|f18fa5013ba4e956|376057|rds|local|vector|||0.133||
 graph_prior_logistic_growth_legs|stem|9cdec975425959c2|ef1c6b6e6e1acd6f|60f3d2f77983c2c6|809827898||t19409.4070924325s|2d776e596e1af2ef|654716|rds|local|vector|||2.44||
@@ -111,7 +112,7 @@ pars_to_keep|object|9acd5a0b5848255c|||||||||||||||
 plot_bl_permeability|function|2e7b981a3131bb8d|||||||||||||||
 plot_bl_permeability_mcmc|function|8b6c733625af25b0|||||||||||||||
 plot_chp_damage_fit|function|ae04e59d2709ad74|||||||||||||||
-plot_chp_damage_fit_mcmc|function|b1fc36dcaa0a372d|||||||||||||||
+plot_chp_damage_fit_mcmc|function|6db0dcfead449462|||||||||||||||
 plot_chp_damage_mcmc|function|d3e9d3b76ddae8fb|||||||||||||||
 plot_continuous_data|function|9f7c35c812452d6a|||||||||||||||
 plot_eip_dose_response|function|f5fd70f634874f25|||||||||||||||
@@ -127,13 +128,14 @@ plot_fit_prevalence_midgut_only_mcmc|function|a89ba5b6980af4d3|||||||||||||||
 plot_fit_prevalence_midgut_only_mcmc_both_types|function|a343fb0f707a6ff4|||||||||||||||
 plot_midgut_dose_response_combined|function|5152a0fdcee65773|||||||||||||||
 plot_noninfectious_then_infectious_double|function|1ec46baba8a42ddb|||||||||||||||
-plot_sd_sensitivity_2d_alpha_kappa|stem|f077f227d92b86f5|ea06058e9e8c0382|13bf53a1d0aa2fec|-1871131855||t19405.6523495695s|34151b337831f1a1|58771|rds|local|vector|||0.069||
+plot_sd_sensitivity_2d_alpha_kappa|stem|d2f4860651df000e|ea06058e9e8c0382|ce622c066c614802|-1871131855||t19592.4734722821s|ce7f96993ca2ec9f|65778|rds|local|vector|||0.053||
+plot_sd_sensitivity_2d_alpha_l0|stem|022c67739ee9357a|5dd0b0ebb1b5cd1d|6fd04b044b4ba31a|-694078650||t19592.4737095809s|ebe3d4ce9bc1751a|64864|rds|local|vector|||0.054||
 plot_sensitivities_midgut_invasion|function|b81cf834483256e6|||||||||||||||
 plot_sensitivities_single_double_feed|function|65e0d6ec44e513b8|||||||||||||||
 plot_sensitivity_sobol|function|104e9ab5a055bb31|||||||||||||||
 plot_single_double_feed|function|8842316e20944f4b|||||||||||||||
 plot_single_double_feed_mcmc|function|ac73ee94f659519d|||||||||||||||
-plot_single_double_sensitivity_2d|function|500462133328f746|||||||||||||||
+plot_single_double_sensitivity_2d|function|348661b16b6bc4a3|||||||||||||||
 posterior_summary|function|8965eece19271b2c|||||||||||||||
 posteriors_correlation|function|e7408bc4c0b91dfc|||||||||||||||
 posteriors_summary|stem|a563d0e2563a3906|4fdad1a208b8ee61|7df8d39ed67724fc|-1299715031||t19408.7431985945s|3ba53b0626b31004|2065|rds|local|vector|||1.386|argument is not an atomic vector coercing|
@@ -159,10 +161,11 @@ sample_prior|function|6f039dafb2f2e897|||||||||||||||
 sampling_fit|stem|1d3c84689f012225|8c4b35c1107ea4f5|9781962428a32864|1084379112||t19581.2188860001s|c0772ff4bd9f43be|4293204391|rds|local|vector|||39497.475|The largest Rhat is NA, indicating chains have not mixed.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlrhat. Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
 sampling_fit_diagnostics|stem|55abc49cb1ef6fad|0499abbd08bd48ad|de58abc12fbc8a90|321453760||t19581.2189271814s|2247cb837b5b96db|124|rds|local|vector|||1.397||
 sampling_fit_log_likelihood_kappa|stem|65f94866618eb9fb|ea621b3a9b00ba9e|d373043d6fd145e9|1310855773||t19346.4861295529s|fda01435032fc2f0|2312001|rds|local|vector|||128.394|There were 16 divergent transitions after warmup. Seehttpsmcstan.orgmiscwarnings.htmldivergenttransitionsafterwarmupto find out why this is a problem and how to eliminate them.. Examine the pairs plot to diagnose sampling problems. The largest Rhat is Inf, indicating chains have not mixed.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlrhat|
-sd_sensitivity_2d_alpha_kappa|stem|6bb53ee73656d285|00b61f1fc01f7b96|062a05b7d23c7bd1|234665059||t19404.7603973171s|eae3a5461cae2ba8|5127|rds|local|vector|||71.238|collapsing to unique x values|
+sd_sensitivity_2d_alpha_kappa|stem|112760a42fbd6e3f|00b61f1fc01f7b96|628e331dbb81b2e3|234665059||t19592.4665189051s|0d45c53bc7af78f6|4762|rds|local|vector|||84.561||
+sd_sensitivity_2d_alpha_l0|stem|9208815709e34049|2eb061399b12bb87|628e331dbb81b2e3|635131962||t19592.4597736714s|8dad7d8d34a41fb5|4376|rds|local|vector|||88.795||
 sensitivity_sobol|function|d0d9bf206094d02e|||||||||||||||
 simulate_model|function|c855077d142739da|||||||||||||||
-single_double_sensitivity_2d|function|aaf8f5fb0af281e7|||||||||||||||
+single_double_sensitivity_2d|function|40e7bc612f5ccaf9|||||||||||||||
 sobol_indices|stem|2bb1d348881ca318|21827abd355f1d10|e4add117ccff4edd|-2111202095||t19433.7158375884s|dac33ee9a982cd19|37124|rds|local|vector|||94.682||
 stan_model|stem|002c8303ddd636ba|2815e1a04913b64b|ef46db3751d8e999|1266485521|src/stan/model_full.stan|t19370.8973154709s|c52e6f310fd255a5|12429|file|local|vector|||0.634||
 stan_model_bare|stem|c45ed89081d3d63b|88524f2a77d350d3|ef46db3751d8e999|-2045659691|src/stan/model_log_likelihood.stan|t19346.4532763909s|766f9eea4f425034|11112|file|local|vector|||0.553||

@@ -201,21 +201,24 @@ plot_sensitivities_single_double_feed <- function(fit, list_stan_datasets) {
 
 calculate_sensitivity_2d <- function(
     parameter_names, multipliers1, multipliers2, fit, stan_data,
-    times, t_refeed=100) {
+    times, non_l0_2nd, t_refeed=100) {
   
   base_parameters <- get_summary_parameters(fit, stan_data$x_0, t_refeed)
   inits <- c(l=as.numeric(base_parameters["l0"]), m=0, h=0)
   
   parameter1_values <- base_parameters[parameter_names[1]] * multipliers1
   parameter2_values <- base_parameters[parameter_names[2]] * multipliers2
-  base_sol <- simulate_model(base_parameters, inits, times=times) %>% 
-    mutate(multiplier=1)
+
   k <- 1
   for(i in seq_along(parameter1_values)) {
     for(j in seq_along(parameter2_values)) {
       parameters <- base_parameters
       parameters[parameter_names[1]] <- parameter1_values[i]
-      parameters[parameter_names[2]] <- parameter1_values[j]
+      if(non_l0_2nd) {
+        parameters[parameter_names[2]] <- parameter2_values[j]
+      } else {
+        inits <- c(l=as.numeric(parameter2_values[j]), m=0, h=0)
+      }
       sol <- simulate_model(parameters, inits, times=times) %>% 
         mutate(
           multiplier1=multipliers1[i],
@@ -235,18 +238,18 @@ calculate_sensitivity_2d <- function(
       parameter2=parameter_names[2])
 }
 
-single_double_sensitivity_2d <- function(parameter_names, multipliers1, multipliers2, fit, list_stan_datasets) {
+single_double_sensitivity_2d <- function(parameter_names, multipliers1, multipliers2, fit, list_stan_datasets, non_l0_2nd=TRUE) {
   
   stan_data <- list_stan_datasets$stan_data
   times <- seq(0.01, 15, 0.01)
   df_single <- calculate_sensitivity_2d(
     parameter_names, multipliers1, multipliers2, fit, stan_data,
-    times, t_refeed=100) %>% 
+    times, non_l0_2nd, t_refeed=100) %>% 
     mutate(type="single") %>% 
     select(-c(l, m))
   df_double <- calculate_sensitivity_2d(
     parameter_names, multipliers1, multipliers2, fit, stan_data,
-    times, t_refeed=3) %>% 
+    times, non_l0_2nd, t_refeed=3) %>% 
     mutate(type="double") %>% 
     select(-c(l, m))
   df_both <- df_single %>% 
@@ -292,7 +295,8 @@ single_double_sensitivity_2d <- function(parameter_names, multipliers1, multipli
   df_long
 }
 
-plot_single_double_sensitivity_2d <- function(df_2d_sensitivity, parameter_names) {
+plot_single_double_sensitivity_2d <- function(df_2d_sensitivity, parameter_names, include_legend=TRUE) {
+  
   colnames(df_2d_sensitivity)[1:2] <- c("V1", "V2")
   max_val <- max(df_2d_sensitivity$value)
   df_2d_sensitivity <- df_2d_sensitivity %>% 
@@ -302,12 +306,17 @@ plot_single_double_sensitivity_2d <- function(df_2d_sensitivity, parameter_names
   breaks_upper <- seq(1, ceiling(max_val), length.out=10)
   breaks_mid <- 0.5 * (breaks_lower + breaks_upper)
   
-  ggplot(df_2d_sensitivity, aes(x=V1, y=V2)) +
-    geom_contour_filled(aes(z=value)) +
+  g <- ggplot(df_2d_sensitivity, aes(x=V1, y=V2)) +
+    geom_contour_filled(aes(z=value), breaks=seq(0, 2, 0.2)) +
     xlab(TeX(paste0("$", "\\", parameter_names[1], "$"))) +
     ylab(TeX(paste0("$", "\\", parameter_names[2], "$"))) +
     geom_point(data=tibble(V1=1, V2=1), colour="red", size=3) +
     theme_bw() +
     scale_fill_viridis_d("Double vs\nsingle feeding\neffect, days",
                          guide = guide_bins(title.position = "right", reverse=TRUE))
+  
+  if(!include_legend)
+    g <- g + theme(legend.position="none")
+  
+  g
 }

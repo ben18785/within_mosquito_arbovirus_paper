@@ -92,7 +92,7 @@ plot_chp_damage_fit_mcmc <- function(fit, df_chp_damage) {
                 aes(ymin=lower, ymax=upper, fill=type),
                 alpha=0.3) +
     geom_line(data=df_sim, aes(colour=type)) +
-    xlab("DPI") +
+    xlab("Days post-blood meal") +
     ylab("CHP") +
     scale_x_continuous(limits=c(0, 12.5)) +
     scale_y_log10() +
