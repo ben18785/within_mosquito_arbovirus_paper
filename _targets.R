@@ -378,7 +378,7 @@ list(
     "figures/sensitivity_2d_single_double_feed.pdf"}, format="file"),
   tar_target(sd_sensitivity_2d_alpha_l0, single_double_sensitivity_2d(c("alpha_m", "l0"),
                                                                          seq(0.1, 5, length.out=25),
-                                                                         seq(0.1, 6, length.out=25),
+                                                                         seq(0.1, 10, length.out=25),
                                                                          sampling_fit,
                                                                          list_stan_datasets,
                                                                          non_l0_2nd=FALSE)),
@@ -386,6 +386,51 @@ list(
   tar_target(file_plot_sd_sensitivity_2d_alpha_l0, {
     filename <- "figures/sensitivity_2d_single_double_feed_l0.pdf"
     ggsave(filename, plot_sd_sensitivity_2d_alpha_l0, width=8, height=5);
+    filename}, format="file"),
+  ## combine both 2d sensitivities
+  tar_target(sd_sensitivity_both, {
+    df_1 <- sd_sensitivity_2d_alpha_kappa
+    colnames(df_1)[1:2] <- c("V1", "V2")
+    df_2 <- sd_sensitivity_2d_alpha_l0
+    colnames(df_2)[1:2] <- c("V1", "V2")
+    df_1 <- df_1 %>% 
+      mutate(type="a")
+    df_2 <- df_2 %>% 
+      mutate(type="b")
+    df_1 %>% 
+      bind_rows(df_2)
+  }),
+  tar_target(plot_sd_sensitivity_both, {
+    
+    max_val <- max(sd_sensitivity_both$value)
+    sd_sensitivity_both1 <- sd_sensitivity_both %>%
+      mutate(value=if_else(value < 0, 0, value))
+
+    breaks_lower <- seq(0, ceiling(max_val) - 1, length.out=10)
+    breaks_upper <- seq(1, ceiling(max_val), length.out=10)
+    breaks_mid <- 0.5 * (breaks_lower + breaks_upper)
+
+    g <- ggplot(sd_sensitivity_both1, aes(x=V1, y=V2)) +
+      geom_contour_filled(aes(z=value), breaks=seq(0, 2.2, 0.2)) +
+      geom_point(data=tibble(V1=1, V2=1), colour="red", size=3) +
+      theme_bw() +
+      scale_fill_viridis_d("Double vs\nsingle feeding\neffect, days",
+                           guide = guide_bins(title.position = "right", reverse=TRUE)) +
+      facet_wrap(~type, 
+                 strip.position = "left", 
+                 labeller = as_labeller(c(a = "k[mh]", b = "l[0]"),
+                                        default = label_parsed)) +
+      ylab(NULL) +
+      xlab(TeX("$\\alpha$")) +
+      theme(strip.background = element_blank(),
+            strip.placement = "outside",
+            strip.text = element_text(size=14),
+            axis.title.x = element_text(size=14))
+    g
+  }),
+  tar_target(file_plot_sd_sensitivity_both, {
+    filename <- "figures/single_double_feed_sensitivity_both.pdf"
+    ggsave(filename, plot_sd_sensitivity_both, width=10, height=4);
     filename}, format="file"),
   
   # prior sensitivity analysis for fit

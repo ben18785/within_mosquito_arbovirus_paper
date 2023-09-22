@@ -47,6 +47,7 @@ file_graph_wassterstein_estimate|stem||175ab620a135cdda|bcd9de9bf01a2cc9|5163905
 file_mean_parameter_values|stem|43e0f2438ed8b11e|9b0f6ed459286ec6|cf8f70d5a4db2850|1036627987||t19398.7696277557s|17e1813002340629|93|rds|local|vector|||0.002||
 file_plot_sd_sensitivity_2d_alpha_kappa|stem|1a9ed7444f6b5aec|560002e95eaf24db|f6d2ca229f384a52|-504567032|figures/sensitivity_2d_single_double_feed.pdf|t19622.3169860947s|d020344c812fedff|9628|file|local|vector|||0.225||
 file_plot_sd_sensitivity_2d_alpha_l0|stem|8bf174b16f11633f|9a18c41586323589|3c6324068da07af3|1981480047|figures/sensitivity_2d_single_double_feed_l0.pdf|t19622.3169834444s|e5b02ef9541ac3b8|9171|file|local|vector|||0.326||
+file_plot_sd_sensitivity_both|stem|80c84e437a46886b|6e8d3587c5781002|9cf5d26d6692ec4d|-16556488|figures/single_double_feed_sensitivity_both.pdf|t19622.6646243893s|fb2bdeb3e86644b8|13514|file|local|vector|||0.291||
 file_posteriors_summary|stem|4ac1eb883db90b0f|a603c140e4c6c7d5|7bd988c71239998e|1840660366||t19622.3283271845s|a1c456b03adbfbf8|44|rds|local|vector|||0.002||
 filename_chp_damage|stem|cecdc4b7f90623a4|c3b095f807a1b99e|ef46db3751d8e999|-233709604|data/raw/midgut damage over time.xlsx|t19318.001638517s|7cd3fa5b5875b28a|9987|file|local|vector|||0||
 filename_denv_dilutions|stem|920ae6ebd0fa1190|f12bd263c0d36011|ef46db3751d8e999|-1160387037|data/raw/DENV test of dilutions 8-26-22.xlsx|t19235.6529888016s|49eebfdf944f3d24|12547|file|local|vector|||0.814||
@@ -131,6 +132,7 @@ plot_midgut_dose_response_combined|function|5152a0fdcee65773|||||||||||||||
 plot_noninfectious_then_infectious_double|function|1ec46baba8a42ddb|||||||||||||||
 plot_sd_sensitivity_2d_alpha_kappa|stem|679e4c3d8bffaff9|ea06058e9e8c0382|22a9a0a9174f2627|-1871131855||t19622.3143698918s|9c704978ad16761b|82929|rds|local|vector|||0.013||
 plot_sd_sensitivity_2d_alpha_l0|stem|22ed2bd88b57dd79|5dd0b0ebb1b5cd1d|da6bbb7f5722165b|-694078650||t19622.3143693574s|9b57ada1a02c9252|83741|rds|local|vector|||0.041||
+plot_sd_sensitivity_both|stem|c3cd8add49d6f219|1d8e69c78c4a6bf9|6bb83beb40d95349|-1543613671||t19622.6646209742s|6e59405628caef74|134097|rds|local|vector|||0.043||
 plot_sensitivities_midgut_invasion|function|b81cf834483256e6|||||||||||||||
 plot_sensitivities_single_double_feed|function|65e0d6ec44e513b8|||||||||||||||
 plot_sensitivity_sobol|function|104e9ab5a055bb31|||||||||||||||
@@ -163,7 +165,8 @@ sampling_fit|stem|cb2993fee415c968|73634d74bd90a7b0|15d21d1b2fff4f4b|1084379112|
 sampling_fit_diagnostics|stem|f7e2af4ba159c136|0499abbd08bd48ad|6e4ea24bf1dcd0eb|321453760||t19622.3194491142s|045b07e719c4cc68|120|rds|local|vector|||0.143||
 sampling_fit_log_likelihood_kappa|stem|65f94866618eb9fb|ea621b3a9b00ba9e|d373043d6fd145e9|1310855773||t19346.4861295529s|fda01435032fc2f0|2312001|rds|local|vector|||128.394|There were 16 divergent transitions after warmup. Seehttpsmcstan.orgmiscwarnings.htmldivergenttransitionsafterwarmupto find out why this is a problem and how to eliminate them.. Examine the pairs plot to diagnose sampling problems. The largest Rhat is Inf, indicating chains have not mixed.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlrhat|
 sd_sensitivity_2d_alpha_kappa|stem|153f94b88cf8b631|00b61f1fc01f7b96|7d8b57779ad7c63a|234665059||t19621.7864637667s|4824a6feb656030d|5135|rds|local|vector|||63.35||
-sd_sensitivity_2d_alpha_l0|stem|45f4bcf5af89785a|2eb061399b12bb87|7d8b57779ad7c63a|635131962||t19621.7852884445s|92c385c6a2e18ef8|5179|rds|local|vector|||57.984||
+sd_sensitivity_2d_alpha_l0|stem|3d38493554107ff8|ae016a9cc9e5f75c|7d8b57779ad7c63a|635131962||t19622.6599333966s|499940db4e7b8918|5081|rds|local|vector|||62.402||
+sd_sensitivity_both|stem|7d29ff077457fe93|a138eadfd311fe74|3bae8ccf7ecb0e7b|1177519025||t19622.6599335155s|bccb48d223405140|9928|rds|local|vector|||0.002||
 sensitivity_sobol|function|d0d9bf206094d02e|||||||||||||||
 simulate_model|function|c855077d142739da|||||||||||||||
 single_double_sensitivity_2d|function|40e7bc612f5ccaf9|||||||||||||||
