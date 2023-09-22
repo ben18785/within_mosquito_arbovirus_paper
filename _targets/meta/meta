@@ -6,7 +6,7 @@ create_sampling_diagnostics|function|14788035ea7f1697|||||||||||||||
 df_chp_damage|stem|281b5643d0d3c58e|3e30a4b9c15980b5|3e508490191c298a|-2804493||t19322.9576667258s|734eed8d6fa94b1a|434|rds|local|vector|||0.083||
 df_denv_dilutions_infected|stem|2b448f888e12e5d3|517c66153ca66bd6|80c46dceab3823b5|-1057504582||t19322.7143818465s|801cade07abe9db2|312|rds|local|vector|||0.096||
 df_disseminated_infection_time_course|stem|9d3448bfe5a7dd38|4cc689a7d56dcd81|5bf7925d6c81bd1b|-704817685||t19322.7184323014s|c4c272a184f75d8c|382|rds|local|vector|||0.117||
-df_eip_dose_response|stem|c88dc17f2c8137a3|0f0b7df518c33ddf|3258914129e6501d|575991084||t19371.4704198648s|caea4c10d8a74e3e|209598|rds|local|vector|||1039.909||
+df_eip_dose_response|stem|1b2aa2e54c93dbf2|0f0b7df518c33ddf|63f07571f8450a18|575991084||t19621.7838917956s|ceed1541ca980e62|209137|rds|local|vector|||968.165||
 df_midgut_legs|stem|176021763aabfe24|88dc55ec0061cd92|b6d8e9fe51501f8d|-1972227969||t19322.7063757356s|0e7ac39955568935|16688|rds|local|vector|||0.069||
 dose_response_curve|function|c8d31f79d9ba6901|||||||||||||||
 dose_response_curve_mcmc|function|2d0d410ab09caa66|||||||||||||||
@@ -19,84 +19,84 @@ exp_decline|function|8b9aefc5425e2cea|||||||||||||||
 f_compare_estimates|function|18eb05ee8ee5fef5|||||||||||||||
 f_create_kde|function|2610ba1410c9160a|||||||||||||||
 file_graph_chp_damage|stem|6474178f610dd77c|051b7db0cbad14ab|b17fbe78be63d0ca|-1602690068|figures/chp_damage.pdf|t19339.5384164375s|42bc8c2a77bca050|7511|file|local|vector|||0.149|Removed 3 rows containing missing values geom_point.|
-file_graph_continuous|stem|148e38da65a76458|faad2a9b927f9e3e|b5d6ce2496e375f2|-983018382|figures/fit_vs_continuous.pdf|t19581.4659145432s|1cda778f32d24152|40892|file|local|vector|||1.333||
+file_graph_continuous|stem|cdc48bd3423a7782|faad2a9b927f9e3e|d7c7e08968e13519|-983018382|figures/fit_vs_continuous.pdf|t19622.3156559865s|700bb2bd78a73134|40223|file|local|vector|||0.316||
 file_graph_experimental_data|stem|0efa3128737b8d81|fd94ce284d2b5096|818fb9673f199869|-1064592768|figures/experimental_titers.pdf|t19322.7104630884s|c58a249cb828a6aa|20897|file|local|vector|||1.046|Removed 181 rows containing nonfinite values stat_smooth.. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3828e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3535e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.6166e16. There are other near singularities as well. 25.251. pseudoinverse used at 4.985. neighborhood radius 3.015. reciprocal condition number  0. There are other near singularities as well. 9.0902. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  0. There are other near singularities as well. 9.1506. pseudoinverse used at 4.985. neighborhood radius 3.015. reciprocal condition number  0. There are other near singularities as well. 9.0902. Removed 181 rows containing missing values geom_point.|
 file_graph_experimental_data_midgut|stem|503689af7cbd164a|0ce4d98f0bdeb3ea|08d089efb69bb59d|62142703|figures/experimental_titers_midgut.pdf|t19581.4614256227s|e5a3945e72d43809|14865|file|local|vector|||1.346|1m22mRemoved 110 rows containing nonfinite values stat_smooth.. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3828e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.3535e16. There are other near singularities as well. 25.251. pseudoinverse used at 2.975. neighborhood radius 5.025. reciprocal condition number  2.6166e16. There are other near singularities as well. 25.251. 1m22mRemoved 110 rows containing missing values geom_point.|
 file_graph_fit_prevalence_dose_response|stem|8d11cc4baf90553c|dc00414e50a4d54f|d7471e6e53c218f7|-1485284617|figures/prevalence_dose_response.pdf|t19323.9108623945s|2751155b0392ecaa|8109|file|local|vector|||0.049|Removed 4 rows containing missing values geom_path.|
 file_graph_fit_prevalence_legs|stem|32543decdabf00c0|c51be97981a91859|416bbbe822da5fc4|365284467|figures/prevalence_legs.pdf|t19346.9834851482s|797857cb5537f0c9|15087|file|local|vector|||0.212|Removed 360 rows containing missing values geom_path.|
-file_graph_fit_prevalence_legs_eip|stem|799ba8cc906878c9|b7380058be1bf69c|1f2dd528e50ac4eb|1503857889|figures/prevalence_legs_eip_mcmc.pdf|t19398.6555649697s|eeaca311c672330f|35458|file|local|vector|||0.277||
+file_graph_fit_prevalence_legs_eip|stem|3c64c6ea5b34e635|b7380058be1bf69c|69309b103ce8485c|1503857889|figures/prevalence_legs_eip_mcmc.pdf|t19622.3170723622s|bf706ba7f4667525|35535|file|local|vector|||0.127||
 file_graph_fit_prevalence_midgut_legs|stem|e81bae1f2fba6aa8|d5dd06fe34dedc52|1c5cdcf77dbb6349|-727643746|figures/prevalence_midgut_legs.pdf|t19323.9108581456s|89207f2170990509|48327|file|local|vector|||0.306||
 file_graph_fit_prevalence_midgut_only|stem|6b5f038cd74c50dd|0afab7dd05b77dfa|d07e67836f81f992|964462409|figures/prevalence_midgut_only.pdf|t19323.9108599138s|8aa258ac93c7cc68|15606|file|local|vector|||0.103|Removed 1000 rows containing missing values geom_path.|
-file_graph_fit_prevalence_midgut_only_mcmc_both_types|stem|70a91a5f7e7fc47b|8c7e2b149929d0c2|5b2b957dc8e1bd98|389933133||t19458.7206516662s|17e1813002340629|93|rds|local|vector|||0.589|1m22mRemoved 1000 rows containing missing values geom_line.|
+file_graph_fit_prevalence_midgut_only_mcmc_both_types|stem|70a91a5f7e7fc47b|8c7e2b149929d0c2|3ce6cf482054e9d3|389933133||t19622.3157735676s|17e1813002340629|93|rds|local|vector|||0.255|1m22mRemoved 1000 rows containing missing values geom_line.|
 file_graph_fit_prevalence_midgut_only_png|stem|63eaf94e91b89525|d47b02ebb471475a|d07e67836f81f992|-1928915247|figures/prevalence_midgut_only.png|t19323.9108617907s|21fb355d2c4e6064|68795|file|local|vector|||0.159|Removed 1000 rows containing missing values geom_path.|
 file_graph_midgut_dose_response_combined|stem|1c230c5a0d9e7e89|bde5de5003856be7|84523a6d4e927324|725685376|figures/prevalence_midgut_dose_response.pdf|t19436.5655365996s|4b82787e50e2db6f|19261|file|local|vector|||0.143||
-file_graph_midgut_dose_response_combined_mcmc|stem|f497db76b5003a64|25685f59a2533582|3c10ce848749aaff|-1435188334|figures/prevalence_midgut_dose_response_mcmc.pdf|t19461.8983055372s|5a7663d307bf8c3d|40960|file|local|vector|||1.201||
+file_graph_midgut_dose_response_combined_mcmc|stem|10e424ac28a5e976|25685f59a2533582|6333600c8b49d3fc|-1435188334|figures/prevalence_midgut_dose_response_mcmc.pdf|t19622.3170691843s|0fd205e47b78dcf8|41031|file|local|vector|||0.118||
 file_graph_midgut_dose_response_combined_png|stem|bde362e6d13581ff|cbf16aab1f425e1b|6a26ada4649de3a3|1865176596|figures/prevalence_midgut_dose_response.png|t19323.6822214396s|0772dd7f924005bb|134205|file|local|vector|||0.432||
-file_graph_midgut_invasion_sensitivities|stem|a224854898c192e2|438c4015e76eadcc|a8080ee4b8b10945|464941294|figures/sensitivities_midgut_invasion.pdf|t19405.5531656304s|a9c35f2061c4044f|357089|file|local|vector|||0.836||
-file_graph_noninfectious_then_infectious_double|stem|7524f33d82d5f164|553cfce31f35bd3b|c727dcc12c355989|155998749|figures/double_other_order.pdf|t19398.5226222331s|dc3855803e129f27|16418|file|local|vector|||0.27|Removed 357 rows containing missing values geom_path.|
-file_graph_posterior_correlations|stem|284756e0b2f463d9|d00bccb6aa3045e1|518e37b98570a2fb|-370594618||t19408.6249156545s|e7d9c43b1c994be3|87|rds|local|vector|||2.82||
-file_graph_prior_predictives|stem|836db1fec031528b|7db23788115ab328|15065ad036acef2f|188496801||t19409.4093984013s|e655bbbdcbba1d63|81|rds|local|vector|||1.062||
-file_graph_sensitivities_single_double_feed|stem|0ecc83f86b1b9e7f|5b9f61e9ca04f653|19cbcb83e9fb6f96|-1947307586|figures/sensitivities_single_double_feed.pdf|t19405.5260767385s|77c1e84cedd48c53|111711|file|local|vector|||0.544||
+file_graph_midgut_invasion_sensitivities|stem|c8b29dfed07a1d7e|438c4015e76eadcc|5aa91c0f1992c779|464941294|figures/sensitivities_midgut_invasion.pdf|t19622.3144452518s|5638ba1653194e76|351562|file|local|vector|||0.754||
+file_graph_noninfectious_then_infectious_double|stem|666b00d8e24508b3|553cfce31f35bd3b|47ba1ec34d5f4be6|155998749|figures/double_other_order.pdf|t19621.646324475s|9f6bb82a26caab78|16246|file|local|vector|||0.773|1m22mRemoved 357 rows containing missing values geom_line.|
+file_graph_posterior_correlations|stem|284756e0b2f463d9|d00bccb6aa3045e1|1fe038d5ca12a475|-370594618||t19622.4238596707s|e7d9c43b1c994be3|87|rds|local|vector|||3.096||
+file_graph_prior_predictives|stem|836db1fec031528b|7db23788115ab328|839b623f320030ff|188496801||t19622.3170677806s|e655bbbdcbba1d63|81|rds|local|vector|||5.46||
+file_graph_sensitivities_single_double_feed|stem|10fd530e3ba12c2f|5b9f61e9ca04f653|faac786f34146974|-1947307586|figures/sensitivities_single_double_feed.pdf|t19622.3148568372s|e447f18a4309292e|111472|file|local|vector|||0.432||
 file_graph_single_double|stem|edcea82deae4eed2|b5ebdac4e1fe517f|a918f9d21b687115|-650493317|figures/single_double.png|t19370.9281727857s|6ebdade8e18c87f4|70580|file|local|vector|||0.258|Removed 440 rows containing missing values geom_path.|
 file_graph_single_double_chp|stem|9af519438a906ec5|3d99bd324319d599|892e92ebd46c9204|830819145|figures/graph_single_double_chp.pdf|t19346.9877742203s|e60d2f95b4ca201c|15754|file|local|vector|||0.218||
-file_graph_single_double_chp_mcmc|stem|b9378bc78403748c|48a5e8158d4d8afe|8f2ddf975ff53d7d|1262893080|figures/graph_single_double_chp_mcmc.pdf|t19398.5212048s|1d5a662de4dd4abc|26663|file|local|vector|||0.224||
-file_graph_sobol_indices|stem|aecb5c36f88432d4|51259ec1296b4be7|761bc2680efef9eb|-2132494405||t19436.4198835105s|c852eab37a726e04|78|rds|local|vector|||0.766||
-file_graph_wasserstein_estimate|stem|18ca8c0d94bbd7ac|534b7327b4669f62|d06dc6b05c821d91|-1942002461||t19408.6669182245s|dfd0d40dc0c5171b|95|rds|local|vector|||8.473||
+file_graph_single_double_chp_mcmc|stem|6faed7bf149d78ce|48a5e8158d4d8afe|03a0cf403d77608e|1262893080|figures/graph_single_double_chp_mcmc.pdf|t19622.3170708417s|79bdcac7015750d5|26667|file|local|vector|||0.141||
+file_graph_sobol_indices|stem|aecb5c36f88432d4|51259ec1296b4be7|bc66cdf1d6e1c00d|-2132494405||t19622.3169940404s|c852eab37a726e04|78|rds|local|vector|||0.682||
+file_graph_wasserstein_estimate|stem|18ca8c0d94bbd7ac|534b7327b4669f62|7fe2b68437844dd2|-1942002461||t19622.3172223296s|dfd0d40dc0c5171b|95|rds|local|vector|||12.952||
 file_graph_wasserstein_heatmap|stem|15cebd10d538ea23|1b660e721b0a6ffc|54c4c50833de86d0|1396103599||t19408.4072219349s|3e4acf685da8f273|84|rds|local|vector|||0.162||
 file_graph_wassterstein_estimate|stem||175ab620a135cdda|bcd9de9bf01a2cc9|516390540||t19408.64819818s||0|rds|local|vector|||0.039||device must be NULL, a string or a function.
 file_mean_parameter_values|stem|43e0f2438ed8b11e|9b0f6ed459286ec6|cf8f70d5a4db2850|1036627987||t19398.7696277557s|17e1813002340629|93|rds|local|vector|||0.002||
-file_plot_sd_sensitivity_2d_alpha_kappa|stem|f4e781db1c3714e1|560002e95eaf24db|ebc03aa8c5b8eccc|-504567032|figures/sensitivity_2d_single_double_feed.pdf|t19405.6523528532s|fb64b5e088a94384|9155|file|local|vector|||0.279||
-file_plot_sd_sensitivity_2d_alpha_l0|stem|01f94bf5f63e6a02|9a18c41586323589|0dd5ab7c37dfba90|1981480047|figures/sensitivity_2d_single_double_feed_l0.pdf|t19592.4737126669s|1a854452df218c9e|7226|file|local|vector|||0.261||
-file_posteriors_summary|stem|4ac1eb883db90b0f|a603c140e4c6c7d5|02001e63c0392975|1840660366||t19408.4630007148s|a1c456b03adbfbf8|44|rds|local|vector|||0.006||
+file_plot_sd_sensitivity_2d_alpha_kappa|stem|1a9ed7444f6b5aec|560002e95eaf24db|f6d2ca229f384a52|-504567032|figures/sensitivity_2d_single_double_feed.pdf|t19622.3169860947s|d020344c812fedff|9628|file|local|vector|||0.225||
+file_plot_sd_sensitivity_2d_alpha_l0|stem|8bf174b16f11633f|9a18c41586323589|3c6324068da07af3|1981480047|figures/sensitivity_2d_single_double_feed_l0.pdf|t19622.3169834444s|e5b02ef9541ac3b8|9171|file|local|vector|||0.326||
+file_posteriors_summary|stem|4ac1eb883db90b0f|a603c140e4c6c7d5|7bd988c71239998e|1840660366||t19622.3283271845s|a1c456b03adbfbf8|44|rds|local|vector|||0.002||
 filename_chp_damage|stem|cecdc4b7f90623a4|c3b095f807a1b99e|ef46db3751d8e999|-233709604|data/raw/midgut damage over time.xlsx|t19318.001638517s|7cd3fa5b5875b28a|9987|file|local|vector|||0||
 filename_denv_dilutions|stem|920ae6ebd0fa1190|f12bd263c0d36011|ef46db3751d8e999|-1160387037|data/raw/DENV test of dilutions 8-26-22.xlsx|t19235.6529888016s|49eebfdf944f3d24|12547|file|local|vector|||0.814||
 filename_disseminated_time_course|stem|392366874f2bf2db|113dbee789e4d782|ef46db3751d8e999|-898473086|data/raw/DENV SF DF dissemination time course 8-26-22.xlsx|t19235.6673397191s|9513134c9d3d5d10|17704|file|local|vector|||0.815||
 filename_legs|stem|4b3c727d8e585539|8781c7fac32db0d7|ef46db3751d8e999|1973180361|data/raw/Compiled leg data.xlsx|t19139.6443441745s|6a68c821d44db45a|26737|file|local|vector|||0.007||
 filename_midgut|stem|c0507fa5d59f0263|2ee9c1f0837ef737|ef46db3751d8e999|-142451940|data/raw/Compiled midgut data.xlsx|t19139.6432128868s|5b6e8aeca8c66ccf|41749|file|local|vector|||0||
 files_prior_sensitivities|stem|53e7b950ab0336b2|a530197303bb789b|1791d8a573e22805|-1119224012||t19408.3868627467s|9903306e1685fb67|94|rds|local|vector|||0.005||
-find_variable_name|function|ecd822bb421f32c1|||||||||||||||
+find_variable_name|function|250df4adb632a26c|||||||||||||||
 fit_mcmc|function|c3fbf8500b3c4c88|||||||||||||||
-fit_mcmc_kappa|function|f8a5d67709a89214|||||||||||||||
+fit_mcmc_kappa|function|d08ff8749f4fcf04|||||||||||||||
 fit_optimise|function|7bb8879f10c1c2c7|||||||||||||||
 fit_optimise_kappa|function|437f70d34491a5ba|||||||||||||||
 get_full_log_likelihood|function|15fd4aebe9f3ba9c|||||||||||||||
 get_summary_parameters|function|0ea8a3b8e7811fa1|||||||||||||||
 graph_bl_permeability|stem|8bb6e6aaa7afdf82|aa9d5f6eb93a6d43|4864ea746486c627|-973413816||t19346.9838095102s|6e526e40156b08c4|828646|rds|local|vector|||0.028||
-graph_bl_permeability_mcmc|stem|ae87eabc00d61be0|457b19260ed6179b|c6277c224e3dfb4d|-1166845372||t19398.5142972125s|7434e79b1e1499d5|757721695|rds|local|vector|||0.083||
+graph_bl_permeability_mcmc|stem|0d092c819131f01d|457b19260ed6179b|1477e5f3b291b3b9|-1166845372||t19621.7909444096s|df8930797e7dc8df|757783746|rds|local|vector|||0.073||
 graph_chp_damage|stem|4f338b47807444c4|d14b4bf8768f1f22|481a7e2941d2cfb2|-2065656816||t19346.9838050827s|6b043e76a3e8612a|823495|rds|local|vector|||0.055||
-graph_chp_damage_mcmc|stem|a349ea3c989756aa|502f9469a9cae1fe|525b4651d77f3e17|2027128779||t19398.5150341091s|637e2835725e63ab|767382661|rds|local|vector|||40.973||
-graph_continuous|stem|c02a1a15f727fcc6|d2e26f0a3270eccb|d5c9dd855ba2fda8|1605326323||t19581.4658668974s|0180d81f590cc286|4792713237|rds|local|vector|||79.456||
-graph_eip_dose_response|stem|6e78ea1bb9f343e6|0c7eb9516c059bf4|66db569f8b31a2f8|1663849473||t19398.6554836083s|ac6bc3977cc8b842|272649|rds|local|vector|||0.15||
-graph_estimates_heatmap|stem|69eb976364a72982|f08baea1a0ca28a2|f235f2640611d603|-1970850326||t19408.6668091853s|68e4a80153e9f43f|102878|rds|local|vector|||0.159||
+graph_chp_damage_mcmc|stem|d6a866b69897a325|502f9469a9cae1fe|6082409926e5210e|2027128779||t19621.784593911s|227b75ca388945d5|767467379|rds|local|vector|||38.565||
+graph_continuous|stem|ed5933d46e931414|d2e26f0a3270eccb|4e3202cb165ae4af|1605326323||t19621.7902540692s|fa1678c8bc8b4911|856554076|rds|local|vector|||4.482||
+graph_eip_dose_response|stem|6cfb95df0807ba65|0c7eb9516c059bf4|51b05628f2f65844|1663849473||t19622.3143340182s|0cae024bebe06319|298004|rds|local|vector|||0.143||
+graph_estimates_heatmap|stem|056f84bd7ee31812|f08baea1a0ca28a2|ecdf863de68ed1fc|-1970850326||t19622.314448618s|b61df03d376b661e|159250|rds|local|vector|||0.105||
 graph_experimental_data|stem|6b122de59cab606b|b8f94891274d7fce|eaf9796ce6982b2f|-1888107996||t19322.7086842679s|a8918ab88139aa15|156616|rds|local|vector|||0.021||
 graph_experimental_data_midgut|stem|19c7a6ab9a6f29b4|cb1f2e35a380c5f9|c4e5a704c988d47f|-1462709422||t19581.4614099625s|fc905ebbba1774cc|132377|rds|local|vector|||0.074||
 graph_fit_prevalence_dose_response|stem|829f6b57d551ac3f|e27ade246e9ad9c2|96e64216b8fa0f90|-1584553380||t19323.9108508062s|f89217f9fce1bfe2|898419|rds|local|vector|||0.129||
-graph_fit_prevalence_dose_response_mcmc|stem|9b151ab2fd1fcb0b|66d8b91702396e4e|abe7da05279d7faa|773784154||t19461.8965776253s|cf2044a05479971a|766911470|rds|local|vector|||18.021||
+graph_fit_prevalence_dose_response_mcmc|stem|e3746eadb5f2593b|66d8b91702396e4e|f91f93bd4ffbb3cb|773784154||t19621.7899168358s|9ed349283a6cab56|766976943|rds|local|vector|||15.999||
 graph_fit_prevalence_legs|stem|dde0ff81356d9e95|c682957791bb9240|da4ca35c946ebecb|1848306733||t19346.9834826348s|4757dd5db005ae12|1230918|rds|local|vector|||0.327||
-graph_fit_prevalence_legs_eip|stem|50dc50266782027e|22c4a57b696c14ef|90455a600f2b8398|1596777757||t19398.6555617167s|8a0aa6b985295bca|444207|rds|local|vector|||0.347|Removed 360 rows containing missing values geom_path.|
-graph_fit_prevalence_legs_mcmc|stem|f945a1052563f9af|8903393bca68c7b9|888009c300af6780|1579347732||t19398.6390494571s|d954d12dedcb1127|758662878|rds|local|vector|||19.159||
+graph_fit_prevalence_legs_eip|stem|c2acc8a78b0f56a5|22c4a57b696c14ef|5545b48b0b249649|1596777757||t19622.3169744337s|7d720efea0a6d82c|759692977|rds|local|vector|||0.173|1m22mRemoved 360 rows containing missing values geom_line.|
+graph_fit_prevalence_legs_mcmc|stem|9b15c65b5689a221|8903393bca68c7b9|8bc20e3db711d145|1579347732||t19621.7894749712s|6edc98e878765c5f|758763286|rds|local|vector|||16.156||
 graph_fit_prevalence_midgut_legs|stem|85173bda95c89d2b|6985116a3d8dd7e0|29813c1fb509b9cb|-811305942||t19323.9108417029s|37e569690998600f|1906517|rds|local|vector|||0.155||
 graph_fit_prevalence_midgut_only|stem|d0859a83742729ee|657ad5f32200ec06|0ed1d72b54a4729d|-1460890296||t19323.9108481253s|98b2a89993362702|1148957|rds|local|vector|||0.25||
-graph_fit_prevalence_midgut_only_mcmc|stem|4583cf21974a92ce|844c266335adc607|6165e289ff2e4d46|1359956710||t19436.569355673s|6bb5ca873c6b7b63|758176495|rds|local|vector|||17.717||
-graph_fit_prevalence_midgut_only_mcmc_both_types|stem|7ad32bd409e80e3a|89f64acfeddad301|d98fb7149daf5386|1980714437||t19458.7206402352s|702f41cc73249688|758545138|rds|local|vector|||19.14||
+graph_fit_prevalence_midgut_only_mcmc|stem|da8d63fda065051d|844c266335adc607|57285974ef7205ec|1359956710||t19621.7857268339s|a1297edfdb19dccd|758261846|rds|local|vector|||16.372||
+graph_fit_prevalence_midgut_only_mcmc_both_types|stem|e5604b03bfaa2283|89f64acfeddad301|403250039e59aaa2|1980714437||t19621.7906893879s|7757c0a9629a0b89|758634750|rds|local|vector|||15.664||
 graph_midgut_dose_response_combined|stem|3ee11788389fda25|e21610411719ad00|616496bfb56fe756|1796995008||t19436.5655348544s|011a0b4be7472df3|2283486|rds|local|vector|||0.748|1m22mRemoved 1000 rows containing missing values geom_line.. 1m22mRemoved 4 rows containing missing values geom_line.|
-graph_midgut_dose_response_combined_mcmc|stem|d16d821c8400420e|597c83ea59f82ff7|c1a77c9c0d3c40c9|710496145||t19461.8982802221s|06fbbee2fb2c2a7b|1525668388|rds|local|vector|||0.618|1m22mRemoved 1000 rows containing missing values geom_line.. 1m22mRemoved 4 rows containing missing values geom_line.|
-graph_midgut_invasion_sensitivities|stem|1aef54bdeeb154cc|ee1520f185a914bd|89b89d6222304ed3|1005224169||t19592.4379901963s|49e3befc7d5a4446|4296919786|rds|local|vector|||4.714||
-graph_noninfectious_then_infectious_double|stem|e2c7f0b448499bc1|3ba123e6510640ca|741c6bafab4b790b|1373307119||t19398.5226190417s|6549a75c3747b35b|1049133|rds|local|vector|||0.143||
-graph_posterior_correlations|stem|f61e68247b4da9a3|457769c478d7ae6c|a914cc19748f0eca|1611126002||t19408.6248829477s|f18fa5013ba4e956|376057|rds|local|vector|||0.133||
-graph_prior_logistic_growth_legs|stem|9cdec975425959c2|ef1c6b6e6e1acd6f|60f3d2f77983c2c6|809827898||t19409.4070924325s|2d776e596e1af2ef|654716|rds|local|vector|||2.44||
-graph_prior_logistic_growth_midgut|stem|eaa22f6d3e04362a|d2daaa6762c3f7cb|60f3d2f77983c2c6|-1308682799||t19409.4090494675s|b665d24816181a20|618968|rds|local|vector|||2.552||
-graph_prior_phi|stem|b16eb0aa0a8a4bf6|81fb440d08e8e8bc|7101038acafbfbc3|1442392718||t19409.3920635954s|02f96d4afdaee7c9|759986553|rds|local|vector|||2.972||
-graph_prior_predictives|stem|8252d379233034f1|9f1227a21c4501c7|fb4878e591fbce1f|-633085594||t19409.409380322s|c9cd60d1bc258c53|761583405|rds|local|vector|||0.254||
-graph_sensitivities_single_double_feed|stem|813591641155429d|d260b0ee31112da4|99fa826dd020148b|-117276829||t19405.52606697s|ae6aa33a56b6a4e2|759798775|rds|local|vector|||1.533||
+graph_midgut_dose_response_combined_mcmc|stem|bb9fe0bf1f106eb3|597c83ea59f82ff7|04186499f1096444|710496145||t19622.3155378416s|83b1d389114d7565|1525869171|rds|local|vector|||0.263|1m22mRemoved 1000 rows containing missing values geom_line.. 1m22mRemoved 4 rows containing missing values geom_line.|
+graph_midgut_invasion_sensitivities|stem|8331d25874e0768f|ee1520f185a914bd|9feac4d0d8c67dcd|1005224169||t19621.786729987s|9186de9c793935dd|761387769|rds|local|vector|||1.293||
+graph_noninfectious_then_infectious_double|stem|74dbbd82a7d159b7|3ba123e6510640ca|4f02308cba65c5ec|1373307119||t19621.620772566s|90d06296be168ce6|1088778|rds|local|vector|||0.131||
+graph_posterior_correlations|stem|fb3489e5804ca4de|457769c478d7ae6c|61b16d16cc3e5f99|1611126002||t19622.4238231752s|bed72eb65088b115|376739|rds|local|vector|||0.239||
+graph_prior_logistic_growth_legs|stem|46aedb0ca6616104|ef1c6b6e6e1acd6f|88f18bc83c923c13|809827898||t19621.7846172872s|858b1cdda57bc672|654605|rds|local|vector|||1.555||
+graph_prior_logistic_growth_midgut|stem|3f2b2cec24d4c1cf|d2daaa6762c3f7cb|88f18bc83c923c13|-1308682799||t19621.7884670277s|1bfa86e631f9e118|618822|rds|local|vector|||2.258||
+graph_prior_phi|stem|e34b1962c89e30aa|81fb440d08e8e8bc|e558f3afc01daece|1442392718||t19621.7887489174s|7bcc5ac4366b2556|760055385|rds|local|vector|||1.818||
+graph_prior_predictives|stem|a20329efca07abb2|9f1227a21c4501c7|fd2e4f330775da76|-633085594||t19622.3147836213s|621ba2905680059f|761728658|rds|local|vector|||0.138||
+graph_sensitivities_single_double_feed|stem|237c60a8f37c4271|d260b0ee31112da4|3b5922bc797ce7df|-117276829||t19621.7890327317s|782bfd2300269f24|759883225|rds|local|vector|||2.07||
 graph_single_double|stem|cedca25acfcc4643|533debf3773c5e7d|c33d1abba43999c1|513076901||t19370.9281697195s|2db1f153775b530c|1204328|rds|local|vector|||0.168||
 graph_single_double_chp|stem|283135961cde675b|e9bef8fd8dc12e5d|21cdfdc91f97154f|-335058568||t19346.9838136888s|e8f6f67159fecb91|237568|rds|local|vector|||0.251|Removed 1 rows containing missing values geom_point.. Removed 440 rows containing missing values geom_path.|
-graph_single_double_chp_mcmc|stem|5d2a8c1dddec42dc|33e732405a90e9d2|1cddaad774dd43f8|204999174||t19398.5212020851s|45a593527003282e|362359|rds|local|vector|||0.526|Removed 1 rows containing missing values geom_point.. Removed 440 rows containing missing values geom_path.|
-graph_single_double_mcmc|stem|5941e4f6052f66fe|fde2c5712565a9e4|f2d6349643bc8c06|-1665383287||t19398.5210600788s|b3e5a6d3f900e762|938387922|rds|local|vector|||10.034||
-graph_sobol_indices|stem|959e94ad9d264deb|3205d37f0a70ccfa|a228b3dc94a4c694|191557491||t19433.7158388308s|51cf5d33c40c80c2|201761|rds|local|vector|||0.06||
+graph_single_double_chp_mcmc|stem|6c44fdf8f6576284|33e732405a90e9d2|9812ecac56a0919f|204999174||t19622.3165124636s|048e7ea703dc12de|1526142220|rds|local|vector|||0.264|1m22mRemoved 1 rows containing missing values geom_point.. 1m22mRemoved 440 rows containing missing values geom_line.|
+graph_single_double_mcmc|stem|b7f5179b4e590e3c|fde2c5712565a9e4|8d4fe66df66f35f9|-1665383287||t19621.79104673s|999b06e91410cdde|403215|rds|local|vector|||8.449||
+graph_sobol_indices|stem|797ee124a16f235a|3205d37f0a70ccfa|1485707d3716d941|191557491||t19622.3144463443s|b601a4ccac811e48|228928|rds|local|vector|||0.034||
 graph_wasserstein_estimate|stem|1fde89c930ba9d32|8e65110b8cc33607|3c6daab9ab9151cd|2095671430||t19408.6491485256s|cb95c7bb8e7cef09|175401|rds|local|vector|||0.179||
-graph_wasserstein_estimates|stem|a30f6ebb63607624|186541595e5eeaf3|48e6f0e790a1262d|-1977932724||t19408.6668200979s|f0757660f56e504e|505883|rds|local|vector|||0.557||
-graph_wasserstein_heatmap|stem|90be7bdfb1f668d5|ad48e4545b79fc90|f5fc2d8f74d1bac3|-1702899999||t19408.6657518322s|b4d377b7b0b22384|88304|rds|local|vector|||0.06||
+graph_wasserstein_estimates|stem|34e29611aacb8718|186541595e5eeaf3|34dd2e310e446b47|-1977932724||t19622.3170045347s|e37205c525d894c0|535380|rds|local|vector|||0.497||
+graph_wasserstein_heatmap|stem|498ce5931c440884|ad48e4545b79fc90|e79c8dae449e674a|-1702899999||t19622.3144497604s|41ddc5f085c51758|134108|rds|local|vector|||0.03||
 graph_wassterstein_estimate|stem|1fde89c930ba9d32|8e65110b8cc33607|3c6daab9ab9151cd|241168596||t19408.6473512839s|cb95c7bb8e7cef09|175401|rds|local|vector|||0.161||
 list_stan_datasets|stem|37c9772e982b378d|a3ebe132ade7c3dd|d2e7657f4ed3cc92|636512020||t19323.7779286409s|d49c2dfa7212c00b|24664|rds|local|vector|||0.337||
 logistic_curve|function|7c5e5095b9d9db98|||||||||||||||
@@ -105,9 +105,10 @@ logistic_results|stem|8e26c661e07f286d|b970b5e1a5d2865f|458edf52df638020|1511254
 logistic_results_tex|stem|341af72db2e7de14|2f202758bf8738e7|c4d8cc2864bc8f51|396335718||t19371.6078337438s|9a7ca7de74a03959|665|rds|local|vector|||0.25|length of NULL cannot be changed. length of NULL cannot be changed. length of NULL cannot be changed. length of NULL cannot be changed. length of NULL cannot be changed. number of rows of result is not a multiple of vector length arg 2. length of NULL cannot be changed. length of NULL cannot be changed. length of NULL cannot be changed. length of NULL cannot be changed. length of NULL cannot be changed. number of rows of result is not a multiple of vector length arg 2|
 mean_parameter_values|stem|681f17616c6e6eef|f4eac5e900457193|42e7cdb8ce3c963c|-1227589964||t19398.7690278185s|55b9bd26e54ad190|246|rds|local|vector|||0.039||
 model_comparison|function|2f97c176abcc2471|||||||||||||||
-opt_fit|stem|1b55488b46575e62|43681d44a164db20|98212c7ae0b7cba6|-443907170||t19370.9010584137s|e33186f589bd0385|724616|rds|local|vector|||313.182|nonzero return code in optimizing. nonzero return code in optimizing. nonzero return code in optimizing. nonzero return code in optimizing. nonzero return code in optimizing|
+opt_fit|stem|2ee99ec1ee76bc3e|43681d44a164db20|6fb6f46f7ca36aa3|-443907170||t19621.4766189159s|59dea3f0f56dc673|719915|rds|local|vector|||383.863|nonzero return code in optimizing. nonzero return code in optimizing. nonzero return code in optimizing. nonzero return code in optimizing. nonzero return code in optimizing|
 opt_fit_kappa|stem|7f3461e426d050d4|d62659b465ab7a14|f60be64d9233998e|121592079||t19346.4846384858s||5126|rds|local|vector|||28.559|nonzero return code in optimizing|Exception Exception CVode failed with error flag 4.  in model4060a2a9e1f_model_log_likelihood_different_kappa at line 47  in model4060a2a9e1f_model_log_likelihood_different_kappa at line 242
 optimise_repeat|function|f2b6889fb7eb6a7a|||||||||||||||
+overall_list|stem|e3734a6613243763|6ca927caa6ea336b|209bcfae3dff9726|-783074274||t19622.3172224513s|ea14aa3144fda98d|383|rds|local|vector|||0.001||
 pars_to_keep|object|9acd5a0b5848255c|||||||||||||||
 plot_bl_permeability|function|2e7b981a3131bb8d|||||||||||||||
 plot_bl_permeability_mcmc|function|8b6c733625af25b0|||||||||||||||
@@ -115,7 +116,7 @@ plot_chp_damage_fit|function|ae04e59d2709ad74|||||||||||||||
 plot_chp_damage_fit_mcmc|function|6db0dcfead449462|||||||||||||||
 plot_chp_damage_mcmc|function|d3e9d3b76ddae8fb|||||||||||||||
 plot_continuous_data|function|9f7c35c812452d6a|||||||||||||||
-plot_eip_dose_response|function|f5fd70f634874f25|||||||||||||||
+plot_eip_dose_response|function|08fbe36130e57611|||||||||||||||
 plot_experimental_data|function|72e618fd4825b1a5|||||||||||||||
 plot_experimental_data_midgut|function|6aec1d5ebc4d4bc7|||||||||||||||
 plot_fit_prevalence_dose_response|function|6cef4948edac26b7|||||||||||||||
@@ -128,17 +129,17 @@ plot_fit_prevalence_midgut_only_mcmc|function|a89ba5b6980af4d3|||||||||||||||
 plot_fit_prevalence_midgut_only_mcmc_both_types|function|a343fb0f707a6ff4|||||||||||||||
 plot_midgut_dose_response_combined|function|5152a0fdcee65773|||||||||||||||
 plot_noninfectious_then_infectious_double|function|1ec46baba8a42ddb|||||||||||||||
-plot_sd_sensitivity_2d_alpha_kappa|stem|d2f4860651df000e|ea06058e9e8c0382|ce622c066c614802|-1871131855||t19592.4734722821s|ce7f96993ca2ec9f|65778|rds|local|vector|||0.053||
-plot_sd_sensitivity_2d_alpha_l0|stem|022c67739ee9357a|5dd0b0ebb1b5cd1d|6fd04b044b4ba31a|-694078650||t19592.4737095809s|ebe3d4ce9bc1751a|64864|rds|local|vector|||0.054||
+plot_sd_sensitivity_2d_alpha_kappa|stem|679e4c3d8bffaff9|ea06058e9e8c0382|22a9a0a9174f2627|-1871131855||t19622.3143698918s|9c704978ad16761b|82929|rds|local|vector|||0.013||
+plot_sd_sensitivity_2d_alpha_l0|stem|22ed2bd88b57dd79|5dd0b0ebb1b5cd1d|da6bbb7f5722165b|-694078650||t19622.3143693574s|9b57ada1a02c9252|83741|rds|local|vector|||0.041||
 plot_sensitivities_midgut_invasion|function|b81cf834483256e6|||||||||||||||
 plot_sensitivities_single_double_feed|function|65e0d6ec44e513b8|||||||||||||||
 plot_sensitivity_sobol|function|104e9ab5a055bb31|||||||||||||||
 plot_single_double_feed|function|8842316e20944f4b|||||||||||||||
-plot_single_double_feed_mcmc|function|ac73ee94f659519d|||||||||||||||
+plot_single_double_feed_mcmc|function|10710e6dd09da93e|||||||||||||||
 plot_single_double_sensitivity_2d|function|348661b16b6bc4a3|||||||||||||||
-posterior_summary|function|8965eece19271b2c|||||||||||||||
-posteriors_correlation|function|e7408bc4c0b91dfc|||||||||||||||
-posteriors_summary|stem|a563d0e2563a3906|4fdad1a208b8ee61|7df8d39ed67724fc|-1299715031||t19408.7431985945s|3ba53b0626b31004|2065|rds|local|vector|||1.386|argument is not an atomic vector coercing|
+posterior_summary|function|a1a9643e0ccb3842|||||||||||||||
+posteriors_correlation|function|10f685913abc9562|||||||||||||||
+posteriors_summary|stem|3cd63ad36327a322|4fdad1a208b8ee61|b078ce239ce06254|-1299715031||t19622.3283266562s|64cf39f5e2afdc9f|1144|rds|local|vector|||3.596|argument is not an atomic vector coercing|
 prepare_data_prefit|function|8b9b334723c43278|||||||||||||||
 prepare_data_prefit_mcmc|function|6627a7152453c072|||||||||||||||
 prepare_simulated_data|function|04bab53303a93a53|||||||||||||||
@@ -146,9 +147,9 @@ prepare_simulated_data_mcmc|function|d7561400c45691fe|||||||||||||||
 prepare_stan_data_hurdle_denv_only|function|de4b27ea4996e24d|||||||||||||||
 prior_predictive_logistic_growth|function|b4d42cdf4a63fb4b|||||||||||||||
 prior_predictive_phi|function|aac2332abbc11b22|||||||||||||||
-prior_sensitivities|stem|31ebfc16ce119848|61e0f4818b4814f7|8b2eb7bb7f16648e|-485190815||t19408.3868626017s|24234c6ad2bc4374|5123|rds|local|vector|||55.367|argument is not an atomic vector coercing|
+prior_sensitivities|stem|c30216752c0f9ac8|61e0f4818b4814f7|d3e0d0cfde5bd5e5|-485190815||t19621.7884402008s|48bcb058aaed233b|5112|rds|local|vector|||53.322|argument is not an atomic vector coercing|
 prior_sensitivity|function|d35132bf1a0c6c78|||||||||||||||
-prior_to_posterior_summary|function|68c036726cb18530|||||||||||||||
+prior_to_posterior_summary|function|6b453e10113d1990|||||||||||||||
 process_damage_data|function|cc344f349e863642|||||||||||||||
 process_denv_dilutions_infected|function|0f58ebb23049d777|||||||||||||||
 process_disseminated_infection_time_course|function|8afbf71151da63bf|||||||||||||||
@@ -158,16 +159,16 @@ rhs_complex|function|e19a70f55f5fc656|||||||||||||||
 rnorm_truncated|function|b37546209e9bf6ad|||||||||||||||
 rnorm_truncated_single|function|2beb157d010c2a55|||||||||||||||
 sample_prior|function|6f039dafb2f2e897|||||||||||||||
-sampling_fit|stem|1d3c84689f012225|8c4b35c1107ea4f5|9781962428a32864|1084379112||t19581.2188860001s|c0772ff4bd9f43be|4293204391|rds|local|vector|||39497.475|The largest Rhat is NA, indicating chains have not mixed.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlrhat. Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
-sampling_fit_diagnostics|stem|55abc49cb1ef6fad|0499abbd08bd48ad|de58abc12fbc8a90|321453760||t19581.2189271814s|2247cb837b5b96db|124|rds|local|vector|||1.397||
+sampling_fit|stem|cb2993fee415c968|73634d74bd90a7b0|15d21d1b2fff4f4b|1084379112||t19621.7726792618s|3f4d74aec9fd387a|757678207|rds|local|vector|||10234.535|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
+sampling_fit_diagnostics|stem|f7e2af4ba159c136|0499abbd08bd48ad|6e4ea24bf1dcd0eb|321453760||t19622.3194491142s|045b07e719c4cc68|120|rds|local|vector|||0.143||
 sampling_fit_log_likelihood_kappa|stem|65f94866618eb9fb|ea621b3a9b00ba9e|d373043d6fd145e9|1310855773||t19346.4861295529s|fda01435032fc2f0|2312001|rds|local|vector|||128.394|There were 16 divergent transitions after warmup. Seehttpsmcstan.orgmiscwarnings.htmldivergenttransitionsafterwarmupto find out why this is a problem and how to eliminate them.. Examine the pairs plot to diagnose sampling problems. The largest Rhat is Inf, indicating chains have not mixed.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlrhat|
-sd_sensitivity_2d_alpha_kappa|stem|112760a42fbd6e3f|00b61f1fc01f7b96|628e331dbb81b2e3|234665059||t19592.4665189051s|0d45c53bc7af78f6|4762|rds|local|vector|||84.561||
-sd_sensitivity_2d_alpha_l0|stem|9208815709e34049|2eb061399b12bb87|628e331dbb81b2e3|635131962||t19592.4597736714s|8dad7d8d34a41fb5|4376|rds|local|vector|||88.795||
+sd_sensitivity_2d_alpha_kappa|stem|153f94b88cf8b631|00b61f1fc01f7b96|7d8b57779ad7c63a|234665059||t19621.7864637667s|4824a6feb656030d|5135|rds|local|vector|||63.35||
+sd_sensitivity_2d_alpha_l0|stem|45f4bcf5af89785a|2eb061399b12bb87|7d8b57779ad7c63a|635131962||t19621.7852884445s|92c385c6a2e18ef8|5179|rds|local|vector|||57.984||
 sensitivity_sobol|function|d0d9bf206094d02e|||||||||||||||
 simulate_model|function|c855077d142739da|||||||||||||||
 single_double_sensitivity_2d|function|40e7bc612f5ccaf9|||||||||||||||
-sobol_indices|stem|2bb1d348881ca318|21827abd355f1d10|e4add117ccff4edd|-2111202095||t19433.7158375884s|dac33ee9a982cd19|37124|rds|local|vector|||94.682||
-stan_model|stem|002c8303ddd636ba|2815e1a04913b64b|ef46db3751d8e999|1266485521|src/stan/model_full.stan|t19370.8973154709s|c52e6f310fd255a5|12429|file|local|vector|||0.634||
+sobol_indices|stem|5fab2ee868c861d0|21827abd355f1d10|f702a821ae0ac30d|-2111202095||t19621.7878229588s|2a67cfcc4852d5e1|37165|rds|local|vector|||93.869|1m22mReturning more or less than 1 row per summarise group was deprecated indplyr 1.1.0.36mℹ39m Please use reframe instead.36mℹ39m When switching from summarise to reframe, remember that reframe  always returns an ungrouped data frame and adjust accordingly.|
+stan_model|stem|c6dac6dfcc9cf8ae|2815e1a04913b64b|ef46db3751d8e999|1266485521|src/stan/model_full.stan|t19621.4717649442s|611ae0568261e63e|12437|file|local|vector|||0.658||
 stan_model_bare|stem|c45ed89081d3d63b|88524f2a77d350d3|ef46db3751d8e999|-2045659691|src/stan/model_log_likelihood.stan|t19346.4532763909s|766f9eea4f425034|11112|file|local|vector|||0.553||
 stan_model_kappa|stem|00e17ba01b7d845c|4520f72ea86b42f1|ef46db3751d8e999|328983018|src/stan/model_log_likelihood_different_kappa.stan|t19346.4818329132s|6dbeacc496622393|11360|file|local|vector|||0.517||
 wasserstein_heatmap|function|cbe80813b6fe0cc8|||||||||||||||

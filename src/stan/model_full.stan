@@ -151,11 +151,11 @@ transformed data{
 
 parameters {
   // all parameters can be positive
-  real<lower=0> l0;
+  real<lower=0, upper=1> l0;
   
   real<lower=0> gamma; // per-capita degradation rate parameter
   real<lower=0> k_lm; // flow of virus through lumen parameter
-  real<lower=0> a; // flow of virus through lumen parameter
+  real<lower=1> a; // flow of virus through lumen parameter
   real<lower=0> alpha_m; //
   real<lower=0> k_m;
   real<lower=0> k_mh;
@@ -249,15 +249,15 @@ model {
   // priors
   l0 ~ normal(0, 1);
   gamma ~ normal(0, 10); // per-capita degradation rate parameter
-  k_lm ~ normal(0, 10); // flow of virus through lumen parameter
+  k_lm ~ normal(0, 5); // flow of virus through lumen parameter
   a ~ normal(0, 10); // flow of virus through lumen parameter
   alpha_m ~ normal(3, 10); //
   k_m ~ normal(1, 10);
   k_mh ~ normal(0, 10);
   alpha_h ~ normal(1.5, 10);
   k_h ~ normal(1, 10);
-  sigma[1] ~ cauchy(0, 5);
-  sigma[2] ~ cauchy(0, 5);
+  sigma[1] ~ normal(0, 5);
+  sigma[2] ~ normal(0, 5);
   zeta ~ normal(1, 1);
   b1 ~ normal(0.1, 0.1);
   b2 ~ normal(0.94, 0.5);

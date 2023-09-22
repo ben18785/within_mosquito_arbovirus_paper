@@ -270,7 +270,7 @@ plot_single_double_feed_mcmc <- function(
     mutate(feed_type=fct_rev(feed_type))
   
   
-  ggplot(all_df,
+  g <- ggplot(tibble(day=seq(1, 3, 1), middle=seq(1, 3, 1)),
          aes(x=day, y=middle)) +
     geom_vline(xintercept = 3, linetype=2) +
     geom_ribbon(data=all_df %>% filter(type=="simulated"),
@@ -289,4 +289,7 @@ plot_single_double_feed_mcmc <- function(
     theme_bw() +
     theme(legend.position = c(0.8, 0.4)) +
     scale_x_continuous(limits=c(0, 12.5))
+  
+  rm(list=setdiff(ls(), "g")) # very weird memory leak thing
+  g
 }

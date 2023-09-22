@@ -75,7 +75,8 @@ fit_mcmc_kappa <- function(opt, stan_model_file, data_in, n_iterations,
               data=data_in,
               iter=n_iterations,
               chains=n_chains,
-              init=init_fun)
+              init=init_fun,
+              thin=5)
   
   fit
 }

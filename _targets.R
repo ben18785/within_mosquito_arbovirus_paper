@@ -52,6 +52,28 @@ source("src/r/sensitivity_sobol.R")
 
 list(
   
+  # overall list of figures and outputs that go into the paper
+  tar_target(overall_list, {
+    list(file_graph_midgut_dose_response_combined_mcmc,
+         file_graph_experimental_data_midgut,
+         file_graph_continuous,
+         file_graph_fit_prevalence_legs_eip,
+         file_graph_single_double_chp_mcmc,
+         file_plot_sd_sensitivity_2d_alpha_kappa,
+         file_plot_sd_sensitivity_2d_alpha_l0,
+         file_graph_prior_predictives,
+         file_graph_posterior_correlations,
+         file_graph_fit_prevalence_midgut_only_mcmc_both_types,
+         file_graph_midgut_invasion_sensitivities,
+         file_graph_noninfectious_then_infectious_double,
+         file_graph_sensitivities_single_double_feed,
+         file_graph_sobol_indices,
+         file_graph_wasserstein_estimate,
+         sampling_fit_diagnostics,
+         file_posteriors_summary
+    )
+  }),
+  
   # raw experimental data processing
   tar_target(filename_midgut, "data/raw/Compiled midgut data.xlsx",
              format = "file"),
@@ -181,7 +203,7 @@ list(
              fit_mcmc(opt_fit,
                       stan_model,
                       list_stan_datasets$stan_data,
-                      n_iterations=3000,
+                      n_iterations=600,
                       n_chains=4)
              ),
   

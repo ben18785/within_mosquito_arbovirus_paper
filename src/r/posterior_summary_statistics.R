@@ -138,6 +138,7 @@ sample_prior <- function(n, prior_formula) {
 find_variable_name <- function(prior_formula) {
   str_prior <- Reduce(paste, deparse(prior_formula))
   varbl_end <- unname(str_locate(str_prior, "~")[1, 1]) - 2
+  print(varbl_end)
   substr(str_prior, 1, varbl_end)
 }
 
@@ -153,8 +154,8 @@ prior_to_posterior_summary <- function(fit) {
   dstars <- vector(length = length(a_normal_only))
   param_names <- vector(length = length(a_normal_only))
   n <- 1000
-  
   for(i in seq_along(dstars)) {
+    print(a_normal_only[[i]])
     a_var <- find_variable_name(a_normal_only[[i]])
     param_names[i] <- a_var
     x_prior <- sample_prior(n, a_normal_only[[i]])
@@ -169,7 +170,7 @@ prior_to_posterior_summary <- function(fit) {
       variable=="b4"~"q",
       TRUE~variable
     ))
-  
+  print("hiya")
   # bespoke ones where prior extraction doesn't work
   ## phi_d
   x_prior <- runif(n)
@@ -231,7 +232,9 @@ posterior_summary <- function(fit) {
       variable=="sigma.1"~"sigma_m",
       variable=="sigma.2"~"sigma_h",
       TRUE~variable
-    ))
+    )) %>% 
+    mutate(across(!variable,
+                  function(x) format(round(x, 3), nsmall = 3)))
   
   df_sum
 }
@@ -263,9 +266,7 @@ posteriors_correlation <- function(fit) {
     rename(
       c=b1,
       sigma_h=sigma.2,
-      sigma_m=sigma.1,
-      c0=chp_vals.2,
-      "c*"=chp_vals.1
+      sigma_m=sigma.1
       )
   
   GGally::ggpairs(df,

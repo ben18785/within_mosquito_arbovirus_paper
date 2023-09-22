@@ -106,9 +106,9 @@ plot_eip_dose_response <- function(df_eip_dose_respose) {
     mutate(q = as.character(q)) %>% 
     mutate(q = paste0(q, "%")) %>% 
     group_by(dose, q) %>% 
-    summarise(lower=quantile(eip, 0.25),
-              middle=median(eip),
-              upper=quantile(eip, 0.75)) %>% 
+    summarise(lower=quantile(eip, 0.25, na.rm=T),
+              middle=median(eip, na.rm=T),
+              upper=quantile(eip, 0.75, na.rm=T)) %>% 
     ggplot(aes(x=dose, y=middle)) +
     geom_line(aes(colour=as.factor(q))) +
     geom_ribbon(aes(ymin=lower, ymax=upper,
