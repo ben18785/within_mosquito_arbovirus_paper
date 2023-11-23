@@ -102,6 +102,46 @@ list(
   tar_target(file_graph_experimental_data_midgut, {
     ggsave("figures/experimental_titers_midgut.pdf", graph_experimental_data_midgut, width=6, height=4);
     "figures/experimental_titers_midgut.pdf"}, format="file"),
+  tar_target(anova_tests_midgut, { # not appropriate since data aren't normal
+    df <- df_midgut_legs %>% 
+      filter(tissue=="midgut",
+             day==3) %>% # represents negative cases
+      mutate(denv_titer=if_else(is.na(denv_titer), 35, denv_titer))
+    fit <- aov(denv_titer~sample, data=df)
+    summary(fit)
+  }),
+  tar_target(t_tests_midgut, { # not appropriate since data aren't normal
+    df <- df_midgut_legs %>% 
+      filter(tissue=="midgut",
+             day==3) %>% 
+      mutate(denv_titer=if_else(is.na(denv_titer), 35, denv_titer)) # represents negative cases
+    df_1 <- df %>% 
+      filter(sample %in% c("1:1", "1:5"))
+    fit_1 <- t.test(denv_titer~sample, data=df_1)
+    df_2 <- df %>% 
+      filter(sample %in% c("1:1", "1:12"))
+    fit_2 <- t.test(denv_titer~sample, data=df_2)
+    df_3 <- df %>% 
+      filter(sample %in% c("1:5", "1:12"))
+    fit_3 <- t.test(denv_titer~sample, data=df_3)
+    list(one_five=fit_1, one_12=fit_2, five_12=fit_3)
+  }),
+  tar_target(kruskal_tests_midgut, { # most appropriate since the observations are not normally distributed
+    df <- df_midgut_legs %>% 
+      filter(tissue=="midgut",
+             day==3) %>% 
+      mutate(denv_titer=if_else(is.na(denv_titer), 35, denv_titer)) # represents negative cases
+    df_1 <- df %>% 
+      filter(sample %in% c("1:1", "1:5"))
+    fit_1 <- kruskal.test(denv_titer~sample, data=df_1)
+    df_2 <- df %>% 
+      filter(sample %in% c("1:1", "1:12"))
+    fit_2 <- kruskal.test(denv_titer~sample, data=df_2)
+    df_3 <- df %>% 
+      filter(sample %in% c("1:5", "1:12"))
+    fit_3 <- kruskal.test(denv_titer~sample, data=df_3)
+    list(one_five=fit_1, one_12=fit_2, five_12=fit_3)
+  }),
   
   # process CHP damage data
   tar_target(filename_chp_damage, "data/raw/midgut damage over time.xlsx",

@@ -1,4 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+anova_tests_midgut|stem|a5b95110a155368c|a0737ce2ff745c6d|9f638fab6dfbf5c8|547688978||t19683.4649334809s|6f8a7e2e5f498836|23588|rds|local|vector|||0.02||
 bl_permeability|function|39a86775eecda18d|||||||||||||||
 calculate_sensitivity|function|e2664e996018ade8|||||||||||||||
 calculate_sensitivity_2d|function|e9bb0f3b18de5733|||||||||||||||
@@ -99,6 +100,7 @@ graph_wasserstein_estimate|stem|1fde89c930ba9d32|8e65110b8cc33607|3c6daab9ab9151
 graph_wasserstein_estimates|stem|34e29611aacb8718|186541595e5eeaf3|34dd2e310e446b47|-1977932724||t19622.3170045347s|e37205c525d894c0|535380|rds|local|vector|||0.497||
 graph_wasserstein_heatmap|stem|498ce5931c440884|ad48e4545b79fc90|e79c8dae449e674a|-1702899999||t19622.3144497604s|41ddc5f085c51758|134108|rds|local|vector|||0.03||
 graph_wassterstein_estimate|stem|1fde89c930ba9d32|8e65110b8cc33607|3c6daab9ab9151cd|241168596||t19408.6473512839s|cb95c7bb8e7cef09|175401|rds|local|vector|||0.161||
+kruskal_tests_midgut|stem|5ce21d0e7c9badf3|fd3f6e5f74159cf1|5f7e476bf8853541|619224271||t19683.4735347075s|a38f23e054c8be1f|332|rds|local|vector|||0.019||
 list_stan_datasets|stem|37c9772e982b378d|a3ebe132ade7c3dd|d2e7657f4ed3cc92|636512020||t19323.7779286409s|d49c2dfa7212c00b|24664|rds|local|vector|||0.337||
 logistic_curve|function|7c5e5095b9d9db98|||||||||||||||
 logistic_regression_comparison|function|d9a84c12c7ade535|||||||||||||||
@@ -174,4 +176,5 @@ sobol_indices|stem|5fab2ee868c861d0|21827abd355f1d10|f702a821ae0ac30d|-211120209
 stan_model|stem|c6dac6dfcc9cf8ae|2815e1a04913b64b|ef46db3751d8e999|1266485521|src/stan/model_full.stan|t19621.4717649442s|611ae0568261e63e|12437|file|local|vector|||0.658||
 stan_model_bare|stem|c45ed89081d3d63b|88524f2a77d350d3|ef46db3751d8e999|-2045659691|src/stan/model_log_likelihood.stan|t19346.4532763909s|766f9eea4f425034|11112|file|local|vector|||0.553||
 stan_model_kappa|stem|00e17ba01b7d845c|4520f72ea86b42f1|ef46db3751d8e999|328983018|src/stan/model_log_likelihood_different_kappa.stan|t19346.4818329132s|6dbeacc496622393|11360|file|local|vector|||0.517||
+t_tests_midgut|stem|3d5bd41206a8b6e8|f58ca5746e7bc26d|3676077ba5abe9e8|-1690895857||t19683.4683338655s|0755a8e07b7033a0|632|rds|local|vector|||0.015||
 wasserstein_heatmap|function|cbe80813b6fe0cc8|||||||||||||||
