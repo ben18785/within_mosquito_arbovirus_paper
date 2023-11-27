@@ -1,7 +1,7 @@
 
-logistic_curve <- function(dilution, a, k, b, q) {
+logistic_curve_conc_simple <- function(concentration, a, k, b, q) {
   
-  log_concentration = log(1.0 / dilution)
+  log_concentration = log(concentration)
   
   a + (k - a)/(1 + q * exp(-b * log_concentration))
 }
@@ -21,17 +21,15 @@ rnorm_truncated <- function(n, mu, sigma, lower=0, upper=Inf) {
 }
 
 prior_predictive_phi <- function(fit) {
-  x <- seq(0.5, 30, 0.1)
+  concentration <- seq(0, sqrt(2), length.out=200)^2
   n <- 1000
-  c <- rnorm_truncated(n, 0.1, 0.1, upper=1)
-  k <- rnorm_truncated(n, 0.94, 0.5, upper=1)
-  b <- rnorm_truncated(n, 3, 1)
-  q <- rnorm_truncated(n, 0,  0.005)
+  b <- rnorm_truncated(n, 1, 1)
+  q <- rnorm_truncated(n, 0, 0.5)
   
   nreps <- 1000
   for(i in 1:nreps) {
-    probs <- logistic_curve(x, c[i], k[i], b[i], q[i])
-    tmp <- tibble(x=x, prob=probs) %>% 
+    probs <- logistic_curve_conc_simple(concentration, 0, 1, b[i], q[i])
+    tmp <- tibble(x=concentration, prob=probs) %>% 
       mutate(iteration=i)
     if(i == 1)
       big_df <- tmp
@@ -48,15 +46,13 @@ prior_predictive_phi <- function(fit) {
       )
   
   # get estimated parameters
-  c <- mean(rstan::extract(fit, "b1")[[1]])
-  k <- mean(rstan::extract(fit, "b2")[[1]])
   b <- mean(rstan::extract(fit, "b3")[[1]])
   q <- mean(rstan::extract(fit, "b4")[[1]])
-  probs <- logistic_curve(x, c, k, b, q)
-  df_est <- tibble(x=x, middle=probs)
+  probs <- logistic_curve(concentration, 0, 1, b, q)
+  df_est <- tibble(x=concentration, middle=probs)
   
   df_summary %>% 
-    ggplot(aes(x=1 / x, y=middle)) +
+    ggplot(aes(x=x, y=middle)) +
     geom_ribbon(aes(ymin=lower, ymax=upper), alpha=0.2,
                 fill="blue") +
     geom_line() +

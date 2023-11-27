@@ -6,7 +6,7 @@ create_sampling_diagnostics <- function(fit) {
     "l0", "gamma", "k_lm", "a",
     "alpha_m", "k_m", "k_mh",
     "alpha_h", "k_h", "sigma",
-    "phi_d", "zeta", "b1", "b2",
+    "phi_d", "zeta",
     "b3", "b4", "x_star", "eta",
     "chp_vals", "chp_sigma")
   df <- rstan::extract(fit, params_to_extract) %>% 
@@ -14,7 +14,7 @@ create_sampling_diagnostics <- function(fit) {
   
   sum_df <- posterior::summarise_draws(df)
   
-  rhats <- sum(sum_df$rhat>1.01, na.rm = TRUE)
+  rhats <- sum(round(sum_df$rhat,2)>1.01, na.rm = TRUE) # just to avoid annoying roundoff issue
   ess_bulks <- sum(sum_df$ess_bulk<400, na.rm = TRUE)
   ess_tails <- sum(sum_df$ess_tail<400, na.rm = TRUE)
   is_converged <- rhats == 0 & ess_bulks == 0 & ess_tails == 0

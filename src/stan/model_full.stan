@@ -33,8 +33,8 @@ functions {
     
     x_t = t<t_refeed? x_star + exp(-eta*t) * (x_0 - x_star): x_star + exp(-eta*(t - t_refeed)) * (x_r - x_star);
     
-    dy_dt[1] = -gamma * l - x_t * (k_lm * l^2) / (a^2 + l^2); // lumen
-    dy_dt[2] = x_t * (k_lm * l^2) / (a^2 + l^2) + alpha_m * m * (1 - m / k_m) - k_mh * (x_t - x_star) * m; // midgut
+    dy_dt[1] = -gamma * l - x_t * (k_lm * l) / (a + l); // lumen
+    dy_dt[2] = x_t * (k_lm * l) / (a + l) + alpha_m * m * (1 - m / k_m) - k_mh * (x_t - x_star) * m; // midgut
     dy_dt[3] = k_mh * (x_t - x_star) * m + alpha_h * h * (1 - h/k_h); // disseminated
     
     return dy_dt;
@@ -171,8 +171,6 @@ parameters {
   real<lower=0> zeta;
   
   // determine probability of infection as function of concentration
-  real<lower=0, upper=1> b1;
-  real<lower=0, upper=1> b2;
   real<lower=0> b3;
   real<lower=0> b4;
   real<lower=0, upper=x_0> x_star;
@@ -259,10 +257,8 @@ model {
   sigma[1] ~ normal(0, 5);
   sigma[2] ~ normal(0, 5);
   zeta ~ normal(1, 1);
-  b1 ~ normal(0.1, 0.1);
-  b2 ~ normal(0.94, 0.5);
-  b3 ~ normal(3, 1);
-  b4 ~ normal(0, 0.005);
+  b3 ~ normal(1, 1);
+  b4 ~ normal(0, 0.5);
   eta ~ normal(2, 1);
   x_star ~ normal(0.1, 0.5);
   
@@ -275,7 +271,7 @@ model {
   if(include_continuous == 1) {
     if(include_hurdle == 1) {
       for(i in 1:n_obs) {
-        phi = logistic_curve(dilutions[dilution_ind[i]], b1, b2, b3, b4);
+        phi = logistic_curve(dilutions[dilution_ind[i]], 0, 1, b3, b4);
         if(difeq_ind[i] == 3) // legs
           phi *= phi_d;
         if(y[i] > 0){
@@ -308,7 +304,7 @@ model {
       real p = 1.0 - lognormal_cdf(titer_lowerb_temp, mu_binary[i], sigma[ind_temp]);
       if(include_hurdle == 1) {
         // include zeta here since this yields dilution for these data
-        real phi_m = logistic_curve(1 / zeta * dilutions_binary[ind_binary[i]], b1, b2, b3, b4);
+        real phi_m = logistic_curve(1.0 / zeta * dilutions_binary[ind_binary[i]], 0, 1, b3, b4);
         if(ind_temp == 1) // midgut
           p *= phi_m;
         else if(ind_temp == 2) // legs

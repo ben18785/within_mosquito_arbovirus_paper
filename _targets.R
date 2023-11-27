@@ -163,7 +163,7 @@ list(
   tar_target(opt_fit,
              fit_optimise(
                list_stan_datasets$stan_data,
-               stan_model, 5)),
+               stan_model, 1)),
   
   # plots based on optimisation
   tar_target(graph_fit_prevalence_midgut_legs,

@@ -21,8 +21,6 @@ prior_sensitivity <- function(fit) {
         diff_k_h=wasserstein(k_h), mu_k_h=mean(k_h), sigma_k_h=sd(k_h),
         diff_eta=wasserstein(eta), mu_eta=mean(eta), sigma_eta=sd(eta),
         diff_x_star=wasserstein(x_star), mu_x_star=mean(x_star), sigma_x_star=sd(x_star),
-        diff_b1=wasserstein(b1), mu_b1=mean(b1), sigma_b1=sd(b1),
-        diff_b2=wasserstein(b2), mu_b2=mean(b2), sigma_b2=sd(b2),
         diff_b3=wasserstein(b3), mu_b3=mean(b3), sigma_b3=sd(b3),
         diff_b4=wasserstein(b4), mu_b4=mean(b4), sigma_b4=sd(b4),
         diff_chp_sigma=wasserstein(chp_sigma), mu_chp_sigma=mean(chp_sigma), sigma_chp_sigma=sd(chp_sigma),
@@ -102,8 +100,6 @@ wasserstein_heatmap <- function(wasserstein_estimates) {
     'zeta'=expression(zeta),
     'alpha_h'=expression(alpha[h]),
     'alpha_m'=expression(alpha[m]),
-    'b1'='c',
-    'b2'='k',
     'b3'='b',
     'b4'='q',
     'chp_sigma'=expression(sigma[c])
@@ -148,8 +144,6 @@ estimates_heatmap <- function(mean_estimates) {
     'zeta'=expression(zeta),
     'alpha_h'=expression(alpha[h]),
     'alpha_m'=expression(alpha[m]),
-    'b1'='c',
-    'b2'='k',
     'b3'='b',
     'b4'='q',
     'chp_sigma'=expression(sigma[c])

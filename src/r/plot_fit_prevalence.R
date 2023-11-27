@@ -71,7 +71,7 @@ dose_response_curve <- function(dilutions, fit) {
   phi_m <- vector(length = length(dilutions))
   for(i in seq_along(dilutions)) {
     phi_m[i] <- logistic_curve(
-      dilutions[i], fit$par$b1, fit$par$b2, fit$par$b3, fit$par$b4)
+      dilutions[i], 0, 1, fit$par$b3, fit$par$b4)
   }
   phi_m
 }
@@ -240,7 +240,7 @@ plot_fit_prevalence_dose_response <- function(fit, list_stan_datasets) {
     ylab("Positive") +
     scale_y_continuous(labels = scales::percent,
                        limits=c(0, 1)) +
-    scale_x_log10(limits=c(0.02, 2))
+    scale_x_log10(limits=c(0.03, 2))
   g
 }
 
@@ -398,13 +398,11 @@ prepare_simulated_data_mcmc <- function(first_index, fit, data_in,
 
 dose_response_curve_mcmc <- function(dilutions, fit) {
   phi_m <- vector(length = length(dilutions))
-  b1 <- median(rstan::extract(fit, "b1")[[1]])
-  b2 <- median(rstan::extract(fit, "b2")[[1]])
   b3 <- median(rstan::extract(fit, "b3")[[1]])
   b4 <- median(rstan::extract(fit, "b4")[[1]])
   for(i in seq_along(dilutions)) {
     phi_m[i] <- logistic_curve(
-      dilutions[i], b1, b2, b3, b4)
+      dilutions[i], 0, 1, b3, b4)
   }
   phi_m
 }
@@ -611,7 +609,6 @@ plot_fit_prevalence_dose_response_mcmc <- function(fit, list_stan_datasets) {
   phi_2_middle <- dose_response_curve_mcmc(data_in$dilutions_sim_fine * (1 / zeta_middle), fit)
   phi_2_lower <- dose_response_curve_mcmc(data_in$dilutions_sim_fine * (1 / zeta_lower), fit)
   phi_2_upper <- dose_response_curve_mcmc(data_in$dilutions_sim_fine * (1 / zeta_upper), fit)
-  
   sigma <- sigmas[1]
   threshold <- data_in$titer_lower_bound[1]
   

@@ -4,8 +4,8 @@ rhs <- function(t, state, parameters) {
 
   with(as.list(c(state, parameters)), {
     x_t = x_star + exp(-eta * t) * (x_0 - x_star)
-    dl_dt = -gamma * l - x_t * (k_lm * l^2) / (a^2 + l^2)
-    dm_dt = x_t * (k_lm * l^2) / (a^2 + l^2) + alpha_m * m * (1 - m / k_m) - k_mh * (x_t - x_star) * m
+    dl_dt = -gamma * l - x_t * (k_lm * l) / (a + l)
+    dm_dt = x_t * (k_lm * l) / (a + l) + alpha_m * m * (1 - m / k_m) - k_mh * (x_t - x_star) * m
     dh_dt = k_mh * (x_t - x_star) * m + alpha_h * h * (1 - h/k_h)
     list(c(dl_dt, dm_dt, dh_dt))
   })

@@ -3,6 +3,11 @@ logistic_curve <- function(dilution, a, k, b, q) {
   a + (k - a)/(1 + q * exp(-b * log_concentration))
 }
 
+logistic_curve_conc <- function(concentration, a, k, b, q) {
+  log_concentration = log(concentration)
+  a + (k - a)/(1 + q * exp(-b * log_concentration))
+}
+
 optimise_repeat <- function(n_opts, data_in, stan_model) {
   current_best <- -Inf
   for(i in 1:n_opts) {

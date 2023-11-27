@@ -3,7 +3,7 @@ pars_to_keep <- c(
   "alpha_m", "k_m", "k_mh",
   "alpha_h", "k_h", "eta",
   "x_star", "chp_vals",
-  "b1", "b2", "b3", "b4",
+  "b3", "b4",
   "phi_d", "chp_sigma",
   "sigma")
 
@@ -164,8 +164,6 @@ prior_to_posterior_summary <- function(fit) {
   }
   df_normal <- tibble(variable=param_names, dstar=dstars) %>% 
     mutate(variable=case_when(
-      variable=="b1"~"c",
-      variable=="b2"~"k",
       variable=="b3"~"b",
       variable=="b4"~"q",
       TRUE~variable
@@ -215,8 +213,6 @@ posterior_summary <- function(fit) {
   
   df_sum <- summarize_draws(df_pars) %>% 
     mutate(variable=case_when(
-      variable=="b1"~"c",
-      variable=="b2"~"k",
       variable=="b3"~"b",
       variable=="b4"~"q",
       TRUE~variable
@@ -264,9 +260,7 @@ posteriors_correlation <- function(fit) {
   df <- df_pars %>% 
     dplyr::select(all_of(vars$variable[1:7])) %>% 
     rename(
-      c=b1,
-      sigma_h=sigma.2,
-      sigma_m=sigma.1
+      sigma_h=sigma.2
       )
   
   GGally::ggpairs(df,

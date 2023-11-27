@@ -131,7 +131,7 @@ plot_noninfectious_then_infectious_double <- function(fit, list_stan_datasets) {
     rename(tissue=name)
   
   thresholds <- data_in$titer_lower_bound
-  prob_infect_midgut <- logistic_curve(5 * (1 / fit$par$zeta), fit$par$b1, fit$par$b2, fit$par$b3, fit$par$b4) 
+  prob_infect_midgut <- logistic_curve(5 * (1 / fit$par$zeta), 0, 1, fit$par$b3, fit$par$b4) 
   prob_escape_midgut <- prob_infect_midgut * fit$par$phi_d
   sigmas <- fit$par$sigma
 
@@ -219,13 +219,11 @@ plot_single_double_feed_mcmc <- function(
   
   # use median values for sigmas, b1-b4, zetam and phi_d
   sigmas <- apply(rstan::extract(fit, "sigma")[[1]], 2, median)
-  b1 <- median(rstan::extract(fit, "b1")[[1]])
-  b2 <- median(rstan::extract(fit, "b2")[[1]])
   b3 <- median(rstan::extract(fit, "b3")[[1]])
   b4 <- median(rstan::extract(fit, "b4")[[1]])
   phi_d <- median(rstan::extract(fit, "phi_d")[[1]])
   zeta <- median(rstan::extract(fit, "zeta")[[1]])
-  prob_infect_midgut <- logistic_curve(5 * (1 / zeta), b1, b2, b3, b4) 
+  prob_infect_midgut <- logistic_curve(5 * (1 / zeta), 0, 1, b3, b4) 
   prob_escape_midgut <- prob_infect_midgut * phi_d
   
   lookup <- tribble(
