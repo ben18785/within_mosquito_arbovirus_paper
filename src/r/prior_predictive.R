@@ -48,7 +48,7 @@ prior_predictive_phi <- function(fit) {
   # get estimated parameters
   b <- mean(rstan::extract(fit, "b3")[[1]])
   q <- mean(rstan::extract(fit, "b4")[[1]])
-  probs <- logistic_curve(concentration, 0, 1, b, q)
+  probs <- logistic_curve_conc_simple(concentration, 0, 1, b, q)
   df_est <- tibble(x=concentration, middle=probs)
   
   df_summary %>% 
@@ -60,7 +60,9 @@ prior_predictive_phi <- function(fit) {
     scale_x_sqrt() +
     scale_y_continuous(labels = scales::percent) +
     xlab("Concentration") +
-    ylab("Positive")
+    ylab("Positive") +
+    theme_bw() +
+    theme(text=element_text(size=14))
 }
 
 prior_predictive_logistic_growth <- function(alpha_est, kappa_est, mu_alpha, sigma_alpha,
@@ -105,6 +107,8 @@ prior_predictive_logistic_growth <- function(alpha_est, kappa_est, mu_alpha, sig
                 fill="blue") +
     geom_line() +
     geom_line(data=df_est, colour="orange") +
-    xlab("Time, DPI") +
-    ylab("Normalised DENV titer")
+    xlab("Time, days post infection") +
+    ylab("Normalised DENV titer") +
+    theme_bw() +
+    theme(text=element_text(size=14))
 }

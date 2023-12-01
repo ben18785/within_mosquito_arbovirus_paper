@@ -155,13 +155,16 @@ plot_noninfectious_then_infectious_double <- function(fit, list_stan_datasets) {
     geom_vline(xintercept = 3, linetype=2) +
     geom_line() +
     facet_wrap(~tissue) +
-    xlab("DPI") +
+    xlab("Days post infection") +
     scale_color_brewer("Feed type", palette = "Dark2") +
     ylab("Positive") +
     scale_y_continuous(labels = scales::percent,
                        limits=c(0, 1)) +
+    scale_x_continuous(limits=c(0, 15)) +
     theme_bw() +
-    scale_x_continuous(limits=c(0, 15))
+    theme(
+      text=element_text(size=14)
+    )
 }
 
 plot_single_double_feed_mcmc <- function(
@@ -281,11 +284,12 @@ plot_single_double_feed_mcmc <- function(
                     position = position_jitterdodge(dodge.width = 0.2, jitter.width = 0.2)) +
     scale_color_brewer("Feed type", palette = "Dark2") +
     scale_fill_brewer("Feed type", palette = "Dark2") +
-    xlab("DPI") +
+    xlab("Days post infection") +
     ylab("Positive") +
     scale_y_continuous(labels = scales::percent) +
     theme_bw() +
-    theme(legend.position = c(0.8, 0.4)) +
+    theme(legend.position = c(0.8, 0.4),
+          text=element_text(size=14)) +
     scale_x_continuous(limits=c(0, 12.5))
   
   rm(list=setdiff(ls(), "g")) # very weird memory leak thing

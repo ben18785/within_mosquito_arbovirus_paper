@@ -126,6 +126,7 @@ wasserstein_heatmap <- function(wasserstein_estimates) {
     ) +
     xlab("") +
     ylab("") +
+    theme(text=element_text(size=14)) +
     scale_fill_viridis_c("Wasserstein\ndist.")
 }
 
@@ -198,5 +199,6 @@ estimates_heatmap <- function(mean_estimates) {
     xlab("") +
     ylab("") +
     scale_fill_viridis_c("Log ratio") +
+    theme(text=element_text(size=14)) +
     guides(pattern = guide_legend(override.aes = list(fill = "white")))
 }

@@ -124,7 +124,8 @@ plot_eip_dose_response <- function(df_eip_dose_respose) {
     geom_vline(xintercept = 0.08, linetype = 2) +
     geom_vline(xintercept = 1, linetype = 2) +
     theme(
-      legend.position = c(0.75, 0.7)
+      legend.position = c(0.75, 0.7),
+      text=element_text(size=14)
     )
 }
 

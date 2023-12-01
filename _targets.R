@@ -100,7 +100,7 @@ list(
   tar_target(graph_experimental_data_midgut,
              plot_experimental_data_midgut(df_midgut_legs)),
   tar_target(file_graph_experimental_data_midgut, {
-    ggsave("figures/experimental_titers_midgut.pdf", graph_experimental_data_midgut, width=6, height=4);
+    ggsave("figures/experimental_titers_midgut.pdf", graph_experimental_data_midgut, width=8, height=4);
     "figures/experimental_titers_midgut.pdf"}, format="file"),
   tar_target(anova_tests_midgut, { # not appropriate since data aren't normal
     df <- df_midgut_legs %>% 
@@ -227,7 +227,8 @@ list(
                list_stan_datasets
              )),
   tar_target(file_graph_noninfectious_then_infectious_double, {
-    ggsave("figures/double_other_order.pdf", graph_noninfectious_then_infectious_double, width=8, height=4);
+    ggsave("figures/double_other_order.pdf",
+           graph_noninfectious_then_infectious_double, width=8, height=4);
     "figures/double_other_order.pdf"}, format="file"),
   tar_target(graph_fit_prevalence_legs,
              plot_fit_prevalence_legs(
@@ -243,7 +244,7 @@ list(
              fit_mcmc(opt_fit,
                       stan_model,
                       list_stan_datasets$stan_data,
-                      n_iterations=600,
+                      n_iterations=1200,
                       n_chains=4)
              ),
   
@@ -264,7 +265,10 @@ list(
                list_stan_datasets)),
   tar_target(graph_single_double_chp_mcmc, 
              {
-               plot_grid(graph_chp_damage_mcmc, graph_bl_permeability_mcmc, graph_single_double_mcmc, nrow = 1,
+               plot_grid(graph_chp_damage_mcmc,
+                         graph_bl_permeability_mcmc,
+                         graph_single_double_mcmc,
+                         nrow = 1,
                          labels = c("A.", "B.", "C."))
              }),
   tar_target(file_graph_single_double_chp_mcmc, {
@@ -387,7 +391,9 @@ list(
                mu_kappa=1, sigma_kappa=10
              )),
   tar_target(graph_prior_predictives, {
-    plot_grid(graph_prior_phi, graph_prior_logistic_growth_midgut, graph_prior_logistic_growth_legs,
+    plot_grid(graph_prior_phi,
+              graph_prior_logistic_growth_midgut,
+              graph_prior_logistic_growth_legs,
               labels=c("A.", "B.", "C."),
               nrow = 1,
               label_x = -0.01)
@@ -401,12 +407,14 @@ list(
   tar_target(graph_midgut_invasion_sensitivities,
              plot_sensitivities_midgut_invasion(sampling_fit, list_stan_datasets)),
   tar_target(file_graph_midgut_invasion_sensitivities, {
-    ggsave("figures/sensitivities_midgut_invasion.pdf", graph_midgut_invasion_sensitivities, width=8, height=5);
+    ggsave("figures/sensitivities_midgut_invasion.pdf",
+           graph_midgut_invasion_sensitivities, width=8, height=5);
     "figures/sensitivities_midgut_invasion.pdf"}, format="file"),
   tar_target(graph_sensitivities_single_double_feed,
              plot_sensitivities_single_double_feed(sampling_fit, list_stan_datasets)),
   tar_target(file_graph_sensitivities_single_double_feed, {
-    ggsave("figures/sensitivities_single_double_feed.pdf", graph_sensitivities_single_double_feed, width=8, height=5);
+    ggsave("figures/sensitivities_single_double_feed.pdf",
+           graph_sensitivities_single_double_feed, width=8, height=5);
     "figures/sensitivities_single_double_feed.pdf"}, format="file"),
   tar_target(sd_sensitivity_2d_alpha_kappa, single_double_sensitivity_2d(c("alpha_m", "k_mh"),
                                                                          seq(0.1, 5, length.out=25),
@@ -461,11 +469,12 @@ list(
                  labeller = as_labeller(c(a = "k[mh]", b = "l[0]"),
                                         default = label_parsed)) +
       ylab(NULL) +
-      xlab(TeX("$\\alpha$")) +
+      xlab(TeX("$\\alpha_m$")) +
       theme(strip.background = element_blank(),
             strip.placement = "outside",
             strip.text = element_text(size=14),
-            axis.title.x = element_text(size=14))
+            axis.title.x = element_text(size=14),
+            text=element_text(size=14))
     g
   }),
   tar_target(file_plot_sd_sensitivity_both, {
@@ -492,7 +501,8 @@ list(
               labels = c("A.", "B."))
   }),
   tar_target(file_graph_wasserstein_estimate, {
-    ggsave("figures/wasserstein_estimates_heatmaps.pdf", graph_wasserstein_estimates)
+    ggsave("figures/wasserstein_estimates_heatmaps.pdf",
+           graph_wasserstein_estimates)
     "figures/wasserstein_estimates_heatmaps.pdf"
   }),
   

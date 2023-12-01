@@ -124,9 +124,10 @@ plot_sensitivities_midgut_invasion <- function(fit, list_stan_datasets) {
     geom_line(data=df_all %>% filter(multiplier==1),
               colour="black", linetype=2) +
     theme(
-      legend.position = "none"
+      legend.position = "none",
+      text=element_text(size=14)
     ) +
-    xlab("DPI") +
+    xlab("Days post infection") +
     ylab("DENV titer, GE/uL") +
     theme_bw() +
     scale_color_viridis_c("Multiplier",
@@ -188,9 +189,10 @@ plot_sensitivities_single_double_feed <- function(fit, list_stan_datasets) {
     ggplot(aes(x=time, y=value, colour=type, group=type)) +
     geom_line() +
     theme(
-      legend.position = "none"
+      legend.position = "none",
+      text=element_text(size=14)
     ) +
-    xlab("DPI") +
+    xlab("Days post infection") +
     ylab("DENV titer, GE/uL") +
     theme_bw() +
     scale_color_brewer(palette = "Dark2") +

@@ -94,11 +94,12 @@ plot_bl_permeability_mcmc <- function(fit, list_stan_datasets,
     ggplot(df, aes(x=time, y=value, colour=type)) +
       geom_line() +
       scale_color_brewer("Feed type", palette = "Dark2") +
-      xlab("DPI") +
+      xlab("Days post infection") +
       ylab("Basal lamina permeability") +
       theme_bw() +
       theme(axis.text.y = element_blank(),
             legend.position = "none",
-            axis.ticks.y=element_blank())
+            axis.ticks.y=element_blank(),
+            text=element_text(size=14))
     }
 }

@@ -8,7 +8,8 @@ plot_experimental_data <- function(df_midgut_legs) {
     geom_smooth(se=FALSE) +
     ylab("DENV titer") +
     scale_color_brewer(palette = "Spectral") +
-    facet_grid(~tissue)
+    facet_grid(~tissue) +
+    theme(text=element_text(size=14))
 }
 
 plot_experimental_data_midgut <- function(df_midgut_legs) {
@@ -20,11 +21,13 @@ plot_experimental_data_midgut <- function(df_midgut_legs) {
     mutate(Concentration=fct_rev(Concentration)) %>% 
     filter(tissue=="midgut") %>% 
     ggplot(aes(x=day, y=denv_titer, colour=Concentration)) +
-    geom_jitter(width=0.2) +
+    geom_jitter(width=0.2, aes(shape=as.factor(Concentration))) +
     scale_y_log10() +
     geom_smooth(se=FALSE) +
+    scale_shape("Concentration") +
     ylab("DENV titer, GE/uL") +
     xlab("Days post infection") +
-    scale_color_viridis_d("Relative concentration") +
-    theme_bw()
+    scale_color_viridis_d("Concentration") +
+    theme_bw() +
+    theme(text=element_text(size=14))
 }

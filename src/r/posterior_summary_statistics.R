@@ -260,11 +260,13 @@ posteriors_correlation <- function(fit) {
   df <- df_pars %>% 
     dplyr::select(all_of(vars$variable[1:7])) %>% 
     rename(
-      sigma_h=sigma.2
-      )
+      c_star=chp_vals.1,
+      c_0=chp_vals.2
+    )
   
   GGally::ggpairs(df,
                   lower = list(continuous = GGally::wrap("points", alpha = 0.3, size=0.5)),
                   upper = list(continuous = GGally::wrap("cor", size = 4))
-  ) + theme(strip.text = element_text(size = 7))
+  ) + theme(strip.text = element_text(size = 6),
+            axis.text=element_text(size=5))
 }

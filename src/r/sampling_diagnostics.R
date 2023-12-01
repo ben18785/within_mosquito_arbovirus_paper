@@ -14,7 +14,7 @@ create_sampling_diagnostics <- function(fit) {
   
   sum_df <- posterior::summarise_draws(df)
   
-  rhats <- sum(round(sum_df$rhat,2)>1.01, na.rm = TRUE) # just to avoid annoying roundoff issue
+  rhats <- sum(sum_df$rhat>1.01, na.rm = TRUE) # just to avoid annoying roundoff issue
   ess_bulks <- sum(sum_df$ess_bulk<400, na.rm = TRUE)
   ess_tails <- sum(sum_df$ess_tail<400, na.rm = TRUE)
   is_converged <- rhats == 0 & ess_bulks == 0 & ess_tails == 0

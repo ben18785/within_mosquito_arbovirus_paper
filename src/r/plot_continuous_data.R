@@ -116,5 +116,6 @@ plot_continuous_data <- function(sampling_fit, list_stan_datasets) {
     xlab("Days post infection") +
     scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + 
     scale_y_sqrt(labels = function(x) format(x, scientific = TRUE)) +
-    theme_bw()
+    theme_bw() +
+    theme(text=element_text(size=14))
 }

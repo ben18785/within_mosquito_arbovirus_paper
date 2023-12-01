@@ -136,6 +136,7 @@ plot_sensitivity_sobol <- function(indices) {
     scale_color_brewer("Sensitivity", palette = "Dark2") +
     scale_fill_brewer("Sensitivity", palette = "Dark2") +
     theme_bw() +
-    xlab("DPI") +
+    theme(text=element_text(size=14)) +
+    xlab("Days post infection") +
     ylab("Sobol' indices")
 }
