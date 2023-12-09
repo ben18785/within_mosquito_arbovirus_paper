@@ -128,7 +128,7 @@ plot_sensitivities_midgut_invasion <- function(fit, list_stan_datasets) {
       text=element_text(size=14)
     ) +
     xlab("Days post infection") +
-    ylab("DENV titer, GE/uL") +
+    ylab("DENV titer, GE/tissue") +
     theme_bw() +
     scale_color_viridis_c("Multiplier",
                           trans = "log",
@@ -193,7 +193,7 @@ plot_sensitivities_single_double_feed <- function(fit, list_stan_datasets) {
       text=element_text(size=14)
     ) +
     xlab("Days post infection") +
-    ylab("DENV titer, GE/uL") +
+    ylab("DENV titer, GE/tissue") +
     theme_bw() +
     scale_color_brewer(palette = "Dark2") +
     scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10, 12, 14)) +
